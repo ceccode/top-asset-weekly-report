@@ -2,23 +2,23 @@
 Source: Yahoo Finance (market cap)
 
 🏆 Top 10:
-1) Oracle Corporation (ORCL) — $566.61B
-2) Palantir Technologies Inc (PLTR) — $431.02B
-3) SAP SE (SAP) — $285.39B
-4) Salesforce, Inc. (CRM) — $253.16B
-5) Shopify Inc. (SHOP) — $213.16B
-6) Intuit Inc. (INTU) — $186.49B
-7) ServiceNow, Inc. (NOW) — $160.15B
-8) Adobe Inc. (ADBE) — $149.53B
-9) Palo Alto Networks, Inc. (PANW) — $130.23B
-10) CrowdStrike Holdings, Inc (CRWD) — $119.91B
+1) Oracle Corporation (ORCL) — $564.11B
+2) Palantir Technologies Inc (PLTR) — $430.25B
+3) SAP SE (SAP) — $284.00B
+4) Salesforce, Inc. (CRM) — $252.52B
+5) Shopify Inc. (SHOP) — $211.23B
+6) Intuit Inc. (INTU) — $185.58B
+7) ServiceNow, Inc. (NOW) — $159.38B
+8) Adobe Inc. (ADBE) — $148.93B
+9) Palo Alto Networks, Inc. (PANW) — $129.26B
+10) CrowdStrike Holdings, Inc (CRWD) — $119.43B
 
 📝 Summary:
-This week’s analysis of the software sector highlights the significant market capitalization of the leading companies, with a total market cap of approximately $3.01 trillion for the tracked assets. Notably, the top five companies—Oracle Corporation, Palantir Technologies Inc., SAP SE, Salesforce, Inc., and Shopify Inc.—account for about 58.14% of this total. Oracle leads with a market cap of approximately $566.61 billion, followed closely by Palantir at $431.02 billion.
+This week's analysis covers the top software companies by market capitalization.
 
-The concentration metrics indicate a high level of market dominance among the largest firms. The combined market cap of the top ten companies reaches approximately $2.50 trillion, representing around 82.95% of the total market cap. This concentration suggests that the software market continues to be influenced…
+The combined market cap of the tracked assets stands at $3.00T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Salesforce, Inc., Shopify Inc.) representing 58.1% of the total.
 
 💡 Insight:
-The current market structure reflects a typical concentration pattern seen in the software industry. The dominance of established players indicates a robust competitive landscape where larger firms often have the resources and market presence to maintain their leadership positions. The data shows that the top two companies alone hold a substantial share of the market, which may discourage new entrants and affect the competitive dynamics.
+The current market structure shows concentration patterns typical of software companies.
 
 ⚠️ Not financial advice. For informational purposes only.

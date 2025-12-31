@@ -1,27 +1,27 @@
 rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
-1,ORCL,Oracle Corporation,EQUITY,USD,566609969152,197.21,Technology,Software - Infrastructure
-2,PLTR,Palantir Technologies Inc.,EQUITY,USD,431020605440,180.84,Technology,Software - Infrastructure
-3,SAP,SAP SE,EQUITY,USD,285386244096,244.59,Technology,Software - Application
-4,CRM,"Salesforce, Inc.",EQUITY,USD,253155852288,265.92,Technology,Software - Application
-5,SHOP,Shopify Inc.,EQUITY,USD,213163769856,163.74,Technology,Software - Application
-6,INTU,Intuit Inc.,EQUITY,USD,186494599168,669.88,Technology,Software - Application
-7,NOW,"ServiceNow, Inc.",EQUITY,USD,160150994944,154.23,Technology,Software - Application
-8,ADBE,Adobe Inc.,EQUITY,USD,149534752768,352.51,Technology,Software - Application
-9,PANW,"Palo Alto Networks, Inc.",EQUITY,USD,130234458112,186.85,Technology,Software - Infrastructure
-10,CRWD,"CrowdStrike Holdings, Inc.",EQUITY,USD,119905574912,475.63,Technology,Software - Infrastructure
-11,SNOW,Snowflake Inc.,EQUITY,USD,75985510400,222.05,Technology,Software - Application
-12,NET,"Cloudflare, Inc.",EQUITY,USD,69923119104,199.62,Technology,Software - Infrastructure
-13,WDAY,"Workday, Inc.",EQUITY,USD,57920307200,216.93,Technology,Software - Application
-14,DDOG,"Datadog, Inc.",EQUITY,USD,48210214912,137.48,Technology,Software - Application
-15,TEAM,Atlassian Corporation,EQUITY,USD,42888282112,162.93,Technology,Software - Application
-16,VEEV,Veeva Systems Inc.,EQUITY,USD,36926738432,224.64,Healthcare,Health Information Services
-17,ZS,"Zscaler, Inc.",EQUITY,USD,36266938368,227.42,Technology,Software - Infrastructure
-18,MDB,"MongoDB, Inc.",EQUITY,USD,34284652544,421.23,Technology,Software - Infrastructure
-19,ZM,"Zoom Communications, Inc.",EQUITY,USD,25828673536,86.3,Technology,Software - Application
-20,HUBS,"HubSpot, Inc.",EQUITY,USD,21384445952,405.83,Technology,Software - Application
-21,OKTA,"Okta, Inc.",EQUITY,USD,15495238656,87.43,Technology,Software - Infrastructure
-22,DOCU,"DocuSign, Inc.",EQUITY,USD,13834841088,69.08,Technology,Software - Application
-23,CFLT,"Confluent, Inc.",EQUITY,USD,10640436224,30.13,Technology,Software - Infrastructure
-24,PATH,UiPath Inc.,EQUITY,USD,8914277376,16.67,Technology,Software - Infrastructure
-25,ESTC,Elastic N.V.,EQUITY,USD,8143656960,76.63,Technology,Software - Application
-26,GTLB,GitLab Inc.,EQUITY,USD,6426143744,38.16,Technology,Software - Infrastructure
+1,ORCL,Oracle Corporation,EQUITY,USD,564110360576,196.34,Technology,Software - Infrastructure
+2,PLTR,Palantir Technologies Inc.,EQUITY,USD,430246002688,180.515,Technology,Software - Infrastructure
+3,SAP,SAP SE,EQUITY,USD,283997732864,243.4,Technology,Software - Application
+4,CRM,"Salesforce, Inc.",EQUITY,USD,252518006784,265.25,Technology,Software - Application
+5,SHOP,Shopify Inc.,EQUITY,USD,211230539776,162.255,Technology,Software - Application
+6,INTU,Intuit Inc.,EQUITY,USD,185581436928,666.6,Technology,Software - Application
+7,NOW,"ServiceNow, Inc.",EQUITY,USD,159377408000,153.485,Technology,Software - Application
+8,ADBE,Adobe Inc.,EQUITY,USD,148928184320,351.0801,Technology,Software - Application
+9,PANW,"Palo Alto Networks, Inc.",EQUITY,USD,129258651648,185.45,Technology,Software - Infrastructure
+10,CRWD,"CrowdStrike Holdings, Inc.",EQUITY,USD,119429111808,473.74,Technology,Software - Infrastructure
+11,SNOW,Snowflake Inc.,EQUITY,USD,75626201088,221.0,Technology,Software - Application
+12,NET,"Cloudflare, Inc.",EQUITY,USD,70296174592,200.685,Technology,Software - Infrastructure
+13,WDAY,"Workday, Inc.",EQUITY,USD,57527820288,215.46,Technology,Software - Application
+14,DDOG,"Datadog, Inc.",EQUITY,USD,47901626368,136.6,Technology,Software - Application
+15,TEAM,Atlassian Corporation,EQUITY,USD,42923819008,163.065,Technology,Software - Application
+16,VEEV,Veeva Systems Inc.,EQUITY,USD,36832006144,224.0637,Healthcare,Health Information Services
+17,ZS,"Zscaler, Inc.",EQUITY,USD,36119797760,226.4973,Technology,Software - Infrastructure
+18,MDB,"MongoDB, Inc.",EQUITY,USD,34528014336,424.22,Technology,Software - Infrastructure
+19,ZM,"Zoom Communications, Inc.",EQUITY,USD,25813708800,86.25,Technology,Software - Application
+20,HUBS,"HubSpot, Inc.",EQUITY,USD,21354936320,405.27,Technology,Software - Application
+21,OKTA,"Okta, Inc.",EQUITY,USD,15459792896,87.23,Technology,Software - Infrastructure
+22,DOCU,"DocuSign, Inc.",EQUITY,USD,13784772608,68.83,Technology,Software - Application
+23,CFLT,"Confluent, Inc.",EQUITY,USD,10679283712,30.24,Technology,Software - Infrastructure
+24,PATH,UiPath Inc.,EQUITY,USD,8810001408,16.475,Technology,Software - Infrastructure
+25,ESTC,Elastic N.V.,EQUITY,USD,8076705280,76.0,Technology,Software - Application
+26,GTLB,GitLab Inc.,EQUITY,USD,6388254208,37.935,Technology,Software - Infrastructure
