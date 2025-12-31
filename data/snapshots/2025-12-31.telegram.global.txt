@@ -1,0 +1,24 @@
+📊 Top Global Assets — 2025-12-31
+Source: Yahoo Finance (market cap)
+
+🏆 Top 10:
+1) NVIDIA Corporation (NVDA) — $4.57T
+2) Apple Inc. (AAPL) — $4.05T
+3) Alphabet Inc. (GOOGL) — $3.80T
+4) Microsoft Corporation (MSFT) — $3.62T
+5) Amazon.com, Inc. (AMZN) — $2.49T
+6) Bitcoin USD (BTC-USD) — $1.77T
+7) Meta Platforms, Inc. (META) — $1.68T
+8) Broadcom Inc. (AVGO) — $1.66T
+9) Tesla, Inc. (TSLA) — $1.51T
+10) Berkshire Hathaway Inc. (BRK-B) — $1.09T
+
+📝 Summary:
+This week's market data indicates a total market capitalization of approximately $40.01 trillion across various asset categories, showcasing a significant presence of technology and financial services. The top five assets alone account for around 46.31% of the overall market cap, while the top ten represent about 65.59%. NVIDIA Corporation (NVDA) leads the market with a market cap of approximately $4.57 trillion, followed closely by Apple Inc. (AAPL) and Alphabet Inc. (GOOGL), both of which also maintain market caps exceeding $3.8 trillion.
+
+In addition to traditional equities, Bitcoin (BTC-USD) remains a prominent player in the market, ranking sixth with a market cap of around $1.77 trillion. This positioning underscores the growing influence of cryptocurrencies alongside established…
+
+💡 Insight:
+The current market structure highlights a robust concentration in technology stocks, particularly within the semiconductor and software sectors. Companies such as Microsoft (MSFT) and Broadcom (AVGO) further emphasize the dominance of this sector, indicating a strong investor preference for technology-driven growth. The substantial market caps of these firms suggest confidence in their ability to innovate and sustain competitive advantages in a rapidly evolving industry.
+
+⚠️ Not financial advice. For informational purposes only.
