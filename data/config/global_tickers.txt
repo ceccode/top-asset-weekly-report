@@ -1,0 +1,66 @@
+# Global Assets Tickers
+# Includes major equities, ETFs, and crypto
+# One ticker per line, comments start with #
+
+# US Mega Cap Tech
+AAPL     # Apple
+MSFT     # Microsoft
+GOOGL    # Alphabet
+AMZN     # Amazon
+NVDA     # NVIDIA
+META     # Meta Platforms
+TSLA     # Tesla
+AVGO     # Broadcom
+ORCL     # Oracle
+
+# US Major Companies
+BRK-B    # Berkshire Hathaway
+JPM      # JPMorgan Chase
+V        # Visa
+UNH      # UnitedHealth
+JNJ      # Johnson & Johnson
+XOM      # Exxon Mobil
+WMT      # Walmart
+MA       # Mastercard
+PG       # Procter & Gamble
+HD       # Home Depot
+CVX      # Chevron
+MRK      # Merck
+ABBV     # AbbVie
+KO       # Coca-Cola
+PEP      # PepsiCo
+COST     # Costco
+LLY      # Eli Lilly
+TMO      # Thermo Fisher
+MCD      # McDonald's
+CSCO     # Cisco
+ACN      # Accenture
+NKE      # Nike
+DIS      # Disney
+NFLX     # Netflix
+AMD      # AMD
+INTC     # Intel
+CRM      # Salesforce
+ADBE     # Adobe
+QCOM     # Qualcomm
+TXN      # Texas Instruments
+
+# Major ETFs
+SPY      # S&P 500 ETF
+QQQ      # Nasdaq 100 ETF
+IWM      # Russell 2000 ETF
+VTI      # Vanguard Total Stock Market
+VOO      # Vanguard S&P 500
+EFA      # iShares MSCI EAFE
+EEM      # iShares MSCI Emerging Markets
+GLD      # SPDR Gold Trust
+TLT      # iShares 20+ Year Treasury
+
+# Crypto
+BTC-USD  # Bitcoin
+ETH-USD  # Ethereum
+SOL-USD  # Solana
+BNB-USD  # Binance Coin
+XRP-USD  # Ripple
+ADA-USD  # Cardano
+DOGE-USD # Dogecoin

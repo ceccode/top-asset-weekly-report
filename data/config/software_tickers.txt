@@ -1,0 +1,31 @@
+# Software Companies Whitelist
+# One ticker per line, comments start with #
+
+# Enterprise Software / SaaS
+CRM      # Salesforce
+ADBE     # Adobe
+NOW      # ServiceNow
+TEAM     # Atlassian
+WDAY     # Workday
+INTU     # Intuit
+ORCL     # Oracle
+SAP      # SAP SE (ADR)
+SHOP     # Shopify
+ZS       # Zscaler
+CRWD     # CrowdStrike
+PANW     # Palo Alto Networks
+SNOW     # Snowflake
+DDOG     # Datadog
+MDB      # MongoDB
+NET      # Cloudflare
+PLTR     # Palantir
+HUBS     # HubSpot
+ZM       # Zoom
+DOCU     # DocuSign
+OKTA     # Okta
+VEEV     # Veeva Systems
+SPLK     # Splunk (now Cisco, may delist)
+ESTC     # Elastic
+CFLT     # Confluent
+PATH     # UiPath
+GTLB     # GitLab

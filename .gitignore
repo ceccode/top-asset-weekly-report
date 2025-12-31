@@ -1,0 +1,28 @@
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Project outputs (optional - uncomment if you don't want to track reports)
+# data/reports/
+# data/snapshots/
+# data/rag/
+
+# Public output (generated)
+public/
