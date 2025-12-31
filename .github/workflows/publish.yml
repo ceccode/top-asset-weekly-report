@@ -41,7 +41,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          python main.py --only all --no-llm --publish
+          python main.py --only all --publish
           # Use --no-llm by default; remove if you want LLM sections
           # and have set OPENAI_API_KEY secret
       
