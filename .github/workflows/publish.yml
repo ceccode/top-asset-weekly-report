@@ -8,7 +8,7 @@ on:
     # Allow manual trigger
 
 permissions:
-  contents: read
+  contents: write  # Allow bot to commit reports
   pages: write
   id-token: write
 
