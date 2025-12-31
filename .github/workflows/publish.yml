@@ -45,6 +45,14 @@ jobs:
           # Use --no-llm by default; remove if you want LLM sections
           # and have set OPENAI_API_KEY secret
       
+      - name: Commit and push reports to repository
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/
+          git diff --staged --quiet || git commit -m "chore: weekly reports update $(date +'%Y-%m-%d')"
+          git push
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
