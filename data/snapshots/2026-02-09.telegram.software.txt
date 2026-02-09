@@ -1,0 +1,24 @@
+📊 Top Software Companies — 2026-02-09
+Source: Yahoo Finance (market cap)
+
+🏆 Top 10:
+1) Oracle Corporation (ORCL) — $410.48B
+2) Palantir Technologies Inc (PLTR) — $323.91B
+3) SAP SE (SAP) — $237.26B
+4) Salesforce, Inc. (CRM) — $182.17B
+5) Shopify Inc. (SHOP) — $146.23B
+6) Intuit Inc. (INTU) — $123.55B
+7) Adobe Inc. (ADBE) — $112.34B
+8) Palo Alto Networks, Inc. (PANW) — $108.97B
+9) ServiceNow, Inc. (NOW) — $106.30B
+10) CrowdStrike Holdings, Inc (CRWD) — $99.70B
+
+📝 Summary:
+This week's analysis covers the top software companies by market capitalization.
+
+The combined market cap of the tracked assets stands at $2.26T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Salesforce, Inc., Shopify Inc.) representing 57.6% of the total.
+
+💡 Insight:
+The current market structure shows concentration patterns typical of software companies.
+
+⚠️ Not financial advice. For informational purposes only.
