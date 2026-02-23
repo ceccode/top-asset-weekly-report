@@ -1,0 +1,298 @@
+{
+  "assets": [
+    {
+      "ticker": "ORCL",
+      "name": "Oracle Corporation",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 425595404288,
+      "price": 148.08,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 1
+    },
+    {
+      "ticker": "PLTR",
+      "name": "Palantir Technologies Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 322335932416,
+      "price": 135.24,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 2
+    },
+    {
+      "ticker": "SAP",
+      "name": "SAP SE",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 236380864512,
+      "price": 202.59,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 3
+    },
+    {
+      "ticker": "CRM",
+      "name": "Salesforce, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 176272326656,
+      "price": 185.16,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 4
+    },
+    {
+      "ticker": "SHOP",
+      "name": "Shopify Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 164701552640,
+      "price": 126.2,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 5
+    },
+    {
+      "ticker": "PANW",
+      "name": "Palo Alto Networks, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 120160681984,
+      "price": 148.7,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 6
+    },
+    {
+      "ticker": "NOW",
+      "name": "ServiceNow, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 110019756032,
+      "price": 104.27,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 7
+    },
+    {
+      "ticker": "ADBE",
+      "name": "Adobe Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 108254142464,
+      "price": 258.61,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 8
+    },
+    {
+      "ticker": "INTU",
+      "name": "Intuit Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 105945112576,
+      "price": 380.55,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 9
+    },
+    {
+      "ticker": "CRWD",
+      "name": "CrowdStrike Holdings, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 97965449216,
+      "price": 388.6,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 10
+    },
+    {
+      "ticker": "NET",
+      "name": "Cloudflare, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 62333263872,
+      "price": 177.14,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 11
+    },
+    {
+      "ticker": "SNOW",
+      "name": "Snowflake Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 59029499904,
+      "price": 172.5,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 12
+    },
+    {
+      "ticker": "DDOG",
+      "name": "Datadog, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 40558579712,
+      "price": 115.66,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 13
+    },
+    {
+      "ticker": "WDAY",
+      "name": "Workday, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 36795269120,
+      "price": 137.81,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 14
+    },
+    {
+      "ticker": "VEEV",
+      "name": "Veeva Systems Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 29639692288,
+      "price": 180.31,
+      "sector": "Healthcare",
+      "industry": "Health Information Services",
+      "rank": 15
+    },
+    {
+      "ticker": "MDB",
+      "name": "MongoDB, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 28044345344,
+      "price": 344.56,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 16
+    },
+    {
+      "ticker": "ZM",
+      "name": "Zoom Communications, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 27022837760,
+      "price": 90.29,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 17
+    },
+    {
+      "ticker": "ZS",
+      "name": "Zscaler, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 25475524608,
+      "price": 159.75,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 18
+    },
+    {
+      "ticker": "TEAM",
+      "name": "Atlassian Corporation",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 20039276544,
+      "price": 75.98,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 19
+    },
+    {
+      "ticker": "OKTA",
+      "name": "Okta, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 13166433280,
+      "price": 74.29,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 20
+    },
+    {
+      "ticker": "HUBS",
+      "name": "HubSpot, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 12314914816,
+      "price": 233.5,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 21
+    },
+    {
+      "ticker": "CFLT",
+      "name": "Confluent, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 10979686400,
+      "price": 30.7,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 22
+    },
+    {
+      "ticker": "DOCU",
+      "name": "DocuSign, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 8908131328,
+      "price": 44.48,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 23
+    },
+    {
+      "ticker": "ESTC",
+      "name": "Elastic N.V.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 6176553984,
+      "price": 58.12,
+      "sector": "Technology",
+      "industry": "Software - Application",
+      "rank": 24
+    },
+    {
+      "ticker": "PATH",
+      "name": "UiPath, Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 5775297024,
+      "price": 10.8,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 25
+    },
+    {
+      "ticker": "GTLB",
+      "name": "GitLab Inc.",
+      "quote_type": "EQUITY",
+      "currency": "USD",
+      "market_cap": 4444076032,
+      "price": 26.39,
+      "sector": "Technology",
+      "industry": "Software - Infrastructure",
+      "rank": 26
+    }
+  ],
+  "metrics": {
+    "total_market_cap": 2258334604800,
+    "top5_concentration": 58.68422144774992,
+    "top10_concentration": 82.69949097952201,
+    "asset_count": 26,
+    "top5_cap": 1325286080512,
+    "top10_cap": 1867631222784
+  }
+}
