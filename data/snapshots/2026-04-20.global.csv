@@ -1,0 +1,51 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,NVDA,NVIDIA Corporation,EQUITY,USD,4901832228864,201.68,Technology,Semiconductors
+2,GOOGL,Alphabet Inc.,EQUITY,USD,4133303091200,341.68,Communication Services,Internet Content & Information
+3,AAPL,Apple Inc.,EQUITY,USD,3971820552192,270.23,Technology,Consumer Electronics
+4,MSFT,Microsoft Corporation,EQUITY,USD,3142335070208,422.79,Technology,Software - Infrastructure
+5,AMZN,"Amazon.com, Inc.",EQUITY,USD,2694585253888,250.56,Consumer Cyclical,Internet Retail
+6,AVGO,Broadcom Inc.,EQUITY,USD,1927517437952,406.54,Technology,Semiconductors
+7,META,"Meta Platforms, Inc.",EQUITY,USD,1747831357440,688.55,Communication Services,Internet Content & Information
+8,TSLA,"Tesla, Inc.",EQUITY,USD,1503299239936,400.62,Consumer Cyclical,Auto Manufacturers
+9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1500475949056,74971.67,,
+10,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1023607767040,474.58,Financial Services,Insurance - Diversified
+11,WMT,Walmart Inc.,EQUITY,USD,1016481316864,127.5,Consumer Defensive,Discount Stores
+12,JPM,JPMorgan Chase & Co.,EQUITY,USD,836862214144,310.29,Financial Services,Banks - Diversified
+13,LLY,Eli Lilly and Company,EQUITY,USD,829709287424,927.03,Healthcare,Drug Manufacturers - General
+14,VTI,Vanguard Total Stock Market Index Fund ETF Shares,ETF,USD,726901063680,350.53,,
+15,SPY,State Street SPDR S&P 500 ETF Trust,ETF,USD,651753750528,710.14,,
+16,V,Visa Inc.,EQUITY,USD,611227074560,317.02,Financial Services,Credit Services
+17,XOM,Exxon Mobil Corporation,EQUITY,USD,608686571520,146.44,Energy,Oil & Gas Integrated
+18,JNJ,Johnson & Johnson,EQUITY,USD,564350156800,234.18,Healthcare,Drug Manufacturers - General
+19,ORCL,Oracle Corporation,EQUITY,USD,503480614912,175.06,Technology,Software - Infrastructure
+20,MA,Mastercard Incorporated,EQUITY,USD,465227776000,521.3,Financial Services,Credit Services
+21,AMD,"Advanced Micro Devices, Inc.",EQUITY,USD,453890113536,278.39,Technology,Semiconductors
+22,COST,Costco Wholesale Corporation,EQUITY,USD,443820572672,999.89,Consumer Defensive,Discount Stores
+23,NFLX,"Netflix, Inc.",EQUITY,USD,410858586112,97.31,Communication Services,Entertainment
+24,ABBV,AbbVie Inc.,EQUITY,USD,368574726144,208.38,Healthcare,Drug Manufacturers - General
+25,CVX,Chevron Corporation,EQUITY,USD,366489468928,183.99,Energy,Oil & Gas Integrated
+26,HD,"The Home Depot, Inc.",EQUITY,USD,348012052480,349.4,Consumer Cyclical,Home Improvement Retail
+27,INTC,Intel Corporation,EQUITY,USD,343939219456,68.5,Technology,Semiconductors
+28,PG,The Procter & Gamble Company,EQUITY,USD,343336222720,146.93,Consumer Defensive,Household & Personal Products
+29,CSCO,"Cisco Systems, Inc.",EQUITY,USD,340781891584,86.25,Technology,Communication Equipment
+30,KO,The Coca-Cola Company,EQUITY,USD,325996544000,75.74,Consumer Defensive,Beverages - Non-Alcoholic
+31,UNH,UnitedHealth Group Incorporated,EQUITY,USD,294658801664,324.63,Healthcare,Healthcare Plans
+32,MRK,"Merck & Co., Inc.",EQUITY,USD,294387712000,119.07,Healthcare,Drug Manufacturers - General
+33,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,277560950784,2298.49,,
+34,QQQ,Invesco QQQ Trust,ETF,USD,255062933504,648.85,,
+35,MCD,McDonald's Corporation,EQUITY,USD,221323280384,311.36,Consumer Cyclical,Restaurants
+36,PEP,"PepsiCo, Inc.",EQUITY,USD,215525572608,157.67,Consumer Defensive,Beverages - Non-Alcoholic
+37,TXN,Texas Instruments Incorporated,EQUITY,USD,209242701824,229.82,Technology,Semiconductors
+38,TMO,Thermo Fisher Scientific Inc.,EQUITY,USD,195695804416,526.6,Healthcare,Diagnostics & Research
+39,DIS,The Walt Disney Company,EQUITY,USD,188493299712,106.29,Communication Services,Entertainment
+40,CRM,"Salesforce, Inc.",EQUITY,USD,168115224576,182.14,Technology,Software - Application
+41,QCOM,QUALCOMM Incorporated,EQUITY,USD,145467736064,136.2,Technology,Semiconductors
+42,ACN,Accenture plc,EQUITY,USD,121640747008,197.65,Technology,Information Technology Services
+43,GLD,SPDR Gold Shares,ETF,USD,116075577344,445.93,,
+44,ADBE,Adobe Inc.,EQUITY,USD,99646849024,244.45,Technology,Software - Application
+45,EFA,iShares MSCI EAFE ETF,ETF,USD,97893883904,104.32,,
+46,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,87423860736,1.4175,,
+47,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,84308680704,624.6,,
+48,IWM,iShares Russell 2000 ETF,ETF,USD,77507960832,275.78,,
+49,NKE,"NIKE, Inc.",EQUITY,USD,68165230592,46.03,Consumer Cyclical,Footwear & Accessories
+50,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,48901206016,84.88,,
