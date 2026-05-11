@@ -1,3 +1,36 @@
+## Report 2026-05-11
+
+### Executive Summary
+This week's analysis covers the top software companies by market capitalization.
+
+The combined market cap of the tracked assets stands at $2.42T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Palo Alto Networks, Inc., Salesforce, Inc.) representing 58.6% of the total.
+
+*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
+
+### Riflessione Strategica
+The current market structure shows concentration patterns typical of software companies.
+
+Key observations from the data:
+- Market leadership remains with established players
+- Concentration metrics provide insight into market dynamics
+
+*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
+
+### Implicazioni
+The data presented reflects current market conditions for software companies.
+
+Observers may note:
+- The relative positioning of assets by market capitalization
+- Changes in concentration over time (when historical data is available)
+
+*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
+
+---
+
+*Not financial advice. For informational purposes only.*
+
+---
+
 ## Report 2026-05-04
 
 ### Executive Summary
@@ -70,39 +103,6 @@ Observers may note:
 This week's analysis covers the top software companies by market capitalization.
 
 The combined market cap of the tracked assets stands at $2.33T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Shopify Inc., Salesforce, Inc.) representing 60.3% of the total.
-
-*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
-
-### Riflessione Strategica
-The current market structure shows concentration patterns typical of software companies.
-
-Key observations from the data:
-- Market leadership remains with established players
-- Concentration metrics provide insight into market dynamics
-
-*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
-
-### Implicazioni
-The data presented reflects current market conditions for software companies.
-
-Observers may note:
-- The relative positioning of assets by market capitalization
-- Changes in concentration over time (when historical data is available)
-
-*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
-
----
-
-*Not financial advice. For informational purposes only.*
-
----
-
-## Report 2026-04-13
-
-### Executive Summary
-This week's analysis covers the top software companies by market capitalization.
-
-The combined market cap of the tracked assets stands at $2.02T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Salesforce, Inc., Shopify Inc.) representing 59.2% of the total.
 
 *This section will be enhanced with AI-generated insights when LLM integration is enabled.*
 
