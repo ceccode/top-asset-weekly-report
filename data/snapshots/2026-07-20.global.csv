@@ -1,0 +1,33 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,NVDA,NVIDIA Corporation,EQUITY,USD,4912260841472,202.81,Technology,Semiconductors
+2,AAPL,Apple Inc.,EQUITY,USD,4901757779968,333.74,Technology,Consumer Electronics
+3,GOOGL,Alphabet Inc.,EQUITY,USD,4231485980672,346.77,Communication Services,Internet Content & Information
+4,MSFT,Microsoft Corporation,EQUITY,USD,2925466222592,393.82,Technology,Software - Infrastructure
+5,AMZN,"Amazon.com, Inc.",EQUITY,USD,2659480240128,247.23,Consumer Cyclical,Internet Retail
+6,AVGO,Broadcom Inc.,EQUITY,USD,1764229775360,370.825,Technology,Semiconductors
+7,META,"Meta Platforms, Inc.",EQUITY,USD,1639846903808,646.01,Communication Services,Internet Content & Information
+8,TSLA,"Tesla, Inc.",EQUITY,USD,1430329884672,380.84,Consumer Cyclical,Auto Manufacturers
+9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1287733248000,64218.38,,
+10,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1058821111808,490.91,Financial Services,Insurance - Diversified
+11,WMT,Walmart Inc.,EQUITY,USD,909130924032,114.24,Consumer Defensive,Discount Stores
+12,JNJ,Johnson & Johnson,EQUITY,USD,609122123776,253.04,Healthcare,Drug Manufacturers - General
+13,INTC,Intel Corporation,EQUITY,USD,477671030784,95.04,Technology,Semiconductors
+14,ABBV,AbbVie Inc.,EQUITY,USD,449631125504,254.49,Healthcare,Drug Manufacturers - General
+15,CSCO,"Cisco Systems, Inc.",EQUITY,USD,441204211712,111.94,Technology,Communication Equipment
+16,COST,Costco Wholesale Corporation,EQUITY,USD,417255915520,940.87,Consumer Defensive,Discount Stores
+17,UNH,UnitedHealth Group Incorporated,EQUITY,USD,386951249920,426.09,Healthcare,Healthcare Plans
+18,CVX,Chevron Corporation,EQUITY,USD,373185576960,187.38,Energy,Oil & Gas Integrated
+19,ORCL,Oracle Corporation,EQUITY,USD,364120342528,126.41,Technology,Software - Infrastructure
+20,NFLX,"Netflix, Inc.",EQUITY,USD,290334539776,68.95,Communication Services,Entertainment
+21,TXN,Texas Instruments Incorporated,EQUITY,USD,258484551680,284.02,Technology,Semiconductors
+22,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,224958562304,1864.22,,
+23,PEP,"PepsiCo, Inc.",EQUITY,USD,187305918464,137.12,Consumer Defensive,Beverages - Non-Alcoholic
+24,QCOM,QUALCOMM Incorporated,EQUITY,USD,181056110592,171.78,Technology,Semiconductors
+25,ADBE,Adobe Inc.,EQUITY,USD,94306877440,237.25,Technology,Software - Application
+26,ACN,Accenture plc,EQUITY,USD,87856529408,143.57,Technology,Information Technology Services
+27,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,75325464576,565.99,,
+28,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,68061077504,1.0905,,
+29,NKE,"NIKE, Inc.",EQUITY,USD,64917901312,43.76,Consumer Cyclical,Footwear & Accessories
+30,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,44501241856,76.41,,
+31,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,11168299008,0.072,,
+32,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,5934764032,0.1627,,

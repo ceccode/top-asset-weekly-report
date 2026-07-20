@@ -1,0 +1,25 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,ORCL,Oracle Corporation,EQUITY,USD,364120342528,126.41,Technology,Software - Infrastructure
+2,PLTR,Palantir Technologies Inc.,EQUITY,USD,317356179456,132.38,Technology,Software - Infrastructure
+3,PANW,"Palo Alto Networks, Inc.",EQUITY,USD,292324179968,358.68,Technology,Software - Infrastructure
+4,CRWD,"CrowdStrike Holdings, Inc.",EQUITY,USD,206788100096,203.08,Technology,Software - Infrastructure
+5,SAP,SAP SE,EQUITY,USD,187497398272,159.04,Technology,Software - Application
+6,SHOP,Shopify Inc.,EQUITY,USD,160338198528,123.56,Technology,Software - Application
+7,NOW,"ServiceNow, Inc.",EQUITY,USD,106472235008,103.24,Technology,Software - Application
+8,NET,"Cloudflare, Inc.",EQUITY,USD,98552520704,277.66,Technology,Software - Infrastructure
+9,ADBE,Adobe Inc.,EQUITY,USD,94306877440,237.25,Technology,Software - Application
+10,SNOW,Snowflake Inc.,EQUITY,USD,93200736256,268.9,Technology,Software - Application
+11,DDOG,"Datadog, Inc.",EQUITY,USD,92083339264,258.69,Technology,Software - Application
+12,INTU,Intuit Inc.,EQUITY,USD,79623880704,291.09,Technology,Software - Application
+13,WDAY,"Workday, Inc.",EQUITY,USD,35756818432,144.78,Technology,Software - Application
+14,VEEV,Veeva Systems Inc.,EQUITY,USD,31738171392,195.38,Healthcare,Health Information Services
+15,ZM,"Zoom Communications, Inc.",EQUITY,USD,26722250752,91.13,Technology,Software - Application
+16,OKTA,"Okta, Inc.",EQUITY,USD,25958129664,149.35,Technology,Software - Infrastructure
+17,MDB,"MongoDB, Inc.",EQUITY,USD,25121302528,312.33,Technology,Software - Infrastructure
+18,ZS,"Zscaler, Inc.",EQUITY,USD,24246726656,149.94,Technology,Software - Infrastructure
+19,TEAM,Atlassian Corporation,EQUITY,USD,23674003456,93.29,Technology,Software - Application
+20,HUBS,"HubSpot, Inc.",EQUITY,USD,11480028160,224.26,Technology,Software - Application
+21,DOCU,"DocuSign, Inc.",EQUITY,USD,10070419456,52.74,Technology,Software - Application
+22,ESTC,Elastic N.V.,EQUITY,USD,6402380800,61.59,Technology,Software - Application
+23,PATH,"UiPath, Inc.",EQUITY,USD,6295160832,12.15,Technology,Software - Infrastructure
+24,GTLB,GitLab Inc.,EQUITY,USD,5526408192,32.72,Technology,Software - Infrastructure
