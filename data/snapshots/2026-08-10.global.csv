@@ -1,0 +1,41 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,NVDA,NVIDIA Corporation,EQUITY,USD,5424535306240,223.96,Technology,Semiconductors
+2,GOOGL,Alphabet Inc.,EQUITY,USD,4333065732096,354.3,Communication Services,Internet Content & Information
+3,MSFT,Microsoft Corporation,EQUITY,USD,3712698548224,499.99,Technology,Software - Infrastructure
+4,AMZN,"Amazon.com, Inc.",EQUITY,USD,2960627335168,274.48,Consumer Cyclical,Internet Retail
+5,AVGO,Broadcom Inc.,EQUITY,USD,2035102646272,427.76,Technology,Semiconductors
+6,META,"Meta Platforms, Inc.",EQUITY,USD,1508378279936,592.1,Communication Services,Internet Content & Information
+7,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1308548661248,65155.48,,
+8,TSLA,"Tesla, Inc.",EQUITY,USD,1297742299136,328.58,Consumer Cyclical,Auto Manufacturers
+9,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1125446320128,521.8,Financial Services,Insurance - Diversified
+10,LLY,Eli Lilly and Company,EQUITY,USD,1057346617344,1185.71,Healthcare,Drug Manufacturers - General
+11,JPM,JP Morgan Chase & Co.,EQUITY,USD,950354706432,357.52,Financial Services,Banks - Diversified
+12,WMT,Walmart Inc.,EQUITY,USD,890111131648,111.85,Consumer Defensive,Discount Stores
+13,AMD,"Advanced Micro Devices, Inc.",EQUITY,USD,789073100800,483.36,Technology,Semiconductors
+14,V,Visa Inc.,EQUITY,USD,676804624384,362.5,Financial Services,Credit Services
+15,JNJ,Johnson & Johnson,EQUITY,USD,624742039552,259.24,Healthcare,Drug Manufacturers - General
+16,INTC,Intel Corporation,EQUITY,USD,512722567168,101.65,Technology,Semiconductors
+17,MA,Mastercard Incorporated,EQUITY,USD,493149782016,562.95,Financial Services,Credit Services
+18,CSCO,"Cisco Systems, Inc.",EQUITY,USD,478608392192,121.43,Technology,Communication Equipment
+19,ABBV,AbbVie Inc.,EQUITY,USD,434781519872,246.04,Healthcare,Drug Manufacturers - General
+20,ORCL,Oracle Corporation,EQUITY,USD,423486849024,147.02,Technology,Software - Infrastructure
+21,COST,Costco Wholesale Corporation,EQUITY,USD,420338106368,947.82,Consumer Defensive,Discount Stores
+22,KO,Coca-Cola Company (The),EQUITY,USD,374536896512,87.05,Consumer Defensive,Beverages - Non-Alcoholic
+23,UNH,UnitedHealth Group Incorporated,EQUITY,USD,369687396352,407.08,Healthcare,Healthcare Plans
+24,CVX,Chevron Corporation,EQUITY,USD,365956726784,186.56,Energy,Oil & Gas Integrated
+25,PG,Procter & Gamble Company (The),EQUITY,USD,338879086592,145.79,Consumer Defensive,Household & Personal Products
+26,NFLX,"Netflix, Inc.",EQUITY,USD,308714471424,74.14,Communication Services,Entertainment
+27,TXN,Texas Instruments Incorporated,EQUITY,USD,261261885440,286.08,Technology,Semiconductors
+28,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,232372256768,1923.15,,
+29,TMO,Thermo Fisher Scientific Inc,EQUITY,USD,219629895680,594.0,Healthcare,Diagnostics & Research
+30,PEP,"PepsiCo, Inc.",EQUITY,USD,189901324288,139.02,Consumer Defensive,Beverages - Non-Alcoholic
+31,DIS,Walt Disney Company (The),EQUITY,USD,181146730496,104.91,Communication Services,Entertainment
+32,QCOM,QUALCOMM Incorporated,EQUITY,USD,176252993536,167.86,Technology,Semiconductors
+33,ACN,Accenture plc,EQUITY,USD,107530461184,175.72,Technology,Information Technology Services
+34,ADBE,Adobe Inc.,EQUITY,USD,105420972032,265.21,Technology,Software - Application
+35,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,80467771392,603.8,,
+36,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,64647344128,1.0318,,
+37,NKE,"NIKE, Inc.",EQUITY,USD,61861900288,41.7,Consumer Cyclical,Footwear & Accessories
+38,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,44724273152,76.69,,
+39,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,10861671424,0.06978,,
+40,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,7194249728,0.19639,,
