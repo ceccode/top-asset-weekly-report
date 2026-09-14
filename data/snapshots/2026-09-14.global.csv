@@ -1,0 +1,47 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,NVDA,NVIDIA Corporation,EQUITY,USD,5080045584384,210.38,Technology,Semiconductors
+2,AAPL,Apple Inc.,EQUITY,USD,4857818775552,332.86,Technology,Consumer Electronics
+3,GOOGL,Alphabet Inc.,EQUITY,USD,4214190768128,344.58,Communication Services,Internet Content & Information
+4,MSFT,Microsoft Corporation,EQUITY,USD,3691461476352,497.13,Technology,Software - Infrastructure
+5,AMZN,"Amazon.com, Inc.",EQUITY,USD,2737296637952,253.775,Consumer Cyclical,Internet Retail
+6,META,"Meta Platforms, Inc.",EQUITY,USD,1680233201664,659.56,Communication Services,Internet Content & Information
+7,AVGO,Broadcom Inc.,EQUITY,USD,1665996816384,349.0,Technology,Semiconductors
+8,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1566985027584,78255.64,,
+9,TSLA,"Tesla, Inc.",EQUITY,USD,1424187064320,360.595,Consumer Cyclical,Auto Manufacturers
+10,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1099832492032,513.77,Financial Services,Insurance - Diversified
+11,LLY,Eli Lilly and Company,EQUITY,USD,1010405343232,1133.07,Healthcare,Drug Manufacturers - General
+12,JPM,JPMorgan Chase & Co.,EQUITY,USD,939496046592,353.435,Financial Services,Banks - Diversified
+13,WMT,Walmart Inc.,EQUITY,USD,863849480192,108.55,Consumer Defensive,Discount Stores
+14,AMD,"Advanced Micro Devices, Inc.",EQUITY,USD,799545425920,489.775,Technology,Semiconductors
+15,V,Visa Inc.,EQUITY,USD,701617733632,375.79,Financial Services,Credit Services
+16,XOM,ExxonMobil Holdings Corporation,EQUITY,USD,694584147968,168.92,Energy,Oil & Gas Integrated
+17,JNJ,Johnson & Johnson,EQUITY,USD,649503834112,269.515,Healthcare,Drug Manufacturers - General
+18,INTC,Intel Corporation,EQUITY,USD,512276987904,96.9101,Technology,Semiconductors
+19,MA,Mastercard Incorporated,EQUITY,USD,504511627264,575.92,Financial Services,Credit Services
+20,ABBV,AbbVie Inc.,EQUITY,USD,462790393856,261.89,Healthcare,Drug Manufacturers - General
+21,CSCO,"Cisco Systems, Inc.",EQUITY,USD,434946179072,110.32,Technology,Communication Equipment
+22,CVX,Chevron Corporation,EQUITY,USD,425246195712,216.785,Energy,Oil & Gas Integrated
+23,ORCL,Oracle Corporation,EQUITY,USD,410582319104,142.54,Technology,Software - Infrastructure
+24,COST,Costco Wholesale Corporation,EQUITY,USD,404275265536,911.6,Consumer Defensive,Discount Stores
+25,KO,The Coca-Cola Company,EQUITY,USD,385293287424,89.55,Consumer Defensive,Beverages - Non-Alcoholic
+26,MRK,"Merck & Co., Inc.",EQUITY,USD,357764530176,145.01,Healthcare,Drug Manufacturers - General
+27,UNH,UnitedHealth Group Incorporated,EQUITY,USD,342383067136,381.445,Healthcare,Healthcare Plans
+28,PG,The Procter & Gamble Company,EQUITY,USD,340991770624,146.8101,Consumer Defensive,Household & Personal Products
+29,NFLX,"Netflix, Inc.",EQUITY,USD,328847130624,78.975,Communication Services,Entertainment
+30,HD,"The Home Depot, Inc.",EQUITY,USD,309104214016,309.82,Consumer Cyclical,Home Improvement Retail
+31,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,306053742592,2511.9,,
+32,TXN,Texas Instruments Incorporated,EQUITY,USD,238581383168,261.245,Technology,Semiconductors
+33,TMO,Thermo Fisher Scientific Inc.,EQUITY,USD,225880489984,610.905,Healthcare,Diagnostics & Research
+34,CRM,"Salesforce, Inc.",EQUITY,USD,208445325312,253.275,Technology,Software - Application
+35,QCOM,QUALCOMM Incorporated,EQUITY,USD,190648795136,178.5,Technology,Semiconductors
+36,PEP,"PepsiCo, Inc.",EQUITY,USD,188084535296,137.69,Consumer Defensive,Beverages - Non-Alcoholic
+37,DIS,The Walt Disney Company,EQUITY,USD,186672119808,108.11,Communication Services,Entertainment
+38,MCD,McDonald's Corporation,EQUITY,USD,181637431296,256.68,Consumer Cyclical,Restaurants
+39,ACN,Accenture plc,EQUITY,USD,116152721408,189.81,Technology,Information Technology Services
+40,ADBE,Adobe Inc.,EQUITY,USD,103642152960,260.735,Technology,Software - Application
+41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,95936626688,722.1,,
+42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,87627800576,1.398,,
+43,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,59434856448,101.63,,
+44,NKE,"NIKE, Inc.",EQUITY,USD,54956208128,37.045,Consumer Cyclical,Footwear & Accessories
+45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,14368489472,0.08399,,
+46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,7674058752,0.20973,,
