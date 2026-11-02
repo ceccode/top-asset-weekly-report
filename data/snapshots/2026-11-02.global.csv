@@ -1,0 +1,47 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,NVDA,NVIDIA Corporation,EQUITY,USD,4995772579840,206.89,Technology,Semiconductors
+2,AAPL,Apple Inc.,EQUITY,USD,4953702662144,339.43,Technology,Consumer Electronics
+3,MSFT,Microsoft Corporation,EQUITY,USD,3894296444928,524.4,Technology,Software - Infrastructure
+4,GOOGL,Alphabet Inc.,EQUITY,USD,3478095396864,282.91,Communication Services,Internet Content & Information
+5,AMZN,"Amazon.com, Inc.",EQUITY,USD,2721126023168,251.65,Consumer Cyclical,Internet Retail
+6,TSLA,"Tesla, Inc.",EQUITY,USD,1625520340992,411.2399,Consumer Cyclical,Auto Manufacturers
+7,AVGO,Broadcom Inc.,EQUITY,USD,1577660841984,330.495,Technology,Semiconductors
+8,META,"Meta Platforms, Inc.",EQUITY,USD,1564487843840,611.885,Communication Services,Internet Content & Information
+9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1556138688512,77367.97,,
+10,LLY,Eli Lilly and Company,EQUITY,USD,1254445154304,1408.31,Healthcare,Drug Manufacturers - General
+11,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1182956126208,552.6,Financial Services,Insurance - Diversified
+12,WMT,Walmart Inc.,EQUITY,USD,1001952837632,126.29,Consumer Defensive,Discount Stores
+13,JPM,JPMorgan Chase & Co.,EQUITY,USD,905267838976,340.8901,Financial Services,Banks - Diversified
+14,AMD,"Advanced Micro Devices, Inc.",EQUITY,USD,797202841600,488.34,Technology,Semiconductors
+15,V,Visa Inc.,EQUITY,USD,796831973376,426.34,Financial Services,Credit Services
+16,XOM,ExxonMobil Holdings Corporation,EQUITY,USD,738992455680,181.17,Energy,Oil & Gas Integrated
+17,JNJ,Johnson & Johnson,EQUITY,USD,646456475648,268.5389,Healthcare,Drug Manufacturers - General
+18,MA,Mastercard Incorporated,EQUITY,USD,574967513088,659.99,Financial Services,Credit Services
+19,ABBV,AbbVie Inc.,EQUITY,USD,511739494400,289.59,Healthcare,Drug Manufacturers - General
+20,COST,Costco Wholesale Corporation,EQUITY,USD,456970469376,1031.235,Consumer Defensive,Discount Stores
+21,CVX,Chevron Corporation,EQUITY,USD,448047153152,229.65,Energy,Oil & Gas Integrated
+22,KO,The Coca-Cola Company,EQUITY,USD,409596592128,95.2129,Consumer Defensive,Beverages - Non-Alcoholic
+23,CSCO,"Cisco Systems, Inc.",EQUITY,USD,406677848064,103.15,Technology,Communication Equipment
+24,PG,The Procter & Gamble Company,EQUITY,USD,377868156928,163.03,Consumer Defensive,Household & Personal Products
+25,ORCL,Oracle Corporation,EQUITY,USD,372935262208,123.02,Technology,Software - Infrastructure
+26,MRK,"Merck & Co., Inc.",EQUITY,USD,366646362112,148.61,Healthcare,Drug Manufacturers - General
+27,UNH,UnitedHealth Group Incorporated,EQUITY,USD,356609949696,397.295,Healthcare,Healthcare Plans
+28,HD,"The Home Depot, Inc.",EQUITY,USD,338870272000,339.655,Consumer Cyclical,Home Improvement Retail
+29,INTC,Intel Corporation,EQUITY,USD,332914032640,62.6367,Technology,Semiconductors
+30,TXN,Texas Instruments Incorporated,EQUITY,USD,281551699968,307.96,Technology,Semiconductors
+31,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,276998225920,2266.09,,
+32,NFLX,"Netflix, Inc.",EQUITY,USD,259164012544,62.2401,Communication Services,Entertainment
+33,TMO,Thermo Fisher Scientific Inc.,EQUITY,USD,253377265664,683.85,Healthcare,Diagnostics & Research
+34,DIS,The Walt Disney Company,EQUITY,USD,195478208512,113.21,Communication Services,Entertainment
+35,CRM,"Salesforce, Inc.",EQUITY,USD,190791974912,231.825,Technology,Software - Application
+36,PEP,"PepsiCo, Inc.",EQUITY,USD,190135091200,139.524,Consumer Defensive,Beverages - Non-Alcoholic
+37,MCD,McDonald's Corporation,EQUITY,USD,186725367808,263.87,Consumer Cyclical,Restaurants
+38,QCOM,QUALCOMM Incorporated,EQUITY,USD,178852446208,167.49,Technology,Semiconductors
+39,ACN,Accenture plc,EQUITY,USD,158878531584,259.63,Technology,Information Technology Services
+40,ADBE,Adobe Inc.,EQUITY,USD,98662203392,253.5,Technology,Software - Application
+41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,92377079808,702.37,,
+42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,79129993216,1.2484,,
+43,NKE,"NIKE, Inc.",EQUITY,USD,58647416832,39.485,Consumer Cyclical,Footwear & Accessories
+44,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,55132012544,93.27,,
+45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,11740823552,0.07488,,
+46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,7005806080,0.18992,,
