@@ -87,6 +87,20 @@ python main.py --no-llm
 python main.py --publish
 ```
 
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest tests -q
+```
+
+The suite runs offline: Yahoo Finance and OpenAI are never called.
+
+## Exit Code
+
+`main.py` exits with `0` only when every requested report was generated (and,
+with `--publish`, the public folder was built). A partial run exits with `1`.
+
 ## LLM Integration (Optional)
 
 To enable AI-generated editorial sections:
@@ -111,6 +125,9 @@ top-asset-weekly-report/
 ├── rag.py               # RAG context
 ├── telegram.py          # Telegram summaries
 ├── publisher.py         # GitHub Pages publishing
+├── report_id.py         # Report date/scope, file names and labels
+├── mdtext.py            # Markdown text helpers
+├── tests/               # pytest suite
 ├── data/
 │   ├── config/          # Ticker whitelists
 │   │   ├── global_tickers.txt

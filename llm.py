@@ -2,8 +2,11 @@
 
 import json
 import logging
-import os
+import re
 from typing import Dict, Any, Optional
+
+from metrics import format_market_cap
+from report_id import ReportId
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +22,16 @@ STRICT RULES:
 6. Always maintain a neutral, informational tone
 
 You will receive market data and historical context. Generate the requested sections in Markdown format."""
+
+# Present in every placeholder section, so they can be told apart from real LLM output
+PLACEHOLDER_MARKER = "will be enhanced with AI-generated"
+
+# Section key -> heading used both in the LLM answer and in the rendered report
+SECTION_HEADINGS = {
+    "executive_summary": "Executive Summary",
+    "riflessione": "Riflessione Strategica",
+    "implicazioni": "Implicazioni",
+}
 
 
 def generate_llm_sections(
@@ -50,6 +63,10 @@ def generate_llm_sections(
         return _generate_placeholders(input_data, report_type)
 
 
+def _scope_label(report_type: str) -> str:
+    return ReportId("", report_type).label_en
+
+
 def _generate_placeholders(input_data: Dict[str, Any], report_type: str) -> Dict[str, str]:
     """Generate deterministic placeholder sections when LLM is unavailable."""
     metrics = input_data.get("metrics", {})
@@ -59,9 +76,7 @@ def _generate_placeholders(input_data: Dict[str, Any], report_type: str) -> Dict
     total_cap = metrics.get("total_market_cap", 0)
     top5_conc = metrics.get("top5_concentration", 0)
     
-    from metrics import format_market_cap
-    
-    scope_label = "global assets" if report_type == "global" else "software companies"
+    scope_label = _scope_label(report_type)
     
     executive_summary = f"""This week's analysis covers the top {scope_label} by market capitalization.
 
@@ -108,7 +123,7 @@ def _call_openai(
     client = OpenAI(api_key=api_key)
     
     # Prepare the user prompt
-    scope_label = "global assets" if report_type == "global" else "software companies"
+    scope_label = _scope_label(report_type)
     
     user_prompt = f"""Generate three sections for a weekly {scope_label} market report.
 
@@ -153,28 +168,12 @@ Format your response as:
 
 def _parse_llm_response(content: str, input_data: Dict[str, Any], report_type: str) -> Dict[str, str]:
     """Parse LLM response into separate sections."""
-    import re
-    
-    sections = {
-        "executive_summary": "",
-        "riflessione": "",
-        "implicazioni": "",
-    }
-    
-    # Extract Executive Summary
-    match = re.search(r"###?\s*Executive Summary\s*\n(.*?)(?=###|\Z)", content, re.DOTALL | re.IGNORECASE)
-    if match:
-        sections["executive_summary"] = match.group(1).strip()
-    
-    # Extract Riflessione Strategica
-    match = re.search(r"###?\s*Riflessione Strategica\s*\n(.*?)(?=###|\Z)", content, re.DOTALL | re.IGNORECASE)
-    if match:
-        sections["riflessione"] = match.group(1).strip()
-    
-    # Extract Implicazioni
-    match = re.search(r"###?\s*Implicazioni\s*\n(.*?)(?=###|\Z)", content, re.DOTALL | re.IGNORECASE)
-    if match:
-        sections["implicazioni"] = match.group(1).strip()
+    sections = {}
+    for key, heading in SECTION_HEADINGS.items():
+        match = re.search(
+            rf"###?\s*{re.escape(heading)}\s*\n(.*?)(?=###|\Z)", content, re.DOTALL | re.IGNORECASE
+        )
+        sections[key] = match.group(1).strip() if match else ""
     
     # Fallback to placeholders for any missing sections
     if not all(sections.values()):

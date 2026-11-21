@@ -8,8 +8,9 @@ Generates weekly market reports for global assets and software companies.
 import argparse
 import logging
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from pathlib import Path
+from typing import List, Optional
 
 from config import (
     REPORTS_DIR,
@@ -31,6 +32,7 @@ from metrics import (
 from rag import extract_rag_context, save_rag_context, ensure_rag_context
 from llm import generate_llm_sections
 from render import render_report, save_report
+from report_id import DATE_FORMAT, SCOPES, ReportId
 from telegram import generate_telegram_txt, save_telegram_txt
 from publisher import build_public
 
@@ -42,102 +44,102 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Where each scope reads its tickers from
+TICKER_SOURCES = {
+    "global": get_global_tickers,
+    "software": get_software_tickers,
+}
 
-def generate_report(
-    scope: str,
-    tickers: list[str],
-    date: str,
-    top_n: int,
-    rag_k: int,
-    use_llm: bool,
-    generate_telegram: bool = True,
-    rag_check: bool = True,
-) -> bool:
+# Assets sent to the LLM, to keep the prompt small
+LLM_ASSET_LIMIT = 20
+
+
+@dataclass(frozen=True)
+class Options:
+    """How a report is generated, as chosen on the command line."""
+    top_n: int = 50
+    rag_k: int = 4
+    use_llm: bool = True
+    telegram: bool = True
+    rag_check: bool = True
+
+
+def generate_report(report: ReportId, tickers: List[str], options: Options) -> bool:
     """
-    Generate a single report for the given scope.
-    
+    Generate a single report.
+
     Returns True if successful, False otherwise.
     """
-    logger.info(f"=== Generating {scope} report for {date} ===")
-    
-    # Fetch data
+    scope = report.scope
+    logger.info(f"=== Generating {scope} report for {report.date} ===")
+
     logger.info(f"Fetching data for {len(tickers)} tickers...")
     assets = fetch_all_tickers(tickers)
-    
+
     if not assets:
         logger.error(f"No valid data fetched for {scope} report. Aborting.")
         return False
-    
-    # Rank and calculate metrics
-    ranked = rank_by_market_cap(assets, top_n)
+
+    ranked = rank_by_market_cap(assets, options.top_n)
     metrics = calculate_metrics(ranked)
-    
     logger.info(f"Ranked {len(ranked)} assets, total cap: {metrics.get('total_market_cap', 0):,.0f}")
-    
-    # Load previous snapshot and calculate changes
-    previous = load_previous_snapshot(SNAPSHOTS_DIR, scope, date)
+
+    previous = load_previous_snapshot(SNAPSHOTS_DIR, scope, report.date)
     changes = calculate_changes(ranked, previous)
     entries, exits, movers = changes
     logger.info(f"Changes: {len(entries)} entries, {len(exits)} exits, {len(movers)} movers")
-    
-    # Save snapshots
-    csv_path = SNAPSHOTS_DIR / f"{date}.{scope}.csv"
-    json_path = SNAPSHOTS_DIR / f"{date}.{scope}.json"
+
+    csv_path = SNAPSHOTS_DIR / report.csv_name
     save_snapshot_csv(ranked, csv_path)
-    save_snapshot_json(ranked, metrics, json_path)
-    
-    # Extract RAG context
-    rag_context = extract_rag_context(REPORTS_DIR, scope, date, rag_k)
+    save_snapshot_json(ranked, metrics, SNAPSHOTS_DIR / report.json_name)
+
+    rag_context = extract_rag_context(REPORTS_DIR, scope, report.date, options.rag_k)
     if rag_context:
         save_rag_context(RAG_DIR, scope, rag_context)
         logger.info(f"RAG context extracted ({len(rag_context)} chars)")
     else:
         logger.info("No RAG context available (no previous reports)")
-    
-    # Generate LLM sections
-    api_key = get_openai_api_key() if use_llm else None
+
+    api_key = get_openai_api_key() if options.use_llm else None
     input_data = {
-        "assets": ranked[:20],  # Send top 20 to LLM to reduce tokens
+        "assets": ranked[:LLM_ASSET_LIMIT],
         "metrics": metrics,
         "entries": entries,
         "exits": exits,
         "movers": movers,
     }
     llm_sections = generate_llm_sections(input_data, rag_context, scope, api_key)
-    
-    # Render and save report
-    report_content = render_report(date, scope, ranked, metrics, changes, llm_sections)
-    report_path = REPORTS_DIR / f"{date}.{scope}.md"
+
+    report_content = render_report(report.date, scope, ranked, metrics, changes, llm_sections)
+    report_path = REPORTS_DIR / report.markdown_name
     save_report(report_content, report_path)
-    
-    # Generate Telegram TXT
-    if generate_telegram:
+
+    # Telegram text and RAG refresh are extras: their failure does not fail the report
+    if options.telegram:
         try:
-            telegram_txt = generate_telegram_txt(date, scope, report_content, csv_path)
-            telegram_path = SNAPSHOTS_DIR / f"{date}.telegram.{scope}.txt"
-            save_telegram_txt(telegram_txt, telegram_path)
+            telegram_txt = generate_telegram_txt(report.date, scope, report_content, csv_path)
+            save_telegram_txt(telegram_txt, SNAPSHOTS_DIR / report.telegram_snapshot_name)
         except Exception as e:
             logger.warning(f"Failed to generate Telegram TXT: {e}")
-    
-    # Check and update RAG context
-    if rag_check:
+
+    if options.rag_check:
         try:
-            ensure_rag_context(RAG_DIR, REPORTS_DIR, scope, k=rag_k)
+            ensure_rag_context(RAG_DIR, REPORTS_DIR, scope, k=options.rag_k)
         except Exception as e:
             logger.warning(f"Failed to update RAG context: {e}")
-    
+
     logger.info(f"✓ {scope} report complete: {report_path}")
     return True
 
 
-def main():
+def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Generate weekly market reports for global assets and software companies."
     )
     parser.add_argument(
         "--date",
         type=str,
-        default=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        default=datetime.now(timezone.utc).strftime(DATE_FORMAT),
         help="Report date in YYYY-MM-DD format (default: today UTC)",
     )
     parser.add_argument(
@@ -160,7 +162,7 @@ def main():
     parser.add_argument(
         "--only",
         type=str,
-        choices=["global", "software", "all"],
+        choices=[*SCOPES, "all"],
         default="all",
         help="Generate only specific report type (default: all)",
     )
@@ -179,77 +181,68 @@ def main():
         action="store_true",
         help="Build public/ folder for GitHub Pages after generating reports",
     )
-    
-    args = parser.parse_args()
-    
-    # Validate date format
+    return parser.parse_args(argv)
+
+
+def _generate_safely(report: ReportId, options: Options) -> bool:
+    """Generate one report, turning any failure into False."""
     try:
-        datetime.strptime(args.date, "%Y-%m-%d")
+        return generate_report(report, TICKER_SOURCES[report.scope](), options)
+    except Exception as e:
+        logger.error(f"Failed to generate {report.scope} report: {e}")
+        return False
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    """Run the CLI. Returns the exit code: 0 only when every requested report was generated."""
+    args = parse_args(argv)
+
+    try:
+        datetime.strptime(args.date, DATE_FORMAT)
     except ValueError:
         logger.error(f"Invalid date format: {args.date}. Use YYYY-MM-DD.")
-        sys.exit(1)
-    
-    logger.info(f"Top Assets Weekly Report Generator")
-    logger.info(f"Date: {args.date}, Top-N: {args.top_n}, RAG-K: {args.rag_k}")
-    logger.info(f"LLM: {'disabled' if args.no_llm else 'enabled if API key present'}")
-    logger.info(f"Telegram: {'disabled' if args.no_telegram else 'enabled'}")
-    logger.info(f"RAG check: {'disabled' if args.no_rag_check else 'enabled'}")
-    
-    use_llm = not args.no_llm
-    generate_telegram = not args.no_telegram
-    rag_check = not args.no_rag_check
-    success_count = 0
-    
-    # Generate global report
-    if args.only in ("global", "all"):
-        try:
-            global_tickers = get_global_tickers()
-            if generate_report(
-                "global", global_tickers, args.date, args.top_n, args.rag_k,
-                use_llm, generate_telegram, rag_check
-            ):
-                success_count += 1
-        except Exception as e:
-            logger.error(f"Failed to generate global report: {e}")
-    
-    # Generate software report
-    if args.only in ("software", "all"):
-        try:
-            software_tickers = get_software_tickers()
-            if generate_report(
-                "software", software_tickers, args.date, args.top_n, args.rag_k,
-                use_llm, generate_telegram, rag_check
-            ):
-                success_count += 1
-        except Exception as e:
-            logger.error(f"Failed to generate software report: {e}")
-    
-    # Summary
-    expected = 2 if args.only == "all" else 1
-    if success_count == expected:
-        logger.info(f"✓ All {success_count} report(s) generated successfully")
-    elif success_count > 0:
-        logger.warning(f"Partial success: {success_count}/{expected} reports generated")
-    else:
+        return 1
+
+    options = Options(
+        top_n=args.top_n,
+        rag_k=args.rag_k,
+        use_llm=not args.no_llm,
+        telegram=not args.no_telegram,
+        rag_check=not args.no_rag_check,
+    )
+
+    logger.info("Top Assets Weekly Report Generator")
+    logger.info(f"Date: {args.date}, Top-N: {options.top_n}, RAG-K: {options.rag_k}")
+    logger.info(f"LLM: {'enabled if API key present' if options.use_llm else 'disabled'}")
+    logger.info(f"Telegram: {'enabled' if options.telegram else 'disabled'}")
+    logger.info(f"RAG check: {'enabled' if options.rag_check else 'disabled'}")
+
+    scopes = list(SCOPES) if args.only == "all" else [args.only]
+    generated = [
+        scope for scope in scopes if _generate_safely(ReportId(args.date, scope), options)
+    ]
+
+    if not generated:
         logger.error("No reports generated")
-        sys.exit(1)
-    
-    # Build public folder if requested
-    if args.publish and success_count > 0:
-        scopes_to_publish = []
-        if args.only in ("global", "all"):
-            scopes_to_publish.append("global")
-        if args.only in ("software", "all"):
-            scopes_to_publish.append("software")
-        
+        return 1
+
+    all_generated = len(generated) == len(scopes)
+    if all_generated:
+        logger.info(f"✓ All {len(generated)} report(s) generated successfully")
+    else:
+        logger.error(f"Partial success: {len(generated)}/{len(scopes)} reports generated")
+
+    if args.publish:
         try:
-            build_public(args.date, scopes_to_publish)
+            published = build_public(args.date, generated)
         except Exception as e:
             logger.error(f"Failed to build public folder: {e}")
-            sys.exit(1)
-    
-    sys.exit(0)
+            return 1
+        if not published:
+            return 1
+
+    return 0 if all_generated else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

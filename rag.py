@@ -1,20 +1,17 @@
 """RAG context extraction from previous reports."""
 
 import logging
-import os
-import re
 from pathlib import Path
 from typing import List, Optional, Tuple
-from datetime import datetime
+
+import mdtext
+from llm import PLACEHOLDER_MARKER, SECTION_HEADINGS
+from report_id import ReportId
 
 logger = logging.getLogger(__name__)
 
 # Sections to extract for RAG context
-LLM_SECTIONS = [
-    "Executive Summary",
-    "Riflessione Strategica",
-    "Implicazioni",
-]
+LLM_SECTIONS = list(SECTION_HEADINGS.values())
 
 # Max words for RAG context
 MAX_RAG_WORDS = 2000
@@ -22,40 +19,31 @@ MAX_RAG_WORDS = 2000
 
 def extract_section(content: str, section_name: str) -> Optional[str]:
     """Extract a specific section from markdown content."""
-    # Match ## Section Name followed by content until next ## or end
-    pattern = rf"##\s*{re.escape(section_name)}\s*\n(.*?)(?=\n##|\Z)"
-    match = re.search(pattern, content, re.DOTALL | re.IGNORECASE)
-    
-    if match:
-        text = match.group(1).strip()
-        # Skip if it's just a placeholder
-        if "TODO" in text or "placeholder" in text.lower():
-            return None
-        return text
-    return None
+    text = mdtext.extract_section(content, section_name)
+    if not text:
+        return None
+    # Skip if it's just a placeholder
+    if "TODO" in text or "placeholder" in text.lower() or PLACEHOLDER_MARKER in text:
+        return None
+    return text
+
+
+def _reports_for_scope(reports_dir: Path, scope: str) -> List[Tuple[str, Path]]:
+    """All (date, path) pairs of the scope's reports, in no particular order."""
+    found = []
+    for report_path in reports_dir.glob(f"*.{scope}.md"):
+        report = ReportId.from_path(report_path)
+        if report:
+            found.append((report.date, report_path))
+    return found
 
 
 def get_recent_reports(reports_dir: Path, scope: str, current_date: str, k: int = 4) -> List[Path]:
     """Get the K most recent reports for the given scope before current_date."""
-    current = datetime.strptime(current_date, "%Y-%m-%d")
-    
-    # Find all matching reports
-    pattern = f"*.{scope}.md"
-    all_reports = list(reports_dir.glob(pattern))
-    
-    # Filter to reports before current date and sort by date descending
-    valid_reports = []
-    for report_path in all_reports:
-        try:
-            date_str = report_path.name.split(".")[0]
-            report_date = datetime.strptime(date_str, "%Y-%m-%d")
-            if report_date < current:
-                valid_reports.append((report_date, report_path))
-        except ValueError:
-            continue
-    
-    valid_reports.sort(key=lambda x: x[0], reverse=True)
-    return [p for _, p in valid_reports[:k]]
+    # ISO dates sort chronologically as plain strings
+    earlier = [r for r in _reports_for_scope(reports_dir, scope) if r[0] < current_date]
+    earlier.sort(key=lambda r: r[0], reverse=True)
+    return [path for _, path in earlier[:k]]
 
 
 def extract_rag_context(reports_dir: Path, scope: str, current_date: str, k: int = 4) -> str:
@@ -74,7 +62,7 @@ def extract_rag_context(reports_dir: Path, scope: str, current_date: str, k: int
     for report_path in recent_reports:
         try:
             content = report_path.read_text(encoding="utf-8")
-            date_str = report_path.name.split(".")[0]
+            date_str = ReportId.from_path(report_path).date
             
             sections_found = []
             for section_name in LLM_SECTIONS:
@@ -94,7 +82,7 @@ def extract_rag_context(reports_dir: Path, scope: str, current_date: str, k: int
 
 def save_rag_context(rag_dir: Path, scope: str, context: str) -> Path:
     """Save RAG context to file."""
-    filepath = rag_dir / f"rag_context_{scope}.txt"
+    filepath = get_rag_file_path(rag_dir, scope)
     filepath.write_text(context, encoding="utf-8")
     logger.info(f"Saved RAG context: {filepath}")
     return filepath
@@ -118,25 +106,8 @@ def get_rag_file_path(rag_dir: Path, scope: str) -> Path:
 
 def get_latest_report_date(reports_dir: Path, scope: str) -> Optional[str]:
     """Get the date of the most recent report for a scope."""
-    pattern = f"*.{scope}.md"
-    all_reports = list(reports_dir.glob(pattern))
-    
-    if not all_reports:
-        return None
-    
-    dates = []
-    for report_path in all_reports:
-        try:
-            date_str = report_path.name.split(".")[0]
-            datetime.strptime(date_str, "%Y-%m-%d")  # Validate format
-            dates.append(date_str)
-        except ValueError:
-            continue
-    
-    if not dates:
-        return None
-    
-    return max(dates)
+    dates = [date for date, _ in _reports_for_scope(reports_dir, scope)]
+    return max(dates) if dates else None
 
 
 def check_rag_freshness(
@@ -174,7 +145,7 @@ def check_rag_freshness(
         
         # Also check by file modification time as fallback
         rag_mtime = rag_path.stat().st_mtime
-        latest_report_path = reports_dir / f"{latest_report_date}.{scope}.md"
+        latest_report_path = reports_dir / ReportId(latest_report_date, scope).markdown_name
         if latest_report_path.exists():
             report_mtime = latest_report_path.stat().st_mtime
             if rag_mtime >= report_mtime:

@@ -4,29 +4,18 @@ import csv
 import logging
 import re
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 from config import DISCLAIMER_SHORT
+from mdtext import extract_section, strip_inline_formatting, truncate_at_word
 from metrics import format_market_cap
+from report_id import ReportId
 
 logger = logging.getLogger(__name__)
 
 # Max character limits for Telegram output
 MAX_SUMMARY_CHARS = 800
 MAX_INSIGHT_CHARS = 600
-
-
-def extract_section_from_markdown(md_text: str, heading: str) -> str:
-    """
-    Extract a section from markdown by heading.
-    Returns content between ## heading and next ## or end of file.
-    """
-    pattern = rf"##\s*{re.escape(heading)}\s*\n(.*?)(?=\n##|\Z)"
-    match = re.search(pattern, md_text, re.DOTALL | re.IGNORECASE)
-    
-    if match:
-        return match.group(1).strip()
-    return ""
 
 
 def load_top_n_from_csv(csv_path: Path, n: int = 10) -> List[Dict[str, Any]]:
@@ -57,7 +46,7 @@ def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str,
     """
     Fallback: parse top N from markdown table under ## Classifica.
     """
-    classifica = extract_section_from_markdown(md_text, "Classifica")
+    classifica = extract_section(md_text, "Classifica")
     if not classifica:
         return []
     
@@ -66,12 +55,12 @@ def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str,
     
     for line in lines:
         line = line.strip()
-        # Skip non-table lines and header/separator
-        if not line.startswith("|") or line.startswith("|--") or "Rank" in line:
+        if not line.startswith("|"):
             continue
-        
+
         parts = [p.strip() for p in line.split("|") if p.strip()]
-        if len(parts) >= 4:
+        # Data rows start with the numeric rank; header and separator do not
+        if len(parts) >= 4 and parts[0].isdigit():
             try:
                 assets.append({
                     "rank": parts[0],
@@ -88,26 +77,9 @@ def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str,
     return assets
 
 
-def truncate_text(text: str, max_chars: int) -> str:
-    """Truncate text to max characters, ending at word boundary."""
-    if len(text) <= max_chars:
-        return text
-    
-    truncated = text[:max_chars]
-    # Find last space to avoid cutting mid-word
-    last_space = truncated.rfind(" ")
-    if last_space > max_chars * 0.7:
-        truncated = truncated[:last_space]
-    
-    return truncated.rstrip(".,;:") + "…"
-
-
 def clean_text_for_telegram(text: str) -> str:
     """Clean markdown text for plain text Telegram output."""
-    # Remove markdown formatting
-    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)  # Bold
-    text = re.sub(r"\*([^*]+)\*", r"\1", text)  # Italic
-    text = re.sub(r"`([^`]+)`", r"\1", text)  # Code
+    text = strip_inline_formatting(text)
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)  # Links
     
     # Clean up whitespace
@@ -132,7 +104,7 @@ def format_summary_bullets(text: str, max_chars: int) -> str:
         paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
         result = "\n\n".join(paragraphs[:2])
     
-    return truncate_text(result, max_chars)
+    return truncate_at_word(result, max_chars)
 
 
 def generate_telegram_txt(
@@ -152,7 +124,7 @@ def generate_telegram_txt(
     Returns:
         Plain text formatted for Telegram
     """
-    scope_label = "Global Assets" if scope == "global" else "Software Companies"
+    scope_label = ReportId(date, scope).label_en.title()
     
     lines = []
     
@@ -180,7 +152,7 @@ def generate_telegram_txt(
         lines.append("")
     
     # Executive Summary
-    summary = extract_section_from_markdown(md_content, "Executive Summary")
+    summary = extract_section(md_content, "Executive Summary")
     if summary:
         summary_clean = format_summary_bullets(summary, MAX_SUMMARY_CHARS)
         lines.append("📝 Summary:")
@@ -188,12 +160,12 @@ def generate_telegram_txt(
         lines.append("")
     
     # Insight from Riflessione Strategica
-    insight = extract_section_from_markdown(md_content, "Riflessione Strategica")
+    insight = extract_section(md_content, "Riflessione Strategica")
     if insight:
         insight_clean = clean_text_for_telegram(insight)
         # Take first paragraph only
         first_para = insight_clean.split("\n\n")[0]
-        insight_truncated = truncate_text(first_para, MAX_INSIGHT_CHARS)
+        insight_truncated = truncate_at_word(first_para, MAX_INSIGHT_CHARS)
         lines.append("💡 Insight:")
         lines.append(insight_truncated)
         lines.append("")

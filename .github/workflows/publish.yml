@@ -35,15 +35,18 @@ jobs:
           cache: 'pip'
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements-dev.txt
+      
+      - name: Run tests
+        run: python -m pytest tests -q
       
       - name: Generate reports
         env:
+          # Without this secret the editorial sections fall back to placeholders
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python main.py --only all --publish
-          # Use --no-llm by default; remove if you want LLM sections
-          # and have set OPENAI_API_KEY secret
+        # Exits non-zero unless every report was generated, which stops the
+        # steps below: nothing is committed or deployed from a partial run
+        run: python main.py --only all --publish
       
       - name: Commit and push reports to repository
         run: |

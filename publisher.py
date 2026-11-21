@@ -1,14 +1,17 @@
 """Publisher module for generating static GitHub Pages site."""
 
+import csv
 import json
 import logging
 import re
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 from config import REPORTS_DIR, SNAPSHOTS_DIR, DISCLAIMER, DISCLAIMER_SHORT
+from mdtext import extract_section, strip_inline_formatting, truncate_at_word
+from report_id import SCOPES, ReportId
 
 logger = logging.getLogger(__name__)
 
@@ -22,33 +25,11 @@ MANIFEST_VERSION = 1
 MAX_EXCERPT_CHARS = 300
 
 
-def extract_section_from_markdown(md_text: str, heading: str) -> str:
-    """Extract a section from markdown by heading."""
-    pattern = rf"##\s*{re.escape(heading)}\s*\n(.*?)(?=\n##|\Z)"
-    match = re.search(pattern, md_text, re.DOTALL | re.IGNORECASE)
-    if match:
-        return match.group(1).strip()
-    return ""
-
-
 def make_excerpt(text: str, max_chars: int = MAX_EXCERPT_CHARS) -> str:
     """Create a short excerpt from text."""
-    # Clean markdown formatting
-    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
-    text = re.sub(r"\*([^*]+)\*", r"\1", text)
-    text = re.sub(r"`([^`]+)`", r"\1", text)
-    text = re.sub(r"\n+", " ", text)
-    text = text.strip()
-    
-    if len(text) <= max_chars:
-        return text
-    
-    truncated = text[:max_chars]
-    last_space = truncated.rfind(" ")
-    if last_space > max_chars * 0.7:
-        truncated = truncated[:last_space]
-    
-    return truncated.rstrip(".,;:") + "…"
+    text = strip_inline_formatting(text)
+    text = re.sub(r"\n+", " ", text).strip()
+    return truncate_at_word(text, max_chars)
 
 
 def load_ranking_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
@@ -56,7 +37,6 @@ def load_ranking_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
     if not csv_path.exists():
         return []
     
-    import csv
     ranking = []
     try:
         with open(csv_path, "r", encoding="utf-8") as f:
@@ -91,17 +71,15 @@ def load_metrics_from_json(json_path: Path) -> Dict[str, Any]:
 
 
 def generate_report_json(
-    date: str,
-    scope: str,
+    report: ReportId,
     ranking: List[Dict[str, Any]],
     metrics: Dict[str, Any],
-    md_path: Path,
-    telegram_path: Optional[Path],
+    has_telegram: bool,
 ) -> Dict[str, Any]:
     """Generate structured JSON for a single report."""
     return {
-        "date": date,
-        "scope": scope,
+        "date": report.date,
+        "scope": report.scope,
         "source": "Yahoo Finance",
         "disclaimer": DISCLAIMER,
         "top_n": len(ranking),
@@ -115,8 +93,8 @@ def generate_report_json(
             "movers": [],
         },
         "paths": {
-            "markdown": f"reports/{date}.{scope}.md",
-            "telegram": f"telegram/{date}.{scope}.txt" if telegram_path and telegram_path.exists() else None,
+            "markdown": f"reports/{report.markdown_name}",
+            "telegram": f"telegram/{report.telegram_public_name}" if has_telegram else None,
         },
     }
 
@@ -128,16 +106,9 @@ def get_all_reports(public_reports_dir: Path) -> List[Dict[str, str]]:
         return reports
     
     for md_file in public_reports_dir.glob("*.md"):
-        try:
-            parts = md_file.stem.split(".")
-            if len(parts) >= 2:
-                date_str = parts[0]
-                scope = parts[1]
-                # Validate date format
-                datetime.strptime(date_str, "%Y-%m-%d")
-                reports.append({"date": date_str, "scope": scope, "path": md_file})
-        except ValueError:
-            continue
+        report = ReportId.from_path(md_file)
+        if report:
+            reports.append({"date": report.date, "scope": report.scope, "path": md_file})
     
     # Sort by date descending
     reports.sort(key=lambda x: x["date"], reverse=True)
@@ -154,52 +125,44 @@ def generate_manifest(public_dir: Path) -> Dict[str, Any]:
     
     # Find latest per scope
     latest = {}
-    for scope in ["global", "software"]:
+    for scope in SCOPES:
         scope_reports = [r for r in all_reports if r["scope"] == scope]
         if scope_reports:
-            latest_report = scope_reports[0]
+            newest = ReportId(scope_reports[0]["date"], scope)
             latest[scope] = {
-                "date": latest_report["date"],
-                "markdown": f"reports/{latest_report['date']}.{scope}.md",
-                "json": f"data/{latest_report['date']}.{scope}.json",
+                "date": newest.date,
+                "markdown": f"reports/{newest.markdown_name}",
+                "json": f"data/{newest.json_name}",
             }
     
     # Build reports array
     reports_list = []
-    for report in all_reports:
-        date = report["date"]
-        scope = report["scope"]
-        md_path = report["path"]
-        json_path = data_dir / f"{date}.{scope}.json"
-        telegram_path = telegram_dir / f"{date}.{scope}.txt"
+    for found in all_reports:
+        report = ReportId(found["date"], found["scope"])
+        md_path = found["path"]
+        json_path = data_dir / report.json_name
+        telegram_path = telegram_dir / report.telegram_public_name
         
         # Read markdown for excerpt
         try:
             md_content = md_path.read_text(encoding="utf-8")
-            summary = extract_section_from_markdown(md_content, "Executive Summary")
+            summary = extract_section(md_content, "Executive Summary")
             excerpt = make_excerpt(summary) if summary else "Report disponibile."
         except Exception:
             excerpt = "Report disponibile."
         
-        # Load ranking for top10
-        csv_path = SNAPSHOTS_DIR / f"{date}.{scope}.csv"
-        ranking = load_ranking_from_csv(csv_path)
-        top10 = ranking[:10]
-        
-        # Determine title
-        scope_label = "Asset Globali" if scope == "global" else "Aziende Software"
-        title = f"Report Settimanale {scope_label} - {date}"
+        top10 = load_ranking_from_csv(SNAPSHOTS_DIR / report.csv_name)[:10]
         
         reports_list.append({
-            "date": date,
-            "scope": scope,
-            "title": title,
+            "date": report.date,
+            "scope": report.scope,
+            "title": report.title,
             "source": "Yahoo Finance",
             "disclaimer": DISCLAIMER_SHORT,
             "paths": {
-                "markdown": f"reports/{date}.{scope}.md",
-                "json": f"data/{date}.{scope}.json" if json_path.exists() else None,
-                "telegram": f"telegram/{date}.{scope}.txt" if telegram_path.exists() else None,
+                "markdown": f"reports/{report.markdown_name}",
+                "json": f"data/{report.json_name}" if json_path.exists() else None,
+                "telegram": f"telegram/{report.telegram_public_name}" if telegram_path.exists() else None,
             },
             "summary_excerpt": excerpt,
             "top10": top10,
@@ -220,7 +183,7 @@ def generate_index_html(manifest: Dict[str, Any]) -> str:
     
     latest_links = ""
     for scope, info in latest.items():
-        scope_label = "Asset Globali" if scope == "global" else "Aziende Software"
+        scope_label = ReportId(info["date"], scope).label_it
         latest_links += f'<li><a href="{info["markdown"]}">{scope_label}</a> ({info["date"]})</li>\n'
     
     reports_links = ""
@@ -294,73 +257,65 @@ def generate_index_html(manifest: Dict[str, Any]) -> str:
 """
 
 
+def _publish_report(report: ReportId) -> None:
+    """Copy one report into public/ together with its JSON data and Telegram text."""
+    md_dst = PUBLIC_DIR / "reports" / report.markdown_name
+    shutil.copy2(REPORTS_DIR / report.markdown_name, md_dst)
+    logger.info(f"Copied: {md_dst}")
+    
+    telegram_src = SNAPSHOTS_DIR / report.telegram_snapshot_name
+    report_json = generate_report_json(
+        report,
+        load_ranking_from_csv(SNAPSHOTS_DIR / report.csv_name),
+        load_metrics_from_json(SNAPSHOTS_DIR / report.json_name),
+        has_telegram=telegram_src.exists(),
+    )
+    json_dst = PUBLIC_DIR / "data" / report.json_name
+    with open(json_dst, "w", encoding="utf-8") as f:
+        json.dump(report_json, f, indent=2, ensure_ascii=False)
+    logger.info(f"Generated: {json_dst}")
+    
+    if telegram_src.exists():
+        telegram_dst = PUBLIC_DIR / "telegram" / report.telegram_public_name
+        shutil.copy2(telegram_src, telegram_dst)
+        logger.info(f"Copied: {telegram_dst}")
+
+
 def build_public(date: str, scopes: List[str]) -> bool:
     """
     Build the public/ folder with all static assets.
-    
+
+    public/ is not versioned, so every build republishes the whole archive
+    found in data/reports/, not only the reports of the current run.
+
     Args:
-        date: Report date to publish
-        scopes: List of scopes to include (global, software)
-    
+        date: Date of the reports generated by the current run
+        scopes: Scopes generated by the current run (global, software)
+
     Returns:
         True if successful
     """
     logger.info(f"Building public/ for date={date}, scopes={scopes}")
-    
-    # Create directories
-    public_reports = PUBLIC_DIR / "reports"
-    public_data = PUBLIC_DIR / "data"
-    public_telegram = PUBLIC_DIR / "telegram"
-    
-    for d in [PUBLIC_DIR, public_reports, public_data, public_telegram]:
+
+    for d in [PUBLIC_DIR, PUBLIC_DIR / "reports", PUBLIC_DIR / "data", PUBLIC_DIR / "telegram"]:
         d.mkdir(parents=True, exist_ok=True)
-    
-    published_count = 0
-    
+
     for scope in scopes:
+        expected = REPORTS_DIR / ReportId(date, scope).markdown_name
+        if not expected.exists():
+            logger.warning(f"Report not found: {expected}")
+
+    published_count = 0
+
+    for found in get_all_reports(REPORTS_DIR):
+        report = ReportId(found["date"], found["scope"])
         try:
-            # Source paths
-            md_src = REPORTS_DIR / f"{date}.{scope}.md"
-            csv_src = SNAPSHOTS_DIR / f"{date}.{scope}.csv"
-            json_src = SNAPSHOTS_DIR / f"{date}.{scope}.json"
-            telegram_src = SNAPSHOTS_DIR / f"{date}.telegram.{scope}.txt"
-            
-            # Check if markdown exists
-            if not md_src.exists():
-                logger.warning(f"Report not found: {md_src}")
-                continue
-            
-            # Copy markdown
-            md_dst = public_reports / f"{date}.{scope}.md"
-            shutil.copy2(md_src, md_dst)
-            logger.info(f"Copied: {md_dst}")
-            
-            # Generate report JSON from CSV
-            ranking = load_ranking_from_csv(csv_src)
-            metrics = load_metrics_from_json(json_src)
-            
-            telegram_dst = public_telegram / f"{date}.{scope}.txt"
-            report_json = generate_report_json(
-                date, scope, ranking, metrics, md_dst,
-                telegram_src if telegram_src.exists() else None
-            )
-            
-            json_dst = public_data / f"{date}.{scope}.json"
-            with open(json_dst, "w", encoding="utf-8") as f:
-                json.dump(report_json, f, indent=2, ensure_ascii=False)
-            logger.info(f"Generated: {json_dst}")
-            
-            # Copy telegram if exists
-            if telegram_src.exists():
-                shutil.copy2(telegram_src, telegram_dst)
-                logger.info(f"Copied: {telegram_dst}")
-            
+            _publish_report(report)
             published_count += 1
-            
         except Exception as e:
-            logger.error(f"Failed to publish {scope} report: {e}")
+            logger.error(f"Failed to publish {report.stem} report: {e}")
             continue
-    
+
     if published_count == 0:
         logger.error("No reports published")
         return False
