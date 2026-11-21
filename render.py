@@ -3,10 +3,10 @@
 import logging
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
-from datetime import datetime
 
 from config import DISCLAIMER, DISCLAIMER_SHORT
 from metrics import format_market_cap
+from report_id import ReportId
 
 logger = logging.getLogger(__name__)
 
@@ -87,11 +87,21 @@ def render_changes_section(
     if movers:
         lines.append("\n**Movimenti Rilevanti (per variazione posizione)**:")
         for m in movers[:5]:
-            direction = "↑" if m["rank_delta"] > 0 else "↓"
             cap_change = f" ({m['cap_delta_pct']:+.1f}% cap)" if abs(m["cap_delta_pct"]) > 1 else ""
-            lines.append(f"- {m['ticker']} ({m['name'][:20]}): {direction}{abs(m['rank_delta'])} posizioni{cap_change})")
-    
+            lines.append(f"- {m['ticker']} ({m['name'][:20]}): {_describe_rank_move(m['rank_delta'])}{cap_change}")
+
     return "\n".join(lines) + "\n"
+
+
+def _describe_rank_move(rank_delta: int) -> str:
+    """Describe a rank change; a positive delta means the asset moved up."""
+    if rank_delta == 0:
+        return "posizione invariata"
+
+    direction = "↑" if rank_delta > 0 else "↓"
+    places = abs(rank_delta)
+    noun = "posizione" if places == 1 else "posizioni"
+    return f"{direction}{places} {noun}"
 
 
 def render_observations(
@@ -161,13 +171,9 @@ def render_report(
     """Render complete Markdown report."""
     entries, exits, movers = changes
     
-    # Determine title based on scope
-    if scope == "global":
-        title = f"Report Settimanale Asset Globali - {date}"
-        scope_label = "Asset Globali"
-    else:
-        title = f"Report Settimanale Aziende Software - {date}"
-        scope_label = "Aziende Software"
+    report = ReportId(date, scope)
+    title = report.title
+    scope_label = report.label_it
     
     # Build report
     parts = []

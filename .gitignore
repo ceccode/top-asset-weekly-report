@@ -26,3 +26,6 @@ env/
 
 # Public output (generated)
 public/
+
+# Tests
+.pytest_cache/

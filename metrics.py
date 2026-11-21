@@ -7,17 +7,15 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime, timedelta
 
+from report_id import DATE_FORMAT, ReportId
+
 logger = logging.getLogger(__name__)
 
 
 def rank_by_market_cap(assets: List[Dict[str, Any]], top_n: int = 50) -> List[Dict[str, Any]]:
     """Sort assets by market cap descending and return top N."""
     sorted_assets = sorted(assets, key=lambda x: x.get("market_cap", 0), reverse=True)
-    ranked = []
-    for i, asset in enumerate(sorted_assets[:top_n], 1):
-        asset["rank"] = i
-        ranked.append(asset)
-    return ranked
+    return [{**asset, "rank": i} for i, asset in enumerate(sorted_assets[:top_n], 1)]
 
 
 def calculate_metrics(ranked_assets: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -56,12 +54,12 @@ def load_previous_snapshot(snapshots_dir: Path, scope: str, current_date: str) -
     Load the most recent previous snapshot for comparison.
     Returns a dict mapping ticker -> asset data.
     """
-    current = datetime.strptime(current_date, "%Y-%m-%d")
+    current = datetime.strptime(current_date, DATE_FORMAT)
     
     # Look for snapshots in the last 14 days
     for days_back in range(1, 15):
-        prev_date = (current - timedelta(days=days_back)).strftime("%Y-%m-%d")
-        csv_path = snapshots_dir / f"{prev_date}.{scope}.csv"
+        prev_date = (current - timedelta(days=days_back)).strftime(DATE_FORMAT)
+        csv_path = snapshots_dir / ReportId(prev_date, scope).csv_name
         
         if csv_path.exists():
             logger.info(f"Found previous snapshot: {csv_path}")
@@ -92,8 +90,12 @@ def calculate_changes(
     
     previous_tickers = set(previous.keys())
     
-    entries = list(current_tickers - previous_tickers)
-    exits = list(previous_tickers - current_tickers)
+    # Deterministic order: entries by current rank, exits by previous rank
+    entries = [a["ticker"] for a in ranked_assets if a["ticker"] not in previous_tickers]
+    exits = sorted(
+        previous_tickers - current_tickers,
+        key=lambda ticker: int(previous[ticker].get("rank", 0)),
+    )
     
     # Calculate rank changes for assets in both snapshots
     movers = []
