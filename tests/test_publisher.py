@@ -68,7 +68,7 @@ def test_build_public_publishes_report_data_manifest_and_index(workspace, ranked
     manifest = read_manifest(workspace)
     assert manifest["latest"]["global"]["date"] == "2025-12-31"
     entry = manifest["reports"][0]
-    assert entry["title"] == "Report Settimanale Asset Globali - 2025-12-31"
+    assert entry["title"] == "Global Assets Weekly Report - 2025-12-31"
     assert entry["summary_excerpt"] == "Summary text."
     assert [a["ticker"] for a in entry["top10"]] == ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF"]
 

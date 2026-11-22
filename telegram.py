@@ -8,6 +8,8 @@ from typing import List, Dict, Any
 from config import DISCLAIMER_SHORT
 from mdtext import extract_section, strip_inline_formatting, truncate_at_word
 from metrics import format_market_cap
+from llm import SECTION_HEADINGS
+from render import RANKING_HEADING
 from report_id import ReportId
 from snapshot import load_snapshot
 
@@ -34,14 +36,14 @@ def top_rows_from_snapshot(csv_path: Path, n: int = 10) -> List[Dict[str, Any]]:
 
 def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str, Any]]:
     """
-    Fallback: the same rows, parsed from the markdown table under ## Classifica.
+    Fallback: the same rows, parsed from the ranking table of the report.
     """
-    classifica = extract_section(md_text, "Classifica")
-    if not classifica:
+    ranking = extract_section(md_text, RANKING_HEADING)
+    if not ranking:
         return []
     
     assets = []
-    lines = classifica.split("\n")
+    lines = ranking.split("\n")
     
     for line in lines:
         line = line.strip()
@@ -111,7 +113,7 @@ def generate_telegram_txt(
     Returns:
         Plain text formatted for Telegram
     """
-    scope_label = ReportId(date, scope).label_en.title()
+    scope_label = ReportId(date, scope).label
     
     lines = []
     
@@ -130,15 +132,15 @@ def generate_telegram_txt(
         lines.append("")
     
     # Executive Summary
-    summary = extract_section(md_content, "Executive Summary")
+    summary = extract_section(md_content, SECTION_HEADINGS["executive_summary"])
     if summary:
         summary_clean = format_summary_bullets(summary, MAX_SUMMARY_CHARS)
         lines.append("📝 Summary:")
         lines.append(summary_clean)
         lines.append("")
     
-    # Insight from Riflessione Strategica
-    insight = extract_section(md_content, "Riflessione Strategica")
+    # Insight from the strategic reflection
+    insight = extract_section(md_content, SECTION_HEADINGS["strategic_reflection"])
     if insight:
         insight_clean = clean_text_for_telegram(insight)
         # Take first paragraph only

@@ -42,6 +42,6 @@ def ranked():
 def llm_sections():
     return {
         "executive_summary": "Summary text.",
-        "riflessione": "Reflection text.",
-        "implicazioni": "Implications text.",
+        "strategic_reflection": "Reflection text.",
+        "implications": "Implications text.",
     }

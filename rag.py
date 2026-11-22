@@ -6,6 +6,7 @@ from typing import List, Optional, Tuple
 
 import mdtext
 from llm import PLACEHOLDER_MARKER, SECTION_HEADINGS
+from render import FOOTER
 from report_id import ReportId
 
 logger = logging.getLogger(__name__)
@@ -61,7 +62,8 @@ def extract_rag_context(reports_dir: Path, scope: str, current_date: str, k: int
     
     for report_path in recent_reports:
         try:
-            content = report_path.read_text(encoding="utf-8")
+            # Without the footer, which would otherwise end up in the last section
+            content = report_path.read_text(encoding="utf-8").strip().removesuffix(FOOTER.strip())
             date_str = ReportId.from_path(report_path).date
             
             sections_found = []

@@ -2,28 +2,44 @@
 
 import logging
 from pathlib import Path
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Optional, Tuple
 
 from asset import Asset
 from config import DISCLAIMER, DISCLAIMER_SHORT
+from llm import SECTION_HEADINGS
 from metrics import format_market_cap
 from report_id import ReportId
 
 logger = logging.getLogger(__name__)
+
+# Heading of the ranking table, which the Telegram fallback reads back
+RANKING_HEADING = "Ranking"
+
+# Closes every report
+FOOTER = f"---\n\n*{DISCLAIMER_SHORT}*\n"
 
 
 def render_frontmatter(
     title: str,
     date: str,
     scope: str,
+    commentary_date: Optional[str] = None,
 ) -> str:
-    """Render YAML frontmatter."""
+    """
+    Render YAML frontmatter.
+
+    `commentary_date` is stated only when the commentary was written on a
+    different day than the report's, as happens when a report is regenerated.
+    """
+    commentary_line = (
+        f"commentary_date: {commentary_date}\n" if commentary_date and commentary_date != date else ""
+    )
     return f"""---
 title: "{title}"
 date: {date}
 source: Yahoo Finance
 scope: {scope}
-disclaimer: "{DISCLAIMER}"
+{commentary_line}disclaimer: "{DISCLAIMER}"
 ---
 
 """
@@ -32,11 +48,11 @@ disclaimer: "{DISCLAIMER}"
 def render_ranking_table(ranked_assets: List[Asset]) -> str:
     """Render the ranking table in Markdown."""
     if not ranked_assets:
-        return "*Nessun dato disponibile*\n"
+        return "*No data available*\n"
     
     lines = [
-        "| Pos. | Ticker | Nome | Tipo | Cap. Mercato | Valuta |",
-        "|------|--------|------|------|--------------|--------|",
+        "| Rank | Ticker | Name | Type | Market Cap | Currency |",
+        "|------|--------|------|------|------------|----------|",
     ]
     
     for asset in ranked_assets:
@@ -53,13 +69,13 @@ def render_ranking_table(ranked_assets: List[Asset]) -> str:
 def render_metrics_section(metrics: Dict[str, Any]) -> str:
     """Render key metrics as bullet list."""
     if not metrics:
-        return "*Nessuna metrica disponibile*\n"
+        return "*No metrics available*\n"
     
     lines = [
-        f"- **Capitalizzazione Totale (Top {metrics.get('asset_count', 'N')})**: {format_market_cap(metrics.get('total_market_cap', 0))}",
-        f"- **Concentrazione Top 5**: {metrics.get('top5_concentration', 0):.1f}%",
-        f"- **Concentrazione Top 10**: {metrics.get('top10_concentration', 0):.1f}%",
-        f"- **Asset Monitorati**: {metrics.get('asset_count', 0)}",
+        f"- **Total Market Cap (Top {metrics.get('asset_count', 'N')})**: {format_market_cap(metrics.get('total_market_cap', 0))}",
+        f"- **Top 5 Concentration**: {metrics.get('top5_concentration', 0):.1f}%",
+        f"- **Top 10 Concentration**: {metrics.get('top10_concentration', 0):.1f}%",
+        f"- **Assets Tracked**: {metrics.get('asset_count', 0)}",
     ]
     
     return "\n".join(lines) + "\n"
@@ -73,18 +89,11 @@ def render_changes_section(
     """Render entries, exits, and movers."""
     lines = []
     
-    if entries:
-        lines.append(f"**Nuove Entrate**: {', '.join(entries)}")
-    else:
-        lines.append("**Nuove Entrate**: Nessuna")
-    
-    if exits:
-        lines.append(f"**Uscite**: {', '.join(exits)}")
-    else:
-        lines.append("**Uscite**: Nessuna")
+    lines.append(f"**New Entries**: {', '.join(entries) if entries else 'None'}")
+    lines.append(f"**Exits**: {', '.join(exits) if exits else 'None'}")
     
     if movers:
-        lines.append("\n**Movimenti Rilevanti (per variazione posizione)**:")
+        lines.append("\n**Notable Movers (by rank change)**:")
         for m in movers[:5]:
             cap_change = f" ({m['cap_delta_pct']:+.1f}% cap)" if abs(m["cap_delta_pct"]) > 1 else ""
             lines.append(f"- {m['ticker']} ({m['name'][:20]}): {_describe_rank_move(m['rank_delta'])}{cap_change}")
@@ -95,11 +104,11 @@ def render_changes_section(
 def _describe_rank_move(rank_delta: int) -> str:
     """Describe a rank change; a positive delta means the asset moved up."""
     if rank_delta == 0:
-        return "posizione invariata"
+        return "rank unchanged"
 
     direction = "↑" if rank_delta > 0 else "↓"
     places = abs(rank_delta)
-    noun = "posizione" if places == 1 else "posizioni"
+    noun = "place" if places == 1 else "places"
     return f"{direction}{places} {noun}"
 
 
@@ -109,23 +118,23 @@ def render_observations(
 ) -> str:
     """Render quantitative observations."""
     if not ranked_assets or not metrics:
-        return "*Dati insufficienti per le osservazioni*\n"
+        return "*Insufficient data for observations*\n"
     
     lines = []
     
     # Top 5 dominance
     top5_conc = metrics.get("top5_concentration", 0)
-    lines.append(f"- I Top 5 asset rappresentano il **{top5_conc:.1f}%** della capitalizzazione totale monitorata")
+    lines.append(f"- The Top 5 assets represent **{top5_conc:.1f}%** of the total tracked market cap")
     
     # Top 10 dominance
     top10_conc = metrics.get("top10_concentration", 0)
-    lines.append(f"- I Top 10 asset rappresentano il **{top10_conc:.1f}%** della capitalizzazione totale monitorata")
+    lines.append(f"- The Top 10 assets represent **{top10_conc:.1f}%** of the total tracked market cap")
     
     # Largest asset
     if ranked_assets:
         largest = ranked_assets[0]
         largest_pct = (largest.market_cap / metrics.get("total_market_cap", 1)) * 100
-        lines.append(f"- **{largest.name}** ({largest.ticker}) guida con {format_market_cap(largest.market_cap)} ({largest_pct:.1f}% del totale)")
+        lines.append(f"- **{largest.name}** ({largest.ticker}) leads with {format_market_cap(largest.market_cap)} ({largest_pct:.1f}% of total)")
     
     # Asset type breakdown
     type_counts: Dict[str, int] = {}
@@ -134,27 +143,27 @@ def render_observations(
     
     if type_counts:
         type_str = ", ".join(f"{k}: {v}" for k, v in sorted(type_counts.items(), key=lambda x: -x[1]))
-        lines.append(f"- Distribuzione per tipologia: {type_str}")
+        lines.append(f"- Asset type distribution: {type_str}")
     
     return "\n".join(lines) + "\n"
 
 
 def render_methodology() -> str:
     """Render methodology and limitations section."""
-    return """### Fonte Dati
-- Dati di mercato da Yahoo Finance API
-- I valori di capitalizzazione sono aggiornati al momento della generazione del report
+    return """### Data Source
+- Market data sourced from Yahoo Finance API
+- Market capitalization values are as of the report generation time
 
-### Metodologia
-- Asset ordinati per capitalizzazione di mercato (decrescente)
-- Metriche di concentrazione calcolate come percentuale della capitalizzazione totale monitorata
-- Variazioni settimanali confrontate con lo snapshot precedente disponibile
+### Methodology
+- Assets ranked by market capitalization (descending)
+- Concentration metrics calculated as percentage of total tracked market cap
+- Week-over-week changes compared to previous available snapshot
 
-### Limitazioni
-- La disponibilità dei dati dipende dalla copertura di Yahoo Finance
-- Alcuni asset potrebbero essere esclusi per mancanza di dati sulla capitalizzazione
-- Conversioni valutarie non applicate; valori mostrati nella valuta nativa
-- Questa analisi copre una lista curata di asset, non l'intero mercato
+### Limitations
+- Data availability depends on Yahoo Finance coverage
+- Some assets may be excluded due to missing market cap data
+- Currency conversions not applied; values shown in native currency
+- This analysis covers a curated list of assets, not the entire market
 """
 
 
@@ -165,59 +174,33 @@ def render_report(
     metrics: Dict[str, Any],
     changes: Tuple[List[str], List[str], List[Dict[str, Any]]],
     llm_sections: Dict[str, str],
+    commentary_date: Optional[str] = None,
 ) -> str:
     """Render complete Markdown report."""
     entries, exits, movers = changes
-    
     report = ReportId(date, scope)
-    title = report.title
-    scope_label = report.label_it
-    
-    # Build report
-    parts = []
-    
-    # Frontmatter
-    parts.append(render_frontmatter(title, date, scope_label))
-    
-    # Title
-    parts.append(f"# {title}\n\n")
-    
-    # Executive Summary
-    parts.append("## Executive Summary\n\n")
-    parts.append(llm_sections.get("executive_summary", "*Summary pending*") + "\n\n")
-    
-    # Ranking Table
-    parts.append("## Classifica\n\n")
-    parts.append(render_ranking_table(ranked_assets) + "\n")
-    
-    # Key Metrics
-    parts.append("## Metriche Chiave\n\n")
-    parts.append(render_metrics_section(metrics) + "\n")
-    
-    # Week-over-Week Changes
-    parts.append("## Variazioni Settimanali\n\n")
-    parts.append(render_changes_section(entries, exits, movers) + "\n")
-    
-    # Quantitative Observations
-    parts.append("## Osservazioni Quantitative\n\n")
-    parts.append(render_observations(ranked_assets, metrics) + "\n")
-    
-    # Methodology
-    parts.append("## Metodologia e Limitazioni\n\n")
-    parts.append(render_methodology() + "\n")
-    
-    # Strategic Reflection (LLM)
-    parts.append("## Riflessione Strategica\n\n")
-    parts.append(llm_sections.get("riflessione", "*Analysis pending*") + "\n\n")
-    
-    # Implications (LLM)
-    parts.append("## Implicazioni\n\n")
-    parts.append(llm_sections.get("implicazioni", "*Implications pending*") + "\n\n")
-    
-    # Footer
-    parts.append("---\n\n")
-    parts.append(f"*{DISCLAIMER_SHORT}*\n")
-    
+
+    def commentary(key: str) -> str:
+        return f"## {SECTION_HEADINGS[key]}\n\n{llm_sections.get(key, '*Pending*')}\n\n"
+
+    parts = [
+        render_frontmatter(report.title, date, report.label, commentary_date),
+        f"# {report.title}\n\n",
+        commentary("executive_summary"),
+        f"## {RANKING_HEADING}\n\n",
+        render_ranking_table(ranked_assets) + "\n",
+        "## Key Metrics\n\n",
+        render_metrics_section(metrics) + "\n",
+        "## Weekly Changes\n\n",
+        render_changes_section(entries, exits, movers) + "\n",
+        "## Quantitative Observations\n\n",
+        render_observations(ranked_assets, metrics) + "\n",
+        "## Methodology and Limitations\n\n",
+        render_methodology() + "\n",
+        commentary("strategic_reflection"),
+        commentary("implications"),
+        FOOTER,
+    ]
     return "".join(parts)
 
 

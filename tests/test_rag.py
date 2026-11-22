@@ -15,19 +15,19 @@ from render import render_report
 def write_report(reports_dir, date, scope="global", summary="Summary of the week."):
     path = reports_dir / f"{date}.{scope}.md"
     path.write_text(
-        f"# Title\n\n## Executive Summary\n\n{summary}\n\n## Classifica\n\ntable\n",
+        f"# Title\n\n## Executive Summary\n\n{summary}\n\n## Ranking\n\ntable\n",
         encoding="utf-8",
     )
     return path
 
 
 def test_extract_section_returns_its_text():
-    assert extract_section("## Implicazioni\n\nbody\n\n## Next\n", "Implicazioni") == "body"
+    assert extract_section("## Implications\n\nbody\n\n## Next\n", "Implications") == "body"
 
 
 def test_extract_section_ignores_todo_and_missing_sections():
-    assert extract_section("## Implicazioni\n\nTODO\n", "Implicazioni") is None
-    assert extract_section("## Other\n\nbody\n", "Implicazioni") is None
+    assert extract_section("## Implications\n\nTODO\n", "Implications") is None
+    assert extract_section("## Other\n\nbody\n", "Implications") is None
 
 
 def test_recent_reports_are_earlier_ones_newest_first(tmp_path):
@@ -94,3 +94,16 @@ def test_ensure_rag_context_writes_the_latest_reports(tmp_path):
     assert path == rag / "rag_context_global.txt"
     assert "## Report 2025-12-31" in path.read_text(encoding="utf-8")
     assert check_rag_freshness(rag, reports, "global") == (True, "up-to-date")
+
+
+def test_rag_context_holds_the_commentary_without_the_report_footer(tmp_path, ranked, llm_sections):
+    metrics = calculate_metrics(ranked)
+    report = render_report("2025-12-24", "global", ranked, metrics, ([], [], []), llm_sections)
+    (tmp_path / "2025-12-24.global.md").write_text(report, encoding="utf-8")
+
+    assert extract_rag_context(tmp_path, "global", "2025-12-31") == (
+        "## Report 2025-12-24\n\n"
+        "### Executive Summary\nSummary text.\n\n"
+        "### Strategic Reflection\nReflection text.\n\n"
+        "### Implications\nImplications text."
+    )

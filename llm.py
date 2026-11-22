@@ -3,8 +3,10 @@
 import json
 import logging
 import re
-from typing import Dict, Any, Optional
+from typing import Dict, Any, List, Optional, Tuple
 
+from asset import Asset
+from config import get_openai_model
 from metrics import format_market_cap
 from report_id import ReportId
 
@@ -20,6 +22,8 @@ STRICT RULES:
 4. Use ONLY observational and analytical language
 5. Focus on describing what the data shows, not what actions to take
 6. Always maintain a neutral, informational tone
+7. Write as of the report date, using ONLY the data provided: never draw on knowledge of later events
+8. Write in English
 
 You will receive market data and historical context. Generate the requested sections in Markdown format."""
 
@@ -29,9 +33,38 @@ PLACEHOLDER_MARKER = "will be enhanced with AI-generated"
 # Section key -> heading used both in the LLM answer and in the rendered report
 SECTION_HEADINGS = {
     "executive_summary": "Executive Summary",
-    "riflessione": "Riflessione Strategica",
-    "implicazioni": "Implicazioni",
+    "strategic_reflection": "Strategic Reflection",
+    "implications": "Implications",
 }
+
+# Assets sent to the LLM, to keep the prompt small
+LLM_ASSET_LIMIT = 20
+
+# Room for the three sections plus the model's reasoning
+MAX_OUTPUT_TOKENS = 6000
+
+
+def build_input(
+    date: str,
+    ranked_assets: List[Asset],
+    metrics: Dict[str, Any],
+    changes: Tuple[List[str], List[str], List[Dict[str, Any]]],
+) -> Dict[str, Any]:
+    """The data the commentary is written from, as plain JSON-ready values."""
+    entries, exits, movers = changes
+    return {
+        "date": date,
+        "assets": [asset.to_dict() for asset in ranked_assets[:LLM_ASSET_LIMIT]],
+        "metrics": metrics,
+        "entries": entries,
+        "exits": exits,
+        "movers": movers,
+    }
+
+
+def is_placeholder(sections: Dict[str, str]) -> bool:
+    """True when any section is a placeholder rather than LLM output."""
+    return any(PLACEHOLDER_MARKER in text for text in sections.values())
 
 
 def generate_llm_sections(
@@ -50,7 +83,7 @@ def generate_llm_sections(
         api_key: OpenAI API key (optional)
     
     Returns:
-        Dict with keys: executive_summary, riflessione, implicazioni
+        Dict with the keys of SECTION_HEADINGS
     """
     if not api_key:
         logger.info("No API key provided, using placeholder sections")
@@ -60,7 +93,7 @@ def generate_llm_sections(
 
 
 def _scope_label(report_type: str) -> str:
-    return ReportId("", report_type).label_en
+    return ReportId("", report_type).label.lower()
 
 
 def _generate_placeholders(input_data: Dict[str, Any], report_type: str) -> Dict[str, str]:
@@ -80,7 +113,7 @@ The combined market cap of the tracked assets stands at {format_market_cap(total
 
 *This section will be enhanced with AI-generated insights when LLM integration is enabled.*"""
 
-    riflessione = f"""The current market structure shows concentration patterns typical of {scope_label}.
+    strategic_reflection = f"""The current market structure shows concentration patterns typical of {scope_label}.
 
 Key observations from the data:
 - Market leadership remains with established players
@@ -88,7 +121,7 @@ Key observations from the data:
 
 *This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*"""
 
-    implicazioni = f"""The data presented reflects current market conditions for {scope_label}.
+    implications = f"""The data presented reflects current market conditions for {scope_label}.
 
 Observers may note:
 - The relative positioning of assets by market capitalization
@@ -98,9 +131,34 @@ Observers may note:
 
     return {
         "executive_summary": executive_summary,
-        "riflessione": riflessione,
-        "implicazioni": implicazioni,
+        "strategic_reflection": strategic_reflection,
+        "implications": implications,
     }
+
+
+def _build_prompt(input_data: Dict[str, Any], rag_context: str, report_type: str) -> str:
+    headings = list(SECTION_HEADINGS.values())
+    answer_format = "\n\n".join(f"### {heading}\n[content]" for heading in headings)
+
+    return f"""Generate three sections for a weekly {_scope_label(report_type)} market report.
+
+## Current Data
+```json
+{json.dumps(input_data, indent=2, default=str)}
+```
+
+## Historical Context (Previous Reports)
+{rag_context if rag_context else "No historical context available."}
+
+## Required Sections
+Generate the following sections in Markdown format. Remember: NO financial advice, NO recommendations, ONLY observations and analysis.
+
+1. **{headings[0]}**: A brief overview of this week's market data (2-3 paragraphs)
+2. **{headings[1]}**: Strategic observations about market structure and trends (2-3 paragraphs)
+3. **{headings[2]}**: What the data suggests about market dynamics (2-3 paragraphs)
+
+Format your response as:
+{answer_format}"""
 
 
 def _call_openai(
@@ -117,53 +175,22 @@ def _call_openai(
         return _generate_placeholders(input_data, report_type)
     
     client = OpenAI(api_key=api_key)
-    
-    # Prepare the user prompt
-    scope_label = _scope_label(report_type)
-    
-    user_prompt = f"""Generate three sections for a weekly {scope_label} market report.
-
-## Current Data
-```json
-{json.dumps(input_data, indent=2, default=str)}
-```
-
-## Historical Context (Previous Reports)
-{rag_context if rag_context else "No historical context available."}
-
-## Required Sections
-Generate the following sections in Markdown format. Remember: NO financial advice, NO recommendations, ONLY observations and analysis.
-
-1. **Executive Summary**: A brief overview of this week's market data (2-3 paragraphs)
-2. **Riflessione Strategica**: Strategic observations about market structure and trends (2-3 paragraphs)
-3. **Implicazioni**: What the data suggests about market dynamics (2-3 paragraphs)
-
-Format your response as:
-### Executive Summary
-[content]
-
-### Riflessione Strategica
-[content]
-
-### Implicazioni
-[content]"""
+    model = get_openai_model()
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.7,
-            max_tokens=2000,
+        response = client.responses.create(
+            model=model,
+            instructions=SYSTEM_PROMPT,
+            input=_build_prompt(input_data, rag_context, report_type),
+            reasoning={"effort": "low"},
+            max_output_tokens=MAX_OUTPUT_TOKENS,
         )
     except OpenAIError as e:
-        logger.error(f"LLM call failed: {e}")
+        logger.error(f"LLM call to {model} failed: {e}")
         return _generate_placeholders(input_data, report_type)
     
     # The API may answer with no text at all (e.g. a refusal)
-    content = response.choices[0].message.content or ""
+    content = response.output_text or ""
     return _parse_llm_response(content, input_data, report_type)
 
 

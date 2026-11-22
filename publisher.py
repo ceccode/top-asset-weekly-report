@@ -11,6 +11,7 @@ from typing import List, Dict, Any
 from config import REPORTS_DIR, SNAPSHOTS_DIR, DISCLAIMER, DISCLAIMER_SHORT
 from mdtext import extract_section, strip_inline_formatting, truncate_at_word
 from asset import Asset
+from llm import SECTION_HEADINGS
 from report_id import SCOPES, ReportId
 from snapshot import load_snapshot
 
@@ -141,10 +142,10 @@ def generate_manifest(public_dir: Path) -> Dict[str, Any]:
         # Read markdown for excerpt
         try:
             md_content = md_path.read_text(encoding="utf-8")
-            summary = extract_section(md_content, "Executive Summary")
-            excerpt = make_excerpt(summary) if summary else "Report disponibile."
+            summary = extract_section(md_content, SECTION_HEADINGS["executive_summary"])
+            excerpt = make_excerpt(summary) if summary else "Report available."
         except (OSError, UnicodeDecodeError):
-            excerpt = "Report disponibile."
+            excerpt = "Report available."
         
         top10 = load_ranking(report)[:10]
         
@@ -178,7 +179,7 @@ def generate_index_html(manifest: Dict[str, Any]) -> str:
     
     latest_links = ""
     for scope, info in latest.items():
-        scope_label = ReportId(info["date"], scope).label_it
+        scope_label = ReportId(info["date"], scope).label
         latest_links += f'<li><a href="{info["markdown"]}">{scope_label}</a> ({info["date"]})</li>\n'
     
     reports_links = ""
@@ -186,7 +187,7 @@ def generate_index_html(manifest: Dict[str, Any]) -> str:
         reports_links += f'<li><a href="{r["paths"]["markdown"]}">{r["title"]}</a></li>\n'
     
     return f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,28 +223,28 @@ def generate_index_html(manifest: Dict[str, Any]) -> str:
 </head>
 <body>
     <h1>📊 Top Assets Weekly Report</h1>
-    <p>Report settimanali sui principali asset per capitalizzazione di mercato.</p>
+    <p>Weekly reports on the top assets by market capitalization.</p>
     
-    <h2>📈 Ultimi Report</h2>
+    <h2>📈 Latest Reports</h2>
     <ul>
 {latest_links}
     </ul>
     
-    <h2>📁 Archivio</h2>
+    <h2>📁 Archive</h2>
     <ul>
 {reports_links}
     </ul>
     
-    <h2>🔗 Dati</h2>
+    <h2>🔗 Data</h2>
     <ul>
-        <li><a href="manifest.json">manifest.json</a> - Indice completo dei report</li>
+        <li><a href="manifest.json">manifest.json</a> - Full index of reports</li>
     </ul>
     
     <div class="disclaimer">
         <strong>⚠️ Disclaimer:</strong> {DISCLAIMER_SHORT}
     </div>
     
-    <p class="meta">Generato: {manifest.get("generated_at_utc", "N/A")}</p>
+    <p class="meta">Generated: {manifest.get("generated_at_utc", "N/A")}</p>
     
     <script data-goatcounter="https://topweeklyasset.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
