@@ -93,8 +93,8 @@
       "name": "Bitcoin USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 1222184665088,
-      "price": 60773.14,
+      "market_cap": 1222942392320,
+      "price": 60805.44,
       "sector": "",
       "industry": "",
       "rank": 9
@@ -126,7 +126,7 @@
       "name": "Walmart Inc.",
       "quote_type": "EQUITY",
       "currency": "USD",
-      "market_cap": 1018236174336,
+      "market_cap": 1015122821120,
       "price": 127.95,
       "sector": "Consumer Defensive",
       "industry": "Discount Stores",
@@ -357,8 +357,8 @@
       "name": "Ethereum USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 208688922624,
-      "price": 1706.7,
+      "market_cap": 208762814464,
+      "price": 1708.32,
       "sector": "",
       "industry": "",
       "rank": 33
@@ -445,8 +445,8 @@
       "name": "BNB USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 72711987200,
-      "price": 552.65,
+      "market_cap": 72705441792,
+      "price": 552.88,
       "sector": "",
       "industry": "",
       "rank": 41
@@ -456,8 +456,8 @@
       "name": "XRP USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 59206733824,
-      "price": 0.9328,
+      "market_cap": 59235864576,
+      "price": 0.9327,
       "sector": "",
       "industry": "",
       "rank": 42
@@ -478,8 +478,8 @@
       "name": "Solana USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 41673969664,
-      "price": 70.42,
+      "market_cap": 41714126848,
+      "price": 70.5,
       "sector": "",
       "industry": "",
       "rank": 44
@@ -489,8 +489,8 @@
       "name": "Dogecoin USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 8696633344,
-      "price": 0.05543,
+      "market_cap": 8699302912,
+      "price": 0.05553,
       "sector": "",
       "industry": "",
       "rank": 45
@@ -500,19 +500,19 @@
       "name": "Cardano USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 5352812544,
-      "price": 0.14535,
+      "market_cap": 5354701312,
+      "price": 0.1455,
       "sector": "",
       "industry": "",
       "rank": 46
     }
   ],
   "metrics": {
-    "total_market_cap": 36974562539520,
-    "top5_concentration": 47.43215282549676,
-    "top10_concentration": 65.51725277864635,
+    "total_market_cap": 36972348106240,
+    "top5_concentration": 47.43499374156346,
+    "top10_concentration": 65.52322633238258,
     "asset_count": 46,
     "top5_cap": 17537831010304,
-    "top10_cap": 24224717602816
+    "top10_cap": 24225475330048
   }
 }

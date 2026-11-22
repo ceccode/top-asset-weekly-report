@@ -7,10 +7,10 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 6,AVGO,Broadcom Inc.,EQUITY,USD,1453140738048,304.41,Technology,Semiconductors
 7,META,"Meta Platforms, Inc.",EQUITY,USD,1433642336256,560.84,Communication Services,Internet Content & Information
 8,TSLA,"Tesla, Inc.",EQUITY,USD,1366942810112,345.82,Consumer Cyclical,Auto Manufacturers
-9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1222184665088,60773.14,,
+9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1222942392320,60805.44,,
 10,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1210976043008,570.0,Financial Services,Insurance - Diversified
 11,LLY,Eli Lilly and Company,EQUITY,USD,1199931523072,1347.11,Healthcare,Drug Manufacturers - General
-12,WMT,Walmart Inc.,EQUITY,USD,1018236174336,127.95,Consumer Defensive,Discount Stores
+12,WMT,Walmart Inc.,EQUITY,USD,1015122821120,127.95,Consumer Defensive,Discount Stores
 13,JPM,JPMorgan Chase & Co.,EQUITY,USD,824646434816,310.53,Financial Services,Banks - Diversified
 14,V,Visa Inc.,EQUITY,USD,749809041408,401.87,Financial Services,Credit Services
 15,AMD,"Advanced Micro Devices, Inc.",EQUITY,USD,702393286656,424.39,Technology,Semiconductors
@@ -31,7 +31,7 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 30,TMO,Thermo Fisher Scientific Inc.,EQUITY,USD,248075190272,669.54,Healthcare,Diagnostics & Research
 31,TXN,Texas Instruments Incorporated,EQUITY,USD,241006919680,263.75,Technology,Semiconductors
 32,NFLX,"Netflix, Inc.",EQUITY,USD,232951873536,56.73,Communication Services,Entertainment
-33,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,208688922624,1706.7,,
+33,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,208762814464,1708.32,,
 34,DIS,The Walt Disney Company,EQUITY,USD,201513353216,117.98,Communication Services,Entertainment
 35,MCD,McDonald's Corporation,EQUITY,USD,192848625664,273.24,Consumer Cyclical,Restaurants
 36,PEP,"PepsiCo, Inc.",EQUITY,USD,191519621120,140.54,Consumer Defensive,Beverages - Non-Alcoholic
@@ -39,9 +39,9 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 38,CRM,"Salesforce, Inc.",EQUITY,USD,148650262528,180.62,Technology,Software - Application
 39,ACN,Accenture plc,EQUITY,USD,130653405184,221.17,Technology,Information Technology Services
 40,ADBE,Adobe Inc.,EQUITY,USD,84732731392,217.71,Technology,Software - Application
-41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,72711987200,552.65,,
-42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,59206733824,0.9328,,
+41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,72705441792,552.88,,
+42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,59235864576,0.9327,,
 43,NKE,"NIKE, Inc.",EQUITY,USD,48896364544,32.92,Consumer Cyclical,Footwear & Accessories
-44,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,41673969664,70.42,,
-45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,8696633344,0.05543,,
-46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,5352812544,0.14535,,
+44,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,41714126848,70.5,,
+45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,8699302912,0.05553,,
+46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,5354701312,0.1455,,

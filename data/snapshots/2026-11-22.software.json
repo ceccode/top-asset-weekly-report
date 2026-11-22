@@ -214,7 +214,7 @@
       "name": "MongoDB, Inc.",
       "quote_type": "EQUITY",
       "currency": "USD",
-      "market_cap": 22995486720,
+      "market_cap": 23031058432,
       "price": 285.9,
       "sector": "Technology",
       "industry": "Software - Infrastructure",
@@ -277,9 +277,9 @@
     }
   ],
   "metrics": {
-    "total_market_cap": 2483891738112,
-    "top5_concentration": 56.67005935250346,
-    "top10_concentration": 80.3101676015983,
+    "total_market_cap": 2483927309824,
+    "top5_concentration": 56.669247794523336,
+    "top10_concentration": 80.309017499443,
     "asset_count": 25,
     "top5_cap": 1407622922240,
     "top10_cap": 1994817617920

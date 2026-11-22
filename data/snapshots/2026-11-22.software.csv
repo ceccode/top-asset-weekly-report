@@ -18,7 +18,7 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 17,OKTA,"Okta, Inc.",EQUITY,USD,33471215616,191.46,Technology,Software - Infrastructure
 18,ZS,"Zscaler, Inc.",EQUITY,USD,31766319104,194.82,Technology,Software - Infrastructure
 19,ZM,"Zoom Communications, Inc.",EQUITY,USD,23710345216,81.26,Technology,Software - Application
-20,MDB,"MongoDB, Inc.",EQUITY,USD,22995486720,285.9,Technology,Software - Infrastructure
+20,MDB,"MongoDB, Inc.",EQUITY,USD,23031058432,285.9,Technology,Software - Infrastructure
 21,DOCU,"DocuSign, Inc.",EQUITY,USD,13935446016,74.56,Technology,Software - Application
 22,HUBS,"HubSpot, Inc.",EQUITY,USD,9468412928,193.88,Technology,Software - Application
 23,ESTC,Elastic N.V.,EQUITY,USD,7926257664,74.79,Technology,Software - Application
