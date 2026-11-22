@@ -1,129 +1,73 @@
 ## Report 2026-11-16
 
 ### Executive Summary
-This week's analysis covers the top software companies by market capitalization.
+As of November 16, 2026, the 25 companies in the dataset had a combined market capitalization of **$2.765 trillion**, approximately $29 billion, or 1.1%, below the prior report’s rounded $2.794 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $2.76T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, SAP SE, Palo Alto Networks, Inc., CrowdStrike Holdings, Inc.) representing 55.2% of the total.
+Palantir remained first at $394.4 billion, followed by Oracle at $376.4 billion and SAP at $271.4 billion. The top five represented **55.2%** of the total, down from 55.6%, while the top ten accounted for **79.9%**, down from 80.3%.
 
-*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
+### Strategic Reflection
+Palantir and Oracle together represented approximately **27.9%** of the dataset’s value, unchanged at one decimal place. Palantir’s lead over Oracle narrowed to approximately $18.1 billion from $36.5 billion, based on the prior report’s rounded figures.
 
-### Riflessione Strategica
-The current market structure shows concentration patterns typical of software companies.
+The top five’s combined capitalization declined to **$1.526 trillion** from $1.553 trillion. Companies ranked sixth through tenth represented **24.7%** of the total, unchanged at one decimal place.
 
-Key observations from the data:
-- Market leadership remains with established players
-- Concentration metrics provide insight into market dynamics
+### Implications
+Based on the prior report’s rounded figures, the top five lost approximately $27 billion in combined value, while the remaining companies lost approximately $2 billion. The decline in concentration reflects the larger aggregate decrease among the top five.
 
-*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
-
-### Implicazioni
-The data presented reflects current market conditions for software companies.
-
-Observers may note:
-- The relative positioning of assets by market capitalization
-- Changes in concentration over time (when historical data is available)
-
-*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
-
----
-
-*Not financial advice. For informational purposes only.*
+Cloudflare rose one place to eighth despite a 0.9% capitalization decline, while ServiceNow fell to ninth with a 3.0% decline. Okta rose to 17th despite a 1.1% decline, while Zscaler fell to 18th with a 5.3% decline. HubSpot’s capitalization rose 10.0% as it retained 22nd place. Five companies outside the displayed top 20 are included in aggregate figures, although their individual capitalizations are not shown.
 
 ---
 
 ## Report 2026-11-09
 
 ### Executive Summary
-This week's analysis covers the top software companies by market capitalization.
+As of November 9, 2026, the 25 companies in the dataset had a combined market capitalization of **$2.794 trillion**, approximately $161 billion, or 5.4%, below the previous report’s rounded $2.955 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $2.79T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, SAP SE, Palo Alto Networks, Inc., CrowdStrike Holdings, Inc.) representing 55.6% of the total.
+Palantir remained first at $408.3 billion, followed by Oracle at $371.8 billion. SAP rose to third at $274.9 billion, ahead of Palo Alto Networks at $268.5 billion. The top five represented **55.6%** of the total, unchanged at one decimal place, while the top ten accounted for **80.3%**, up from 79.7%.
 
-*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
+### Strategic Reflection
+Palantir and Oracle together represented approximately **27.9%** of the dataset’s value, compared with 27.7% in the previous report. Palantir’s lead over Oracle narrowed to approximately $36.5 billion from $71.9 billion, based on the prior report’s rounded figures.
 
-### Riflessione Strategica
-The current market structure shows concentration patterns typical of software companies.
+The top five’s combined capitalization declined to **$1.553 trillion** from $1.642 trillion. Companies ranked sixth through tenth represented **24.7%** of the total, up from 24.1%.
 
-Key observations from the data:
-- Market leadership remains with established players
-- Concentration metrics provide insight into market dynamics
+### Implications
+Based on the prior report’s rounded figures, the top five lost approximately $89 billion in combined value, while the remaining companies lost approximately $72 billion. Their proportions of the total remained broadly stable, while the top-ten share increased.
 
-*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
-
-### Implicazioni
-The data presented reflects current market conditions for software companies.
-
-Observers may note:
-- The relative positioning of assets by market capitalization
-- Changes in concentration over time (when historical data is available)
-
-*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
-
----
-
-*Not financial advice. For informational purposes only.*
+Cloudflare rose two places to ninth as its capitalization increased 8.9%. SAP gained one place with a 1.0% increase, while Palo Alto Networks fell one place with a 9.7% decline. Zoom rose to 19th despite a 1.3% decline, illustrating how rankings reflect relative changes. Five companies outside the displayed top 20 are included in aggregate figures, although their individual capitalizations are not shown.
 
 ---
 
 ## Report 2026-11-02
 
 ### Executive Summary
-This week's analysis covers the top software companies by market capitalization.
+As of November 2, 2026, the 25 companies in the dataset had a combined market capitalization of **$2.955 trillion**, approximately $198 billion, or 6.3%, below the previous report’s rounded $3.153 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $2.96T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 55.6% of the total.
+Palantir ranked first at $444.7 billion, followed by Oracle at $372.8 billion and Palo Alto Networks at $297.2 billion. The top five represented **55.6%** of the total, up from 53.8%, while the top ten accounted for **79.7%**, up from 79.6%.
 
-*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
+### Strategic Reflection
+Palantir and Oracle together represented approximately **27.7%** of the dataset’s value, compared with 26.8% in the previous report. Based on the prior report’s rounded figures, Palantir’s lead over Oracle narrowed to approximately $71.9 billion from $89.6 billion.
 
-### Riflessione Strategica
-The current market structure shows concentration patterns typical of software companies.
+The top five’s combined capitalization declined to **$1.642 trillion** from $1.697 trillion. Companies ranked sixth through tenth represented **24.1%** of the total, down from 25.8%.
 
-Key observations from the data:
-- Market leadership remains with established players
-- Concentration metrics provide insight into market dynamics
+### Implications
+Based on the prior report’s rounded figures, the top five lost approximately $55 billion in combined value, while the remaining companies lost approximately $143 billion. The increase in top-five concentration reflects a larger aggregate decline outside that group.
 
-*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
-
-### Implicazioni
-The data presented reflects current market conditions for software companies.
-
-Observers may note:
-- The relative positioning of assets by market capitalization
-- Changes in concentration over time (when historical data is available)
-
-*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
-
----
-
-*Not financial advice. For informational purposes only.*
+ServiceNow retained eighth place despite a 30.3% decline in capitalization. Datadog fell one place to 13th as its capitalization declined 16.9%, while Adobe rose one place to tenth despite a 3.0% decline. Five companies outside the displayed top 20 are included in aggregate figures, although their individual capitalizations are not shown.
 
 ---
 
 ## Report 2026-10-26
 
 ### Executive Summary
-This week's analysis covers the top software companies by market capitalization.
+As of October 26, 2026, the 25 companies in the dataset had a combined market capitalization of **$3.153 trillion**, approximately $130 billion, or 4.3%, above the previous report’s rounded $3.023 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $3.15T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 53.8% of the total.
+Palantir remained first at $466.9 billion, followed by Oracle at $377.3 billion and Palo Alto Networks at $312.7 billion. The top five accounted for **53.8%** of total capitalization, down from 54.2%, while the top ten represented **79.6%**, down from 80.2%.
 
-*This section will be enhanced with AI-generated insights when LLM integration is enabled.*
+### Strategic Reflection
+Palantir and Oracle together represented approximately **26.8%** of the dataset’s value, compared with 28.4% in the previous report. Based on the prior report’s rounded figures, Palantir’s lead over Oracle widened to approximately $89.6 billion from $71.8 billion.
 
-### Riflessione Strategica
-The current market structure shows concentration patterns typical of software companies.
+The top five’s combined capitalization rose to **$1.697 trillion** from $1.638 trillion. Companies ranked sixth through tenth represented **25.8%** of the total, compared with 26.0% in the previous report.
 
-Key observations from the data:
-- Market leadership remains with established players
-- Concentration metrics provide insight into market dynamics
+### Implications
+Based on the prior report’s rounded figures, the top five gained approximately $59 billion in combined value, while the remaining companies gained approximately $71 billion. The decline in both top-five and top-ten concentration reflects a greater share of total value outside those groups.
 
-*This section will be enhanced with AI-generated strategic analysis when LLM integration is enabled.*
-
-### Implicazioni
-The data presented reflects current market conditions for software companies.
-
-Observers may note:
-- The relative positioning of assets by market capitalization
-- Changes in concentration over time (when historical data is available)
-
-*This section will be enhanced with AI-generated implications when LLM integration is enabled.*
-
----
-
-*Not financial advice. For informational purposes only.*
+MongoDB rose one place to 19th as its capitalization increased 7.3%, while Zoom fell one place to 20th despite a 0.3% increase. CrowdStrike’s capitalization rose 12.2%, and Palo Alto Networks’ rose 9.6%; both retained their ranks. Five companies outside the displayed top 20 are included in aggregate figures, although their individual capitalizations are not shown.

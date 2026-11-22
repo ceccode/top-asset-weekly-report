@@ -14,9 +14,8 @@ def test_names_derive_from_date_and_scope():
 
 
 def test_labels_and_title():
-    assert ReportId("2025-12-31", "global").title == "Report Settimanale Asset Globali - 2025-12-31"
-    assert ReportId("2025-12-31", "software").label_it == "Aziende Software"
-    assert ReportId("2025-12-31", "software").label_en == "software companies"
+    assert ReportId("2025-12-31", "global").title == "Global Assets Weekly Report - 2025-12-31"
+    assert ReportId("2025-12-31", "software").label == "Software Companies"
 
 
 def test_from_path_reads_date_and_scope():

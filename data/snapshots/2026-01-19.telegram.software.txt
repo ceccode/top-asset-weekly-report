@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) CrowdStrike Holdings, Inc (CRWD) — $114.42B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of January 19, 2026, the 26 companies in the dataset had a combined market capitalization of $2.76 trillion, down approximately $197 billion, or 6.6%, from the rounded $2.96 trillion reported on January 12. Oracle ranked first at $549.0 billion, followed by Palantir at $407.5 billion and SAP at $272.6 billion.
 
-The combined market cap of the tracked assets stands at $2.76T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Salesforce, Inc., Shopify Inc.) representing 59.6% of the total.
+The top five represented 59.6% of the group’s value, up from 59.0% in the prior report. The top ten accounted for 83.3%, unchanged at one decimal place.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Oracle and Palantir together represented approximately 34.6% of the group’s market capitalization, compared with 33.6% a week earlier. The top five had a combined value of $1.65 trillion, down from approximately $1.74 trillion.
 
 ⚠️ Not financial advice. For informational purposes only.

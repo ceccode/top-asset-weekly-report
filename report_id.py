@@ -8,8 +8,7 @@ from typing import Optional
 SCOPES = ("global", "software")
 DATE_FORMAT = "%Y-%m-%d"
 
-_LABELS_IT = {"global": "Asset Globali", "software": "Aziende Software"}
-_LABELS_EN = {"global": "global assets", "software": "software companies"}
+_LABELS = {"global": "Global Assets", "software": "Software Companies"}
 
 
 @dataclass(frozen=True)
@@ -34,16 +33,13 @@ class ReportId:
         return f"{self.date}.{self.scope}"
 
     @property
-    def label_it(self) -> str:
-        return _LABELS_IT.get(self.scope, _LABELS_IT["software"])
-
-    @property
-    def label_en(self) -> str:
-        return _LABELS_EN.get(self.scope, _LABELS_EN["software"])
+    def label(self) -> str:
+        """What the report covers, as shown in titles."""
+        return _LABELS.get(self.scope, _LABELS["software"])
 
     @property
     def title(self) -> str:
-        return f"Report Settimanale {self.label_it} - {self.date}"
+        return f"{self.label} Weekly Report - {self.date}"
 
     @property
     def markdown_name(self) -> str:

@@ -11,7 +11,7 @@ A CLI tool that generates weekly market reports in Markdown for:
 - Ranks assets by market capitalization
 - Calculates concentration metrics (Top 5, Top 10)
 - Tracks week-over-week changes (entries, exits, movers)
-- Generates clean Markdown reports in Italian with YAML frontmatter
+- Generates clean Markdown reports in English with YAML frontmatter
 - Optional LLM integration for editorial sections
 - File-based RAG for historical context
 - Telegram-friendly TXT summaries
@@ -112,11 +112,30 @@ python main.py
 
 Without an API key, the tool generates deterministic placeholder sections.
 
+The commentary is written by `gpt-6.1-terra`. Set `OPENAI_MODEL` to use another model.
+
+## Regenerating Past Reports
+
+`regenerate.py` renders the reports in `data/reports/` again from their snapshots,
+so a template or format fix reaches the whole archive:
+
+```bash
+python regenerate.py                  # every report
+python regenerate.py --from 2026-06-01 --only global
+python regenerate.py --no-llm         # never call the LLM
+```
+
+Commentary already written by the LLM is kept. A report that only has placeholders
+gets its commentary written now, from that week's data, and states the day in its
+frontmatter (`commentary_date`). Running the script again does not call the LLM
+for reports that already have commentary.
+
 ## Output Structure
 
 ```text
 top-asset-weekly-report/
 ├── main.py              # CLI entrypoint
+├── regenerate.py        # Regenerate past reports from snapshots
 ├── config.py            # Configuration
 ├── yahoo.py             # Data fetching
 ├── asset.py             # The ranked asset
@@ -175,15 +194,15 @@ Each Markdown report includes:
 
 1. **YAML Frontmatter** - Metadata and disclaimer
 2. **Executive Summary** - Overview (LLM or placeholder)
-3. **Classifica** - Ranking table
-4. **Metriche Chiave** - Key metrics
-5. **Variazioni Settimanali** - Week-over-week changes
-6. **Osservazioni Quantitative** - Data observations
-7. **Metodologia e Limitazioni** - Standard methodology section
-8. **Riflessione Strategica** - Strategic analysis (LLM or placeholder)
-9. **Implicazioni** - Implications (LLM or placeholder)
+3. **Ranking** - Ranking table
+4. **Key Metrics** - Totals and concentration
+5. **Weekly Changes** - Week-over-week changes
+6. **Quantitative Observations** - Data observations
+7. **Methodology and Limitations** - Standard methodology section
+8. **Strategic Reflection** - Strategic analysis (LLM or placeholder)
+9. **Implications** - Implications (LLM or placeholder)
 
-Reports are generated in **Italian** by default.
+Reports are written in **English**.
 
 ## GitHub Pages Publishing
 

@@ -27,7 +27,7 @@ from metrics import (
     calculate_changes,
 )
 from rag import extract_rag_context, ensure_rag_context
-from llm import generate_llm_sections
+from llm import build_input, generate_llm_sections
 from render import render_report, save_report
 from report_id import DATE_FORMAT, SCOPES, ReportId
 from snapshot import load_previous_snapshot, save_snapshot_csv, save_snapshot_json
@@ -47,10 +47,6 @@ TICKER_SOURCES = {
     "global": get_global_tickers,
     "software": get_software_tickers,
 }
-
-# Assets sent to the LLM, to keep the prompt small
-LLM_ASSET_LIMIT = 20
-
 
 @dataclass(frozen=True)
 class Options:
@@ -99,13 +95,7 @@ def generate_report(report: ReportId, tickers: List[str], options: Options) -> b
         logger.info("No RAG context available (no previous reports)")
 
     api_key = get_openai_api_key() if options.use_llm else None
-    input_data = {
-        "assets": [asset.to_dict() for asset in ranked[:LLM_ASSET_LIMIT]],
-        "metrics": metrics,
-        "entries": entries,
-        "exits": exits,
-        "movers": movers,
-    }
+    input_data = build_input(report.date, ranked, metrics, changes)
     llm_sections = generate_llm_sections(input_data, rag_context, scope, api_key)
 
     report_content = render_report(report.date, scope, ranked, metrics, changes, llm_sections)

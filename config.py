@@ -68,6 +68,15 @@ def get_software_tickers() -> List[str]:
     return tickers
 
 
+# Model writing the commentary sections; override with OPENAI_MODEL
+DEFAULT_OPENAI_MODEL = "gpt-6.1-terra"
+
+
 def get_openai_api_key() -> str | None:
     """Get OpenAI API key from environment."""
     return os.environ.get("OPENAI_API_KEY")
+
+
+def get_openai_model() -> str:
+    """Get the OpenAI model from environment, or the default one."""
+    return os.environ.get("OPENAI_MODEL") or DEFAULT_OPENAI_MODEL
