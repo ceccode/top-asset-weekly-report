@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Intuit Inc. (INTU) — $87.52B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of May 25, 2026, the 25 companies in the dataset had a combined market capitalization of $2.475 trillion, approximately $54 billion, or 2.2%, above the rounded $2.421 trillion reported a week earlier. The comparison includes a change in group membership: CFLT exited, and no entries were recorded.
 
-The combined market cap of the tracked assets stands at $2.47T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 59.3% of the total.
+Oracle ranked first at $552.4 billion, followed by Palantir at $328.1 billion and Palo Alto Networks at $211.3 billion. The top five accounted for 59.3% of the group’s value, up from 58.8%; the top ten represented 82.5%, down from 82.7%.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Oracle and Palantir together represented approximately 35.6% of the group’s market capitalization, compared with 36.2% a week earlier. The top five had a combined value of $1.468 trillion, up from the prior report’s rounded $1.424 trillion.
 
 ⚠️ Not financial advice. For informational purposes only.

@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Eli Lilly and Company (LLY) — $1.08T
 
 📝 Summary:
-This week's analysis covers the top global assets by market capitalization.
+As of June 29, 2026, the 46 tracked assets had a combined reported market capitalization of $37.79 trillion, approximately $1.60 trillion, or 4.1%, below the June 22 total. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $37.79T, with the top 5 assets (NVIDIA Corporation, Apple Inc., Alphabet Inc., Microsoft Corporation, Amazon.com, Inc.) representing 48.2% of the total.
+NVIDIA remained first at $4.66 trillion. Apple rose to second at $4.17 trillion, while Alphabet fell to third at $4.12 trillion. Tesla, Meta and Bitcoin remained seventh, eighth and ninth, respectively.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of global assets.
+Technology-sector equities occupied four of the top six positions: NVIDIA, Apple, Microsoft and Broadcom. Alphabet and Meta, classified as Communication Services, ranked third and eighth. Semiconductor companies NVIDIA, Broadcom, AMD and Intel appeared in the top 15.
 
 ⚠️ Not financial advice. For informational purposes only.

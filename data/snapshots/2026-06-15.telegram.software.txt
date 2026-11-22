@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Datadog, Inc. (DDOG) — $81.84B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of June 15, 2026, the 25 companies in the dataset had a combined market capitalization of $2.427 trillion, down approximately $197 billion, or 7.5%, from the rounded $2.624 trillion reported a week earlier. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $2.43T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 59.0% of the total.
+Oracle remained first at $529.6 billion, followed by Palantir at $306.8 billion and Palo Alto Networks at $227.9 billion. The top five accounted for 59.0% of the group’s value, compared with 59.1% a week earlier; the top ten represented 81.5%, down from 82.0%.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Oracle and Palantir together represented approximately 34.5% of the group’s market capitalization, down from 35.8% a week earlier. The top five had a combined value of $1.432 trillion, compared with $1.550 trillion in the previous report.
 
 ⚠️ Not financial advice. For informational purposes only.

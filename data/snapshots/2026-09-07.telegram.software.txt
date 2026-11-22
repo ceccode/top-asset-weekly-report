@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Adobe Inc. (ADBE) — $105.94B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of September 7, 2026, the 25 companies in the dataset had a combined market capitalization of $2.960 trillion, down approximately $105 billion, or 3.4%, from the prior report’s rounded $3.065 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $2.96T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 54.5% of the total.
+Oracle ranked first at $457.4 billion, followed by Palantir at $418.9 billion and Palo Alto Networks at $271.6 billion. The top five accounted for 54.5% of total capitalization, compared with 54.6% a week earlier; the top ten represented 80.6%, up from 80.1%.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Oracle rose one place to first as its capitalization increased 6.2%, while Palantir fell one place as its capitalization declined 6.1%. Together, they represented approximately 29.6% of the dataset’s value, up from 28.6% in the previous report.
 
 ⚠️ Not financial advice. For informational purposes only.

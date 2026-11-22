@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Walmart Inc. (WMT) — $1.05T
 
 📝 Summary:
-This week's analysis covers the top global assets by market capitalization.
+As of May 4, 2026, the 46 tracked assets had a combined reported market capitalization of $39.51 trillion, approximately $1.30 trillion, or 3.2%, below the April 27 total. The tracked count fell from 50 as two assets entered and six exited.
 
-The combined market cap of the tracked assets stands at $39.51T, with the top 5 assets (NVIDIA Corporation, Alphabet Inc., Apple Inc., Microsoft Corporation, Amazon.com, Inc.) representing 49.5% of the total.
+NVIDIA remained first at $4.82 trillion, followed by Alphabet at $4.67 trillion and Apple at $4.11 trillion. Bitcoin rose to seventh from eighth, while Meta moved to eighth from seventh.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of global assets.
+Technology-sector equities occupied four of the top six positions: NVIDIA, Apple, Microsoft and Broadcom. Alphabet and Meta, classified as Communication Services, ranked second and eighth, respectively.
 
 ⚠️ Not financial advice. For informational purposes only.

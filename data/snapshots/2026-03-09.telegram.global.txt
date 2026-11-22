@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Berkshire Hathaway Inc. (BRK-B) — $1.08T
 
 📝 Summary:
-This week's analysis covers the top global assets by market capitalization.
+As of March 9, 2026, the 50 tracked assets had a combined reported market capitalization of $37.56 trillion, down approximately $0.43 trillion, or 1.1%, from March 2. The top five accounted for 45.38% of the total, while the top ten represented 64.30%.
 
-The combined market cap of the tracked assets stands at $37.56T, with the top 5 assets (NVIDIA Corporation, Apple Inc., Alphabet Inc., Microsoft Corporation, Amazon.com, Inc.) representing 45.4% of the total.
+NVIDIA remained first at $4.32 trillion, followed by Apple at $3.78 trillion and Alphabet at $3.61 trillion. Bitcoin remained ninth at $1.34 trillion. SOL-USD entered the tracked list, while EEM exited.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of global assets.
+Technology-sector equities occupied four of the top eight positions: NVIDIA, Apple, Microsoft and Broadcom. Alphabet and Meta, classified as Communication Services, also ranked in the top eight, reflecting the prominence of technology and internet-related businesses in the dataset.
 
 ⚠️ Not financial advice. For informational purposes only.

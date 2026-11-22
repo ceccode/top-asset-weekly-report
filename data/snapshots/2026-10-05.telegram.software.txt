@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Snowflake Inc. (SNOW) — $120.09B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of October 5, 2026, the 25 companies in the dataset had a combined market capitalization of $3.100 trillion, approximately $121 billion, or 4.1%, above the previous report’s rounded $2.979 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $3.10T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, Palo Alto Networks, Inc., CrowdStrike Holdings, Inc., SAP SE) representing 56.0% of the total.
+Palantir remained first at $452.5 billion, followed by Oracle at $434.9 billion and Palo Alto Networks at $330.7 billion. The top five accounted for 56.0% of total capitalization, unchanged at one decimal place, while the top ten represented 81.2%, up from 81.1%.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Palantir and Oracle together represented approximately 28.6% of the dataset’s value, unchanged from the previous report at one decimal place. Oracle’s capitalization rose 8.6%, narrowing its gap with Palantir to approximately $17.7 billion from $51.6 billion a week earlier.
 
 ⚠️ Not financial advice. For informational purposes only.

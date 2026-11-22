@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) ServiceNow, Inc. (NOW) — $98.05B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of May 18, 2026, the 26 companies in the dataset had a combined market capitalization of $2.421 trillion, up approximately $4.5 billion, or 0.2%, from the rounded $2.417 trillion reported a week earlier. Oracle ranked first at $554.9 billion, followed by Palantir at $321.2 billion and SAP at $199.8 billion.
 
-The combined market cap of the tracked assets stands at $2.42T, with the top 5 assets (Oracle Corporation, Palantir Technologies Inc., SAP SE, Palo Alto Networks, Inc., CrowdStrike Holdings, Inc.) representing 58.8% of the total.
+The top five accounted for 58.8% of the group’s value, compared with 58.6% a week earlier. The top ten represented 82.7%, unchanged at one decimal place.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Oracle and Palantir together represented approximately 36.2% of the group’s market capitalization, down from 37.0% a week earlier. The top five had a combined value of $1.424 trillion, up from the prior report’s rounded $1.416 trillion.
 
 ⚠️ Not financial advice. For informational purposes only.

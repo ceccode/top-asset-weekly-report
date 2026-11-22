@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) Cloudflare, Inc. (NET) — $106.10B
 
 📝 Summary:
-This week's analysis covers the top software companies by market capitalization.
+As of October 19, 2026, the 25 companies in the dataset had a combined market capitalization of $3.023 trillion, approximately $172 billion, or 5.4%, below the previous report’s rounded $3.195 trillion. No entries or exits were recorded.
 
-The combined market cap of the tracked assets stands at $3.02T, with the top 5 assets (Palantir Technologies Inc., Oracle Corporation, Palo Alto Networks, Inc., SAP SE, CrowdStrike Holdings, Inc.) representing 54.2% of the total.
+Palantir remained first at $465.8 billion, followed by Oracle at $394.0 billion and Palo Alto Networks at $285.4 billion. The top five represented 54.2% of the total, down from 55.3%, while the top ten accounted for 80.2%, down from 80.9%.
 
 💡 Insight:
-The current market structure shows concentration patterns typical of software companies.
+Palantir and Oracle together represented approximately 28.4% of the dataset’s value, compared with 28.6% in the previous report. Their market capitalizations declined 6.4% and 5.6%, respectively, and Palantir’s lead narrowed to approximately $71.8 billion from $80.5 billion.
 
 ⚠️ Not financial advice. For informational purposes only.
