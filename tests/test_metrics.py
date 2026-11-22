@@ -143,3 +143,9 @@ def test_ranking_leaves_the_given_assets_untouched():
     rank_by_market_cap(assets)
 
     assert assets == [{"ticker": "AAA", "market_cap": 1}]
+
+
+def test_unreadable_previous_snapshot_is_ignored(tmp_path):
+    (tmp_path / "2025-12-24.global.csv").write_text("rank,name\n1,Alpha\n", encoding="utf-8")
+
+    assert load_previous_snapshot(tmp_path, "global", "2025-12-31") is None

@@ -37,7 +37,8 @@ def load_top_n_from_csv(csv_path: Path, n: int = 10) -> List[Dict[str, Any]]:
                     "market_cap": float(row.get("market_cap", 0)),
                 })
             return assets
-    except Exception as e:
+    except (OSError, csv.Error, ValueError, TypeError) as e:
+        # ValueError/TypeError: a row with a missing or non-numeric market cap
         logger.warning(f"Error reading CSV {csv_path}: {e}")
         return []
 
@@ -61,15 +62,12 @@ def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str,
         parts = [p.strip() for p in line.split("|") if p.strip()]
         # Data rows start with the numeric rank; header and separator do not
         if len(parts) >= 4 and parts[0].isdigit():
-            try:
-                assets.append({
-                    "rank": parts[0],
-                    "ticker": parts[1],
-                    "name": parts[2][:30],  # Truncate long names
-                    "market_cap_str": parts[4] if len(parts) > 4 else "",
-                })
-            except (IndexError, ValueError):
-                continue
+            assets.append({
+                "rank": parts[0],
+                "ticker": parts[1],
+                "name": parts[2][:30],  # Truncate long names
+                "market_cap_str": parts[4] if len(parts) > 4 else "",
+            })
         
         if len(assets) >= n:
             break

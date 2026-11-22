@@ -73,7 +73,7 @@ def extract_rag_context(reports_dir: Path, scope: str, current_date: str, k: int
             if sections_found:
                 context_parts.append(f"## Report {date_str}\n\n" + "\n\n".join(sections_found))
         
-        except Exception as e:
+        except (OSError, UnicodeDecodeError) as e:
             logger.warning(f"Error reading {report_path}: {e}")
             continue
     
@@ -153,7 +153,7 @@ def check_rag_freshness(
         
         return False, "stale"
     
-    except Exception as e:
+    except (OSError, UnicodeDecodeError) as e:
         logger.warning(f"Error checking RAG freshness: {e}")
         return False, "error"
 

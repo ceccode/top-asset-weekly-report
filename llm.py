@@ -56,11 +56,7 @@ def generate_llm_sections(
         logger.info("No API key provided, using placeholder sections")
         return _generate_placeholders(input_data, report_type)
     
-    try:
-        return _call_openai(input_data, rag_context, report_type, api_key)
-    except Exception as e:
-        logger.error(f"LLM call failed: {e}")
-        return _generate_placeholders(input_data, report_type)
+    return _call_openai(input_data, rag_context, report_type, api_key)
 
 
 def _scope_label(report_type: str) -> str:
@@ -113,9 +109,9 @@ def _call_openai(
     report_type: str,
     api_key: str
 ) -> Dict[str, str]:
-    """Call OpenAI API to generate sections."""
+    """Call OpenAI API to generate sections; API failures fall back to placeholders."""
     try:
-        from openai import OpenAI
+        from openai import OpenAI, OpenAIError
     except ImportError:
         logger.warning("openai package not installed, using placeholders")
         return _generate_placeholders(input_data, report_type)
@@ -152,17 +148,22 @@ Format your response as:
 ### Implicazioni
 [content]"""
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt}
-        ],
-        temperature=0.7,
-        max_tokens=2000,
-    )
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.7,
+            max_tokens=2000,
+        )
+    except OpenAIError as e:
+        logger.error(f"LLM call failed: {e}")
+        return _generate_placeholders(input_data, report_type)
     
-    content = response.choices[0].message.content
+    # The API may answer with no text at all (e.g. a refusal)
+    content = response.choices[0].message.content or ""
     return _parse_llm_response(content, input_data, report_type)
 
 

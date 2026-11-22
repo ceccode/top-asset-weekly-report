@@ -51,7 +51,8 @@ def load_ranking_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
                     "quote_type": row.get("quote_type", "EQUITY"),
                 })
         return ranking
-    except Exception as e:
+    except (OSError, csv.Error, ValueError, TypeError) as e:
+        # ValueError/TypeError: a row with a missing or non-numeric rank or market cap
         logger.warning(f"Error reading CSV {csv_path}: {e}")
         return []
 
@@ -65,7 +66,7 @@ def load_metrics_from_json(json_path: Path) -> Dict[str, Any]:
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             return data.get("metrics", {})
-    except Exception as e:
+    except (OSError, ValueError) as e:
         logger.warning(f"Error reading JSON {json_path}: {e}")
         return {}
 
@@ -148,7 +149,7 @@ def generate_manifest(public_dir: Path) -> Dict[str, Any]:
             md_content = md_path.read_text(encoding="utf-8")
             summary = extract_section(md_content, "Executive Summary")
             excerpt = make_excerpt(summary) if summary else "Report disponibile."
-        except Exception:
+        except (OSError, UnicodeDecodeError):
             excerpt = "Report disponibile."
         
         top10 = load_ranking_from_csv(SNAPSHOTS_DIR / report.csv_name)[:10]
@@ -312,7 +313,7 @@ def build_public(date: str, scopes: List[str]) -> bool:
         try:
             _publish_report(report)
             published_count += 1
-        except Exception as e:
+        except OSError as e:
             logger.error(f"Failed to publish {report.stem} report: {e}")
             continue
 
@@ -327,7 +328,7 @@ def build_public(date: str, scopes: List[str]) -> bool:
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(manifest, f, indent=2, ensure_ascii=False)
         logger.info(f"Generated: {manifest_path}")
-    except Exception as e:
+    except OSError as e:
         logger.error(f"Failed to generate manifest: {e}")
         return False
     
@@ -337,7 +338,7 @@ def build_public(date: str, scopes: List[str]) -> bool:
         index_path = PUBLIC_DIR / "index.html"
         index_path.write_text(index_html, encoding="utf-8")
         logger.info(f"Generated: {index_path}")
-    except Exception as e:
+    except OSError as e:
         logger.error(f"Failed to generate index.html: {e}")
         # Not fatal, continue
     

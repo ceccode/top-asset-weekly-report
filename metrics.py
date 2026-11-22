@@ -67,7 +67,7 @@ def load_previous_snapshot(snapshots_dir: Path, scope: str, current_date: str) -
                 with open(csv_path, "r", encoding="utf-8") as f:
                     reader = csv.DictReader(f)
                     return {row["ticker"]: row for row in reader}
-            except Exception as e:
+            except (OSError, UnicodeDecodeError, csv.Error, KeyError) as e:
                 logger.warning(f"Error loading previous snapshot: {e}")
                 return None
     

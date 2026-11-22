@@ -29,7 +29,7 @@ from metrics import (
     save_snapshot_csv,
     save_snapshot_json,
 )
-from rag import extract_rag_context, save_rag_context, ensure_rag_context
+from rag import extract_rag_context, ensure_rag_context
 from llm import generate_llm_sections
 from render import render_report, save_report
 from report_id import DATE_FORMAT, SCOPES, ReportId
@@ -93,9 +93,9 @@ def generate_report(report: ReportId, tickers: List[str], options: Options) -> b
     save_snapshot_csv(ranked, csv_path)
     save_snapshot_json(ranked, metrics, SNAPSHOTS_DIR / report.json_name)
 
+    # Context for the LLM; the RAG file itself is written once, by ensure_rag_context below
     rag_context = extract_rag_context(REPORTS_DIR, scope, report.date, options.rag_k)
     if rag_context:
-        save_rag_context(RAG_DIR, scope, rag_context)
         logger.info(f"RAG context extracted ({len(rag_context)} chars)")
     else:
         logger.info("No RAG context available (no previous reports)")
@@ -114,18 +114,18 @@ def generate_report(report: ReportId, tickers: List[str], options: Options) -> b
     report_path = REPORTS_DIR / report.markdown_name
     save_report(report_content, report_path)
 
-    # Telegram text and RAG refresh are extras: their failure does not fail the report
+    # Telegram text and RAG refresh are extras: failing to write them does not fail the report
     if options.telegram:
+        telegram_txt = generate_telegram_txt(report.date, scope, report_content, csv_path)
         try:
-            telegram_txt = generate_telegram_txt(report.date, scope, report_content, csv_path)
             save_telegram_txt(telegram_txt, SNAPSHOTS_DIR / report.telegram_snapshot_name)
-        except Exception as e:
-            logger.warning(f"Failed to generate Telegram TXT: {e}")
+        except OSError as e:
+            logger.warning(f"Failed to save Telegram TXT: {e}")
 
     if options.rag_check:
         try:
             ensure_rag_context(RAG_DIR, REPORTS_DIR, scope, k=options.rag_k)
-        except Exception as e:
+        except OSError as e:
             logger.warning(f"Failed to update RAG context: {e}")
 
     logger.info(f"✓ {scope} report complete: {report_path}")
@@ -185,11 +185,16 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
 
 
 def _generate_safely(report: ReportId, options: Options) -> bool:
-    """Generate one report, turning any failure into False."""
+    """
+    Generate one report, turning any failure into False.
+
+    This is the boundary that lets the other scope still run: the traceback
+    is logged so an unexpected error remains visible.
+    """
     try:
         return generate_report(report, TICKER_SOURCES[report.scope](), options)
-    except Exception as e:
-        logger.error(f"Failed to generate {report.scope} report: {e}")
+    except Exception:
+        logger.exception(f"Failed to generate {report.scope} report")
         return False
 
 
@@ -235,8 +240,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.publish:
         try:
             published = build_public(args.date, generated)
-        except Exception as e:
-            logger.error(f"Failed to build public folder: {e}")
+        except Exception:
+            logger.exception("Failed to build public folder")
             return 1
         if not published:
             return 1

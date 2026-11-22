@@ -12,32 +12,33 @@ def fetch_ticker_data(ticker: str) -> Optional[Dict[str, Any]]:
     Fetch data for a single ticker.
     Returns None if ticker is invalid or missing market cap.
     """
+    # yfinance raises unrelated exception types for network, parsing and
+    # rate-limit problems, so this boundary has to catch them all
     try:
-        t = yf.Ticker(ticker)
-        info = t.info
-        
-        if not info:
-            logger.warning(f"No data returned for {ticker}")
-            return None
-        
-        market_cap = info.get("marketCap")
-        if market_cap is None or market_cap == 0:
-            logger.warning(f"Skipping {ticker}: no marketCap available")
-            return None
-        
-        return {
-            "ticker": ticker,
-            "name": info.get("longName") or info.get("shortName") or ticker,
-            "quote_type": info.get("quoteType", "UNKNOWN"),
-            "currency": info.get("currency", "USD"),
-            "market_cap": market_cap,
-            "price": info.get("regularMarketPrice") or info.get("previousClose"),
-            "sector": info.get("sector", ""),
-            "industry": info.get("industry", ""),
-        }
+        info = yf.Ticker(ticker).info
     except Exception as e:
         logger.warning(f"Error fetching {ticker}: {e}")
         return None
+    
+    if not info:
+        logger.warning(f"No data returned for {ticker}")
+        return None
+    
+    market_cap = info.get("marketCap")
+    if market_cap is None or market_cap == 0:
+        logger.warning(f"Skipping {ticker}: no marketCap available")
+        return None
+    
+    return {
+        "ticker": ticker,
+        "name": info.get("longName") or info.get("shortName") or ticker,
+        "quote_type": info.get("quoteType", "UNKNOWN"),
+        "currency": info.get("currency", "USD"),
+        "market_cap": market_cap,
+        "price": info.get("regularMarketPrice") or info.get("previousClose"),
+        "sector": info.get("sector", ""),
+        "industry": info.get("industry", ""),
+    }
 
 
 def fetch_all_tickers(tickers: List[str]) -> List[Dict[str, Any]]:

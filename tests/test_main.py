@@ -86,3 +86,65 @@ def test_failed_publish_fails_the_run(run):
     run(publish_succeeds=False)
 
     assert cli.main(["--date", "2025-12-31", "--publish"]) == 1
+
+
+@pytest.fixture
+def workspace(tmp_path, monkeypatch, ranked):
+    """Empty data folders, and Yahoo replaced by the `ranked` fixture's assets."""
+    for name in ["REPORTS_DIR", "SNAPSHOTS_DIR", "RAG_DIR"]:
+        folder = tmp_path / name.lower()
+        folder.mkdir()
+        monkeypatch.setattr(cli, name, folder)
+    fetched = [{k: v for k, v in asset.items() if k != "rank"} for asset in ranked]
+    monkeypatch.setattr(cli, "fetch_all_tickers", lambda tickers: fetched)
+    return tmp_path
+
+
+REPORT = cli.ReportId("2025-12-31", "global")
+OFFLINE = cli.Options(use_llm=False)
+
+
+def test_generate_report_writes_report_snapshots_telegram_and_rag(workspace):
+    assert cli.generate_report(REPORT, ["AAA"], OFFLINE) is True
+
+    assert "| 1 | AAA |" in (workspace / "reports_dir/2025-12-31.global.md").read_text("utf-8")
+    assert (workspace / "snapshots_dir/2025-12-31.global.csv").exists()
+    assert (workspace / "snapshots_dir/2025-12-31.global.json").exists()
+    assert (workspace / "snapshots_dir/2025-12-31.telegram.global.txt").exists()
+    assert (workspace / "rag_dir/rag_context_global.txt").exists()
+
+
+def test_generate_report_fails_when_yahoo_returns_nothing(workspace, monkeypatch):
+    monkeypatch.setattr(cli, "fetch_all_tickers", lambda tickers: [])
+
+    assert cli.generate_report(REPORT, ["AAA"], OFFLINE) is False
+    assert list((workspace / "reports_dir").iterdir()) == []
+
+
+def test_rag_file_is_left_alone_without_the_rag_check(workspace):
+    (workspace / "reports_dir/2025-12-24.global.md").write_text(
+        "## Executive Summary\n\nEarlier analysis.\n", encoding="utf-8"
+    )
+
+    cli.generate_report(REPORT, ["AAA"], cli.Options(use_llm=False, rag_check=False))
+
+    assert list((workspace / "rag_dir").iterdir()) == []
+
+
+def test_telegram_file_error_does_not_fail_the_report(workspace, monkeypatch):
+    def unwritable(content, path):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(cli, "save_telegram_txt", unwritable)
+
+    assert cli.generate_report(REPORT, ["AAA"], OFFLINE) is True
+
+
+def test_bug_in_an_extra_step_is_not_swallowed(workspace, monkeypatch):
+    def buggy(*args):
+        raise KeyError("bug in our code")
+
+    monkeypatch.setattr(cli, "generate_telegram_txt", buggy)
+
+    with pytest.raises(KeyError):
+        cli.generate_report(REPORT, ["AAA"], OFFLINE)
