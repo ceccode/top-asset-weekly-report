@@ -2,7 +2,7 @@
 
 A CLI tool that generates weekly market reports in Markdown for:
 
-1. **Global Assets** - Major equities, ETFs, and cryptocurrencies
+1. **Global Assets** - Major equities and cryptocurrencies
 2. **Software Companies** - Curated list of software/SaaS companies
 
 ## Features
