@@ -1,6 +1,5 @@
 """Publisher module for generating static GitHub Pages site."""
 
-import csv
 import json
 import logging
 import re
@@ -11,7 +10,9 @@ from typing import List, Dict, Any
 
 from config import REPORTS_DIR, SNAPSHOTS_DIR, DISCLAIMER, DISCLAIMER_SHORT
 from mdtext import extract_section, strip_inline_formatting, truncate_at_word
+from asset import Asset
 from report_id import SCOPES, ReportId
+from snapshot import load_snapshot
 
 logger = logging.getLogger(__name__)
 
@@ -32,29 +33,22 @@ def make_excerpt(text: str, max_chars: int = MAX_EXCERPT_CHARS) -> str:
     return truncate_at_word(text, max_chars)
 
 
-def load_ranking_from_csv(csv_path: Path) -> List[Dict[str, Any]]:
-    """Load ranking data from CSV snapshot."""
-    if not csv_path.exists():
-        return []
-    
-    ranking = []
-    try:
-        with open(csv_path, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                ranking.append({
-                    "rank": int(row.get("rank", 0)),
-                    "name": row.get("name", ""),
-                    "ticker": row.get("ticker", ""),
-                    "market_cap": float(row.get("market_cap", 0)),
-                    "currency": row.get("currency", "USD"),
-                    "quote_type": row.get("quote_type", "EQUITY"),
-                })
-        return ranking
-    except (OSError, csv.Error, ValueError, TypeError) as e:
-        # ValueError/TypeError: a row with a missing or non-numeric rank or market cap
-        logger.warning(f"Error reading CSV {csv_path}: {e}")
-        return []
+def ranking_entry(asset: Asset) -> Dict[str, Any]:
+    """An asset as it appears in the published JSON."""
+    return {
+        "rank": asset.rank,
+        "name": asset.name,
+        "ticker": asset.ticker,
+        "market_cap": asset.market_cap,
+        "currency": asset.currency,
+        "quote_type": asset.quote_type,
+    }
+
+
+def load_ranking(report: ReportId) -> List[Dict[str, Any]]:
+    """The published ranking of a report, read from its CSV snapshot."""
+    assets = load_snapshot(SNAPSHOTS_DIR / report.csv_name) or []
+    return [ranking_entry(asset) for asset in assets]
 
 
 def load_metrics_from_json(json_path: Path) -> Dict[str, Any]:
@@ -152,7 +146,7 @@ def generate_manifest(public_dir: Path) -> Dict[str, Any]:
         except (OSError, UnicodeDecodeError):
             excerpt = "Report disponibile."
         
-        top10 = load_ranking_from_csv(SNAPSHOTS_DIR / report.csv_name)[:10]
+        top10 = load_ranking(report)[:10]
         
         reports_list.append({
             "date": report.date,
@@ -267,7 +261,7 @@ def _publish_report(report: ReportId) -> None:
     telegram_src = SNAPSHOTS_DIR / report.telegram_snapshot_name
     report_json = generate_report_json(
         report,
-        load_ranking_from_csv(SNAPSHOTS_DIR / report.csv_name),
+        load_ranking(report),
         load_metrics_from_json(SNAPSHOTS_DIR / report.json_name),
         has_telegram=telegram_src.exists(),
     )

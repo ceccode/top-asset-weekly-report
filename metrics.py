@@ -1,31 +1,24 @@
 """Ranking and metrics calculations."""
 
-import csv
-import json
-import logging
-from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
-from datetime import datetime, timedelta
 
-from report_id import DATE_FORMAT, ReportId
-
-logger = logging.getLogger(__name__)
+from asset import Asset
 
 
-def rank_by_market_cap(assets: List[Dict[str, Any]], top_n: int = 50) -> List[Dict[str, Any]]:
+def rank_by_market_cap(assets: List[Asset], top_n: int = 50) -> List[Asset]:
     """Sort assets by market cap descending and return top N."""
-    sorted_assets = sorted(assets, key=lambda x: x.get("market_cap", 0), reverse=True)
-    return [{**asset, "rank": i} for i, asset in enumerate(sorted_assets[:top_n], 1)]
+    sorted_assets = sorted(assets, key=lambda asset: asset.market_cap, reverse=True)
+    return [asset.ranked(i) for i, asset in enumerate(sorted_assets[:top_n], 1)]
 
 
-def calculate_metrics(ranked_assets: List[Dict[str, Any]]) -> Dict[str, Any]:
+def calculate_metrics(ranked_assets: List[Asset]) -> Dict[str, Any]:
     """Calculate key metrics for the ranked assets."""
     if not ranked_assets:
         return {}
     
-    total_market_cap = sum(a.get("market_cap", 0) for a in ranked_assets)
-    top5_cap = sum(a.get("market_cap", 0) for a in ranked_assets[:5])
-    top10_cap = sum(a.get("market_cap", 0) for a in ranked_assets[:10])
+    total_market_cap = sum(a.market_cap for a in ranked_assets)
+    top5_cap = sum(a.market_cap for a in ranked_assets[:5])
+    top10_cap = sum(a.market_cap for a in ranked_assets[:10])
     
     return {
         "total_market_cap": total_market_cap,
@@ -49,105 +42,50 @@ def format_market_cap(value: float) -> str:
         return f"${value:,.0f}"
 
 
-def load_previous_snapshot(snapshots_dir: Path, scope: str, current_date: str) -> Optional[Dict[str, Dict[str, Any]]]:
-    """
-    Load the most recent previous snapshot for comparison.
-    Returns a dict mapping ticker -> asset data.
-    """
-    current = datetime.strptime(current_date, DATE_FORMAT)
-    
-    # Look for snapshots in the last 14 days
-    for days_back in range(1, 15):
-        prev_date = (current - timedelta(days=days_back)).strftime(DATE_FORMAT)
-        csv_path = snapshots_dir / ReportId(prev_date, scope).csv_name
-        
-        if csv_path.exists():
-            logger.info(f"Found previous snapshot: {csv_path}")
-            try:
-                with open(csv_path, "r", encoding="utf-8") as f:
-                    reader = csv.DictReader(f)
-                    return {row["ticker"]: row for row in reader}
-            except (OSError, UnicodeDecodeError, csv.Error, KeyError) as e:
-                logger.warning(f"Error loading previous snapshot: {e}")
-                return None
-    
-    logger.info(f"No previous snapshot found for {scope}")
-    return None
-
-
 def calculate_changes(
-    ranked_assets: List[Dict[str, Any]],
-    previous: Optional[Dict[str, Dict[str, Any]]]
+    ranked_assets: List[Asset],
+    previous: Optional[Dict[str, Asset]]
 ) -> Tuple[List[str], List[str], List[Dict[str, Any]]]:
     """
     Calculate entries, exits, and rank changes compared to previous snapshot.
     Returns (entries, exits, movers).
     """
-    current_tickers = {a["ticker"] for a in ranked_assets}
-    
     if previous is None:
         return [], [], []
     
-    previous_tickers = set(previous.keys())
+    current_tickers = {a.ticker for a in ranked_assets}
     
     # Deterministic order: entries by current rank, exits by previous rank
-    entries = [a["ticker"] for a in ranked_assets if a["ticker"] not in previous_tickers]
+    entries = [a.ticker for a in ranked_assets if a.ticker not in previous]
     exits = sorted(
-        previous_tickers - current_tickers,
-        key=lambda ticker: int(previous[ticker].get("rank", 0)),
+        previous.keys() - current_tickers,
+        key=lambda ticker: previous[ticker].rank,
     )
     
     # Calculate rank changes for assets in both snapshots
     movers = []
     for asset in ranked_assets:
-        ticker = asset["ticker"]
-        if ticker in previous:
-            prev_rank = int(previous[ticker].get("rank", 0))
-            curr_rank = asset["rank"]
-            rank_delta = prev_rank - curr_rank  # Positive = moved up
-            
-            prev_cap = float(previous[ticker].get("market_cap", 0))
-            curr_cap = asset.get("market_cap", 0)
-            cap_delta_pct = ((curr_cap - prev_cap) / prev_cap * 100) if prev_cap > 0 else 0
-            
-            if rank_delta != 0 or abs(cap_delta_pct) > 5:
-                movers.append({
-                    "ticker": ticker,
-                    "name": asset["name"],
-                    "rank_delta": rank_delta,
-                    "cap_delta_pct": cap_delta_pct,
-                    "current_rank": curr_rank,
-                })
+        before = previous.get(asset.ticker)
+        if before is None:
+            continue
+
+        rank_delta = before.rank - asset.rank  # Positive = moved up
+        cap_delta_pct = (
+            (asset.market_cap - before.market_cap) / before.market_cap * 100
+            if before.market_cap > 0
+            else 0
+        )
+
+        if rank_delta != 0 or abs(cap_delta_pct) > 5:
+            movers.append({
+                "ticker": asset.ticker,
+                "name": asset.name,
+                "rank_delta": rank_delta,
+                "cap_delta_pct": cap_delta_pct,
+                "current_rank": asset.rank,
+            })
     
     # Sort movers by absolute rank change
     movers.sort(key=lambda x: abs(x["rank_delta"]), reverse=True)
     
     return entries, exits, movers[:10]  # Top 10 movers
-
-
-def save_snapshot_csv(ranked_assets: List[Dict[str, Any]], filepath: Path) -> None:
-    """Save ranked assets to CSV."""
-    if not ranked_assets:
-        return
-    
-    fieldnames = ["rank", "ticker", "name", "quote_type", "currency", "market_cap", "price", "sector", "industry"]
-    
-    with open(filepath, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(ranked_assets)
-    
-    logger.info(f"Saved snapshot: {filepath}")
-
-
-def save_snapshot_json(ranked_assets: List[Dict[str, Any]], metrics: Dict[str, Any], filepath: Path) -> None:
-    """Save ranked assets and metrics to JSON."""
-    data = {
-        "assets": ranked_assets,
-        "metrics": metrics,
-    }
-    
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-    
-    logger.info(f"Saved JSON snapshot: {filepath}")

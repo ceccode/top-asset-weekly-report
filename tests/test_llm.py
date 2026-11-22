@@ -12,7 +12,7 @@ REQUIREMENTS = Path(__file__).resolve().parent.parent / "requirements.txt"
 
 
 def test_without_api_key_sections_are_deterministic_placeholders(ranked):
-    input_data = {"assets": ranked, "metrics": calculate_metrics(ranked)}
+    input_data = {"assets": [a.to_dict() for a in ranked], "metrics": calculate_metrics(ranked)}
 
     sections = generate_llm_sections(input_data, "", "global", api_key=None)
 

@@ -1,13 +1,15 @@
 """Yahoo Finance data fetching."""
 
 import logging
-from typing import List, Dict, Any, Optional
+from typing import List, Optional
 import yfinance as yf
+
+from asset import Asset
 
 logger = logging.getLogger(__name__)
 
 
-def fetch_ticker_data(ticker: str) -> Optional[Dict[str, Any]]:
+def fetch_ticker_data(ticker: str) -> Optional[Asset]:
     """
     Fetch data for a single ticker.
     Returns None if ticker is invalid or missing market cap.
@@ -29,19 +31,19 @@ def fetch_ticker_data(ticker: str) -> Optional[Dict[str, Any]]:
         logger.warning(f"Skipping {ticker}: no marketCap available")
         return None
     
-    return {
-        "ticker": ticker,
-        "name": info.get("longName") or info.get("shortName") or ticker,
-        "quote_type": info.get("quoteType", "UNKNOWN"),
-        "currency": info.get("currency", "USD"),
-        "market_cap": market_cap,
-        "price": info.get("regularMarketPrice") or info.get("previousClose"),
-        "sector": info.get("sector", ""),
-        "industry": info.get("industry", ""),
-    }
+    return Asset(
+        ticker=ticker,
+        name=info.get("longName") or info.get("shortName") or ticker,
+        quote_type=info.get("quoteType", "UNKNOWN"),
+        currency=info.get("currency", "USD"),
+        market_cap=market_cap,
+        price=info.get("regularMarketPrice") or info.get("previousClose"),
+        sector=info.get("sector", ""),
+        industry=info.get("industry", ""),
+    )
 
 
-def fetch_all_tickers(tickers: List[str]) -> List[Dict[str, Any]]:
+def fetch_all_tickers(tickers: List[str]) -> List[Asset]:
     """
     Fetch data for all tickers.
     Skips tickers that fail or have no market cap.

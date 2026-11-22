@@ -8,19 +8,21 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from asset import Asset  # noqa: E402  (needs the path set above)
+
 
 def _asset(rank, ticker, name, market_cap, quote_type="EQUITY"):
-    return {
-        "rank": rank,
-        "ticker": ticker,
-        "name": name,
-        "quote_type": quote_type,
-        "currency": "USD",
-        "market_cap": market_cap,
-        "price": 100.0,
-        "sector": "Technology",
-        "industry": "Software",
-    }
+    return Asset(
+        rank=rank,
+        ticker=ticker,
+        name=name,
+        quote_type=quote_type,
+        currency="USD",
+        market_cap=market_cap,
+        price=100.0,
+        sector="Technology",
+        industry="Software",
+    )
 
 
 @pytest.fixture

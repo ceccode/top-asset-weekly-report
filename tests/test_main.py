@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 import pytest
 
 import main as cli
@@ -95,7 +97,7 @@ def workspace(tmp_path, monkeypatch, ranked):
         folder = tmp_path / name.lower()
         folder.mkdir()
         monkeypatch.setattr(cli, name, folder)
-    fetched = [{k: v for k, v in asset.items() if k != "rank"} for asset in ranked]
+    fetched = [replace(asset, rank=None) for asset in ranked]
     monkeypatch.setattr(cli, "fetch_all_tickers", lambda tickers: fetched)
     return tmp_path
 
