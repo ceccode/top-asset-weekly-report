@@ -25,7 +25,7 @@ for d in [REPORTS_DIR, SNAPSHOTS_DIR, RAG_DIR]:
 DEFAULT_GLOBAL_TICKERS = [
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "BRK-B",
     "JPM", "V", "UNH", "JNJ", "XOM", "WMT", "MA", "PG", "HD", "CVX",
-    "SPY", "QQQ", "BTC-USD", "ETH-USD"
+    "BTC-USD", "ETH-USD"
 ]
 
 # Disclaimer text

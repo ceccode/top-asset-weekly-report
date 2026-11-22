@@ -1,5 +1,5 @@
 # Global Assets Tickers
-# Includes major equities, ETFs, and crypto
+# Includes major equities and crypto
 # One ticker per line, comments start with #
 
 # US Mega Cap Tech
@@ -45,16 +45,8 @@ ADBE     # Adobe
 QCOM     # Qualcomm
 TXN      # Texas Instruments
 
-# Major ETFs
-SPY      # S&P 500 ETF
-QQQ      # Nasdaq 100 ETF
-IWM      # Russell 2000 ETF
-VTI      # Vanguard Total Stock Market
-VOO      # Vanguard S&P 500
-EFA      # iShares MSCI EAFE
-EEM      # iShares MSCI Emerging Markets
-GLD      # SPDR Gold Trust
-TLT      # iShares 20+ Year Treasury
+# ETFs are not listed: Yahoo Finance no longer reports a market cap for them,
+# and their holdings would be counted twice next to the equities above
 
 # Crypto
 BTC-USD  # Bitcoin

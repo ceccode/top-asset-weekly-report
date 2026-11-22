@@ -24,8 +24,6 @@ ZM       # Zoom
 DOCU     # DocuSign
 OKTA     # Okta
 VEEV     # Veeva Systems
-SPLK     # Splunk (now Cisco, may delist)
 ESTC     # Elastic
-CFLT     # Confluent
 PATH     # UiPath
 GTLB     # GitLab
