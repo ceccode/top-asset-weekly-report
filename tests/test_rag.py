@@ -56,7 +56,7 @@ def test_rag_context_is_empty_without_previous_reports(tmp_path):
 def test_placeholder_sections_stay_out_of_the_rag_context(tmp_path, ranked):
     metrics = calculate_metrics(ranked)
     placeholders = generate_llm_sections(
-        {"assets": ranked, "metrics": metrics}, "", "global", api_key=None
+        {"assets": [a.to_dict() for a in ranked], "metrics": metrics}, "", "global", api_key=None
     )
     report = render_report("2025-12-24", "global", ranked, metrics, ([], [], []), placeholders)
     (tmp_path / "2025-12-24.global.md").write_text(report, encoding="utf-8")

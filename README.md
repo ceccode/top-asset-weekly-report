@@ -119,7 +119,9 @@ top-asset-weekly-report/
 ├── main.py              # CLI entrypoint
 ├── config.py            # Configuration
 ├── yahoo.py             # Data fetching
+├── asset.py             # The ranked asset
 ├── metrics.py           # Calculations
+├── snapshot.py          # CSV/JSON snapshots
 ├── render.py            # Markdown generation
 ├── llm.py               # LLM integration
 ├── rag.py               # RAG context

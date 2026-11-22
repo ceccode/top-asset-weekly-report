@@ -3,8 +3,9 @@ import json
 import pytest
 
 import publisher
-from metrics import calculate_metrics, save_snapshot_csv, save_snapshot_json
+from metrics import calculate_metrics
 from render import render_report
+from snapshot import save_snapshot_csv, save_snapshot_json
 
 
 @pytest.fixture

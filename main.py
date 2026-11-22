@@ -25,14 +25,12 @@ from metrics import (
     rank_by_market_cap,
     calculate_metrics,
     calculate_changes,
-    load_previous_snapshot,
-    save_snapshot_csv,
-    save_snapshot_json,
 )
 from rag import extract_rag_context, ensure_rag_context
 from llm import generate_llm_sections
 from render import render_report, save_report
 from report_id import DATE_FORMAT, SCOPES, ReportId
+from snapshot import load_previous_snapshot, save_snapshot_csv, save_snapshot_json
 from telegram import generate_telegram_txt, save_telegram_txt
 from publisher import build_public
 
@@ -102,7 +100,7 @@ def generate_report(report: ReportId, tickers: List[str], options: Options) -> b
 
     api_key = get_openai_api_key() if options.use_llm else None
     input_data = {
-        "assets": ranked[:LLM_ASSET_LIMIT],
+        "assets": [asset.to_dict() for asset in ranked[:LLM_ASSET_LIMIT]],
         "metrics": metrics,
         "entries": entries,
         "exits": exits,

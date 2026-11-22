@@ -1,6 +1,5 @@
 """Telegram TXT generator for mobile-friendly report summaries."""
 
-import csv
 import logging
 import re
 from pathlib import Path
@@ -10,6 +9,7 @@ from config import DISCLAIMER_SHORT
 from mdtext import extract_section, strip_inline_formatting, truncate_at_word
 from metrics import format_market_cap
 from report_id import ReportId
+from snapshot import load_snapshot
 
 logger = logging.getLogger(__name__)
 
@@ -18,34 +18,23 @@ MAX_SUMMARY_CHARS = 800
 MAX_INSIGHT_CHARS = 600
 
 
-def load_top_n_from_csv(csv_path: Path, n: int = 10) -> List[Dict[str, Any]]:
-    """Load top N assets from CSV snapshot."""
-    if not csv_path.exists():
-        return []
-    
-    try:
-        with open(csv_path, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            assets = []
-            for i, row in enumerate(reader):
-                if i >= n:
-                    break
-                assets.append({
-                    "rank": row.get("rank", str(i + 1)),
-                    "ticker": row.get("ticker", ""),
-                    "name": row.get("name", ""),
-                    "market_cap": float(row.get("market_cap", 0)),
-                })
-            return assets
-    except (OSError, csv.Error, ValueError, TypeError) as e:
-        # ValueError/TypeError: a row with a missing or non-numeric market cap
-        logger.warning(f"Error reading CSV {csv_path}: {e}")
-        return []
+def top_rows_from_snapshot(csv_path: Path, n: int = 10) -> List[Dict[str, Any]]:
+    """The top N rows of the Telegram list, read from the CSV snapshot."""
+    assets = load_snapshot(csv_path) or []
+    return [
+        {
+            "rank": str(asset.rank),
+            "ticker": asset.ticker,
+            "name": asset.name,
+            "market_cap_str": format_market_cap(asset.market_cap) if asset.market_cap else "",
+        }
+        for asset in assets[:n]
+    ]
 
 
 def parse_top_n_from_markdown_table(md_text: str, n: int = 10) -> List[Dict[str, Any]]:
     """
-    Fallback: parse top N from markdown table under ## Classifica.
+    Fallback: the same rows, parsed from the markdown table under ## Classifica.
     """
     classifica = extract_section(md_text, "Classifica")
     if not classifica:
@@ -132,21 +121,12 @@ def generate_telegram_txt(
     lines.append("")
     
     # Top 10 list
-    assets = load_top_n_from_csv(csv_path, n=10)
-    if not assets:
-        assets = parse_top_n_from_markdown_table(md_content, n=10)
-    
-    if assets:
+    top = top_rows_from_snapshot(csv_path, n=10) or parse_top_n_from_markdown_table(md_content, n=10)
+
+    if top:
         lines.append("🏆 Top 10:")
-        for asset in assets:
-            if "market_cap" in asset and asset["market_cap"]:
-                cap_str = format_market_cap(asset["market_cap"])
-            else:
-                cap_str = asset.get("market_cap_str", "")
-            
-            name = asset.get("name", "")[:25]
-            ticker = asset.get("ticker", "")
-            lines.append(f"{asset['rank']}) {name} ({ticker}) — {cap_str}")
+        for row in top:
+            lines.append(f"{row['rank']}) {row['name'][:25]} ({row['ticker']}) — {row['market_cap_str']}")
         lines.append("")
     
     # Executive Summary

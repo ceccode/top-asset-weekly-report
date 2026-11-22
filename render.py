@@ -4,6 +4,7 @@ import logging
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 
+from asset import Asset
 from config import DISCLAIMER, DISCLAIMER_SHORT
 from metrics import format_market_cap
 from report_id import ReportId
@@ -28,7 +29,7 @@ disclaimer: "{DISCLAIMER}"
 """
 
 
-def render_ranking_table(ranked_assets: List[Dict[str, Any]]) -> str:
+def render_ranking_table(ranked_assets: List[Asset]) -> str:
     """Render the ranking table in Markdown."""
     if not ranked_assets:
         return "*Nessun dato disponibile*\n"
@@ -39,14 +40,12 @@ def render_ranking_table(ranked_assets: List[Dict[str, Any]]) -> str:
     ]
     
     for asset in ranked_assets:
-        rank = asset.get("rank", "-")
-        ticker = asset.get("ticker", "-")
-        name = asset.get("name", "-")[:40]  # Truncate long names
-        quote_type = asset.get("quote_type", "-")
-        market_cap = format_market_cap(asset.get("market_cap", 0))
-        currency = asset.get("currency", "-")
+        name = asset.name[:40]  # Truncate long names
+        market_cap = format_market_cap(asset.market_cap)
         
-        lines.append(f"| {rank} | {ticker} | {name} | {quote_type} | {market_cap} | {currency} |")
+        lines.append(
+            f"| {asset.rank} | {asset.ticker} | {name} | {asset.quote_type} | {market_cap} | {asset.currency} |"
+        )
     
     return "\n".join(lines) + "\n"
 
@@ -105,7 +104,7 @@ def _describe_rank_move(rank_delta: int) -> str:
 
 
 def render_observations(
-    ranked_assets: List[Dict[str, Any]],
+    ranked_assets: List[Asset],
     metrics: Dict[str, Any]
 ) -> str:
     """Render quantitative observations."""
@@ -125,14 +124,13 @@ def render_observations(
     # Largest asset
     if ranked_assets:
         largest = ranked_assets[0]
-        largest_pct = (largest.get("market_cap", 0) / metrics.get("total_market_cap", 1)) * 100
-        lines.append(f"- **{largest['name']}** ({largest['ticker']}) guida con {format_market_cap(largest.get('market_cap', 0))} ({largest_pct:.1f}% del totale)")
+        largest_pct = (largest.market_cap / metrics.get("total_market_cap", 1)) * 100
+        lines.append(f"- **{largest.name}** ({largest.ticker}) guida con {format_market_cap(largest.market_cap)} ({largest_pct:.1f}% del totale)")
     
     # Asset type breakdown
     type_counts: Dict[str, int] = {}
     for asset in ranked_assets:
-        qt = asset.get("quote_type", "UNKNOWN")
-        type_counts[qt] = type_counts.get(qt, 0) + 1
+        type_counts[asset.quote_type] = type_counts.get(asset.quote_type, 0) + 1
     
     if type_counts:
         type_str = ", ".join(f"{k}: {v}" for k, v in sorted(type_counts.items(), key=lambda x: -x[1]))
@@ -163,7 +161,7 @@ def render_methodology() -> str:
 def render_report(
     date: str,
     scope: str,
-    ranked_assets: List[Dict[str, Any]],
+    ranked_assets: List[Asset],
     metrics: Dict[str, Any],
     changes: Tuple[List[str], List[str], List[Dict[str, Any]]],
     llm_sections: Dict[str, str],

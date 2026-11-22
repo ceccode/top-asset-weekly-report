@@ -1,10 +1,11 @@
-from metrics import calculate_metrics, save_snapshot_csv
+from metrics import calculate_metrics
 from render import render_report
+from snapshot import save_snapshot_csv
 from telegram import (
     clean_text_for_telegram,
     generate_telegram_txt,
-    load_top_n_from_csv,
     parse_top_n_from_markdown_table,
+    top_rows_from_snapshot,
 )
 
 
@@ -16,14 +17,14 @@ def test_top_n_from_csv(tmp_path, ranked):
     path = tmp_path / "snapshot.csv"
     save_snapshot_csv(ranked, path)
 
-    top = load_top_n_from_csv(path, n=2)
+    top = top_rows_from_snapshot(path, n=2)
 
     assert [(a["rank"], a["ticker"]) for a in top] == [("1", "AAA"), ("2", "BBB")]
-    assert top[0]["market_cap"] == 500e9
+    assert top[0]["market_cap_str"] == "$500.00B"
 
 
 def test_top_n_from_missing_csv_is_empty(tmp_path):
-    assert load_top_n_from_csv(tmp_path / "missing.csv") == []
+    assert top_rows_from_snapshot(tmp_path / "missing.csv") == []
 
 
 def test_top_n_from_the_report_table_skips_the_header(ranked, llm_sections):
