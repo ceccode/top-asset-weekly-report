@@ -1,3 +1,22 @@
+## Report 2026-11-22
+
+### Executive Summary
+As of November 22, 2026, the 46 tracked assets had a combined reported market capitalization of **$36.98 trillion**, down approximately $3.20 trillion, or 8.0%, from November 16. The asset count was unchanged, with no recorded entries or exits.
+
+Apple remained first at $4.98 trillion, followed by Microsoft at $3.60 trillion. Alphabet rose to third at $3.26 trillion, while NVIDIA fell to fourth at $3.03 trillion. Amazon remained fifth, and Bitcoin ranked ninth at $1.23 trillion.
+
+### Strategic Reflection
+Technology-sector equities occupied three of the top five positions: Apple, Microsoft and NVIDIA. NVIDIA, Broadcom and AMD represented semiconductors in the top 20, while Alphabet and Meta were classified as Communication Services.
+
+NVIDIA’s capitalization declined 21.04% as it fell one place, while Alphabet rose one place despite a 7.96% decline. Beyond the top 20, Home Depot rose three places to 25th despite a 2.34% decline; Oracle fell three places to 27th as its capitalization declined 16.24%.
+
+### Implications
+The top five accounted for **47.43%** of the reported aggregate, down approximately 0.45 percentage points from November 16. The top ten represented **65.52%**, down approximately 0.55 points. Both measures declined for a second consecutive week.
+
+Rank changes reflect relative capitalization movements rather than gains alone, as illustrated by Alphabet and Home Depot. The aggregate combines equities and cryptocurrency and represents reported market capitalizations rather than distinct underlying economic value.
+
+---
+
 ## Report 2026-11-16
 
 ### Executive Summary
@@ -52,22 +71,3 @@ Tesla rose two places to sixth with a 4.34% capitalization increase, while Broad
 The top five accounted for **48.63%** of the reported aggregate, down approximately 0.79 percentage points from October 26. The top ten represented **67.01%**, down approximately 0.31 points. Both measures declined for a third consecutive week.
 
 Rank changes reflect relative movements as well as changes in individual capitalization. The aggregate combines equities and cryptocurrencies and represents reported market capitalizations rather than distinct underlying economic value.
-
----
-
-## Report 2026-10-26
-
-### Executive Summary
-As of October 26, 2026, the 46 tracked assets had a combined reported market capitalization of **$41.80 trillion**, approximately $0.66 trillion, or 1.6%, below the October 19 total. The tracked count was unchanged, with no recorded entries or exits.
-
-NVIDIA remained first at $5.19 trillion, followed by Apple at $5.01 trillion. Microsoft rose to third at $3.90 trillion, narrowly ahead of Alphabet at $3.89 trillion. Bitcoin remained seventh at $1.60 trillion.
-
-### Strategic Reflection
-Technology-sector equities occupied three of the top six positions: NVIDIA, Apple and Microsoft. Alphabet and Meta were classified as Communication Services. NVIDIA, Broadcom, AMD and Intel represented semiconductors in the top 20.
-
-Microsoft rose one place despite a 1.70% decline in market capitalization, while Alphabet fell one place after a 7.98% decline. Tesla rose to eighth with a 7.72% increase, overtaking Broadcom, whose capitalization fell 3.46%.
-
-### Implications
-The top five represented **49.42%** of the reported aggregate, down approximately 0.75 percentage points from October 19. The top ten accounted for **67.32%**, down approximately 0.78 points. Both measures indicate lower concentration among the largest tracked assets.
-
-Rank changes reflect relative movements rather than capitalization changes alone. Beyond the top 20, UnitedHealth rose to 26th with a 3.69% increase, while Procter & Gamble fell to 27th despite a 1.94% increase. The aggregate combines equities and cryptocurrencies and represents reported market capitalizations rather than distinct underlying economic value.

@@ -1,0 +1,24 @@
+📊 Top Global Assets — 2026-11-22
+Source: Yahoo Finance (market cap)
+
+🏆 Top 10:
+1) Apple Inc. (AAPL) — $4.98T
+2) Microsoft Corporation (MSFT) — $3.60T
+3) Alphabet Inc. (GOOGL) — $3.26T
+4) NVIDIA Corporation (NVDA) — $3.03T
+5) Amazon.com, Inc. (AMZN) — $2.67T
+6) Broadcom Inc. (AVGO) — $1.45T
+7) Meta Platforms, Inc. (META) — $1.43T
+8) Tesla, Inc. (TSLA) — $1.37T
+9) Bitcoin USD (BTC-USD) — $1.23T
+10) Berkshire Hathaway Inc. (BRK-B) — $1.21T
+
+📝 Summary:
+As of November 22, 2026, the 46 tracked assets had a combined reported market capitalization of $36.98 trillion, down approximately $3.20 trillion, or 8.0%, from November 16. The asset count was unchanged, with no recorded entries or exits.
+
+Apple remained first at $4.98 trillion, followed by Microsoft at $3.60 trillion. Alphabet rose to third at $3.26 trillion, while NVIDIA fell to fourth at $3.03 trillion. Amazon remained fifth, and Bitcoin ranked ninth at $1.23 trillion.
+
+💡 Insight:
+Technology-sector equities occupied three of the top five positions: Apple, Microsoft and NVIDIA. NVIDIA, Broadcom and AMD represented semiconductors in the top 20, while Alphabet and Meta were classified as Communication Services.
+
+⚠️ Not financial advice. For informational purposes only.
