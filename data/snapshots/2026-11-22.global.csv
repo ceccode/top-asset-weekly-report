@@ -7,7 +7,7 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 6,AVGO,Broadcom Inc.,EQUITY,USD,1453140738048,304.41,Technology,Semiconductors
 7,META,"Meta Platforms, Inc.",EQUITY,USD,1433642336256,560.84,Communication Services,Internet Content & Information
 8,TSLA,"Tesla, Inc.",EQUITY,USD,1366942810112,345.82,Consumer Cyclical,Auto Manufacturers
-9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1225093677056,61091.7,,
+9,BTC-USD,Bitcoin USD,CRYPTOCURRENCY,USD,1229541867520,60993.33,,
 10,BRK-B,Berkshire Hathaway Inc.,EQUITY,USD,1210976043008,570.0,Financial Services,Insurance - Diversified
 11,LLY,Eli Lilly and Company,EQUITY,USD,1199931523072,1347.11,Healthcare,Drug Manufacturers - General
 12,WMT,Walmart Inc.,EQUITY,USD,1018236174336,127.95,Consumer Defensive,Discount Stores
@@ -31,7 +31,7 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 30,TMO,Thermo Fisher Scientific Inc.,EQUITY,USD,248075190272,669.54,Healthcare,Diagnostics & Research
 31,TXN,Texas Instruments Incorporated,EQUITY,USD,241006919680,263.75,Technology,Semiconductors
 32,NFLX,"Netflix, Inc.",EQUITY,USD,232951873536,56.73,Communication Services,Entertainment
-33,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,209175052288,1713.96,,
+33,ETH-USD,Ethereum USD,CRYPTOCURRENCY,USD,209664720896,1712.23,,
 34,DIS,The Walt Disney Company,EQUITY,USD,201513353216,117.98,Communication Services,Entertainment
 35,MCD,McDonald's Corporation,EQUITY,USD,192848625664,273.24,Consumer Cyclical,Restaurants
 36,PEP,"PepsiCo, Inc.",EQUITY,USD,191519621120,140.54,Consumer Defensive,Beverages - Non-Alcoholic
@@ -39,9 +39,9 @@ rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
 38,CRM,"Salesforce, Inc.",EQUITY,USD,148650262528,180.62,Technology,Software - Application
 39,ACN,Accenture plc,EQUITY,USD,130653405184,221.17,Technology,Information Technology Services
 40,ADBE,Adobe Inc.,EQUITY,USD,84732731392,217.71,Technology,Software - Application
-41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,72738816000,555.0,,
-42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,59155570688,0.9337,,
+41,BNB-USD,BNB USD,CRYPTOCURRENCY,USD,72886853632,554.1,,
+42,XRP-USD,XRP USD,CRYPTOCURRENCY,USD,59300147200,0.9324,,
 43,NKE,"NIKE, Inc.",EQUITY,USD,48896364544,32.92,Consumer Cyclical,Footwear & Accessories
-44,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,41705979904,70.66,,
-45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,8696345600,0.05566,,
-46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,5355787776,0.14606,,
+44,SOL-USD,Solana USD,CRYPTOCURRENCY,USD,41841655808,70.56,,
+45,DOGE-USD,Dogecoin USD,CRYPTOCURRENCY,USD,8727002112,0.05556,,
+46,ADA-USD,Cardano USD,CRYPTOCURRENCY,USD,5373923328,0.14576,,

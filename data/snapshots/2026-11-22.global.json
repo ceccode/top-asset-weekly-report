@@ -93,8 +93,8 @@
       "name": "Bitcoin USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 1225093677056,
-      "price": 61091.7,
+      "market_cap": 1229541867520,
+      "price": 60993.33,
       "sector": "",
       "industry": "",
       "rank": 9
@@ -357,8 +357,8 @@
       "name": "Ethereum USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 209175052288,
-      "price": 1713.96,
+      "market_cap": 209664720896,
+      "price": 1712.23,
       "sector": "",
       "industry": "",
       "rank": 33
@@ -445,8 +445,8 @@
       "name": "BNB USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 72738816000,
-      "price": 555.0,
+      "market_cap": 72886853632,
+      "price": 554.1,
       "sector": "",
       "industry": "",
       "rank": 41
@@ -456,8 +456,8 @@
       "name": "XRP USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 59155570688,
-      "price": 0.9337,
+      "market_cap": 59300147200,
+      "price": 0.9324,
       "sector": "",
       "industry": "",
       "rank": 42
@@ -478,8 +478,8 @@
       "name": "Solana USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 41705979904,
-      "price": 70.66,
+      "market_cap": 41841655808,
+      "price": 70.56,
       "sector": "",
       "industry": "",
       "rank": 44
@@ -489,8 +489,8 @@
       "name": "Dogecoin USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 8696345600,
-      "price": 0.05566,
+      "market_cap": 8727002112,
+      "price": 0.05556,
       "sector": "",
       "industry": "",
       "rank": 45
@@ -500,19 +500,19 @@
       "name": "Cardano USD",
       "quote_type": "CRYPTOCURRENCY",
       "currency": "USD",
-      "market_cap": 5355787776,
-      "price": 0.14606,
+      "market_cap": 5373923328,
+      "price": 0.14576,
       "sector": "",
       "industry": "",
       "rank": 46
     }
   ],
   "metrics": {
-    "total_market_cap": 36977968044544,
-    "top5_concentration": 47.427784536937686,
-    "top10_concentration": 65.51908581239287,
+    "total_market_cap": 36983382985728,
+    "top5_concentration": 47.42084037328846,
+    "top10_concentration": 65.5215203395515,
     "asset_count": 46,
     "top5_cap": 17537831010304,
-    "top10_cap": 24227626614784
+    "top10_cap": 24232074805248
   }
 }
