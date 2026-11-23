@@ -1,0 +1,26 @@
+rank,ticker,name,quote_type,currency,market_cap,price,sector,industry
+1,PLTR,Palantir Technologies Inc.,EQUITY,USD,381074079744,158.155,Technology,Software - Infrastructure
+2,ORCL,Oracle Corporation,EQUITY,USD,353298677760,113.32,Technology,Software - Infrastructure
+3,PANW,"Palo Alto Networks, Inc.",EQUITY,USD,290884386816,354.305,Technology,Software - Infrastructure
+4,SAP,SAP SE,EQUITY,USD,235065245696,203.66,Technology,Software - Application
+5,CRWD,"CrowdStrike Holdings, Inc.",EQUITY,USD,209832919040,204.928,Technology,Software - Infrastructure
+6,SHOP,Shopify Inc.,EQUITY,USD,173017907200,134.485,Technology,Software - Application
+7,CRM,"Salesforce, Inc.",EQUITY,USD,152477220864,185.27,Technology,Software - Application
+8,NET,"Cloudflare, Inc.",EQUITY,USD,104299307008,291.02,Technology,Software - Infrastructure
+9,SNOW,Snowflake Inc.,EQUITY,USD,96185630720,272.635,Technology,Software - Application
+10,NOW,"ServiceNow, Inc.",EQUITY,USD,95483174912,91.995,Technology,Software - Application
+11,ADBE,Adobe Inc.,EQUITY,USD,86986203136,223.5,Technology,Software - Application
+12,INTU,Intuit Inc.,EQUITY,USD,74747240448,279.705,Technology,Software - Application
+13,DDOG,"Datadog, Inc.",EQUITY,USD,60871778304,168.6,Technology,Software - Application
+14,VEEV,Veeva Systems Inc.,EQUITY,USD,43736436736,270.13,Healthcare,Health Information Services
+15,WDAY,"Workday, Inc.",EQUITY,USD,42424459264,176.0351,Technology,Software - Application
+16,ZS,"Zscaler, Inc.",EQUITY,USD,36628606976,224.64,Technology,Software - Infrastructure
+17,OKTA,"Okta, Inc.",EQUITY,USD,35971153920,205.76,Technology,Software - Infrastructure
+18,TEAM,Atlassian Corporation,EQUITY,USD,35506233344,140.98,Technology,Software - Application
+19,MDB,"MongoDB, Inc.",EQUITY,USD,25348261888,314.665,Technology,Software - Infrastructure
+20,ZM,"Zoom Communications, Inc.",EQUITY,USD,24906657792,85.36,Technology,Software - Application
+21,DOCU,"DocuSign, Inc.",EQUITY,USD,14322333696,76.63,Technology,Software - Application
+22,HUBS,"HubSpot, Inc.",EQUITY,USD,9611015168,196.8,Technology,Software - Application
+23,ESTC,Elastic N.V.,EQUITY,USD,8703092736,82.12,Technology,Software - Application
+24,GTLB,GitLab Inc.,EQUITY,USD,7461019648,44.78,Technology,Software - Infrastructure
+25,PATH,"UiPath, Inc.",EQUITY,USD,6153125376,11.8067,Technology,Software - Infrastructure
