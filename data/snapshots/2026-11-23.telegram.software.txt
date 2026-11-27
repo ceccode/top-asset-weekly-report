@@ -14,11 +14,11 @@ Source: Yahoo Finance (market cap)
 10) ServiceNow, Inc. (NOW) — $95.48B
 
 📝 Summary:
-As of November 23, 2026, the 25 companies in the dataset had a combined market capitalization of $2.605 trillion, approximately $121 billion, or 4.9%, above the November 22 report’s rounded $2.484 trillion. No entries or exits were recorded.
+As of November 23, 2026, the 25 companies in the dataset had a combined market capitalization of $2.605 trillion, approximately $160 billion, or 5.8%, below the previous report’s rounded $2.765 trillion. No entries or exits were recorded.
 
-Palantir remained first at $381.1 billion, followed by Oracle at $353.3 billion and Palo Alto Networks at $290.9 billion. SAP rose to fourth, while CrowdStrike fell to fifth. The top five represented 56.4% of the total, down from 56.7%; the top ten accounted for 80.3%, unchanged at one decimal place.
+Palantir remained first at $381.1 billion, followed by Oracle at $353.3 billion. Palo Alto Networks rose to third at $290.9 billion, while SAP fell to fourth at $235.1 billion. The top five represented 56.4% of the total, up from 55.2%; the top ten accounted for 80.3%, up from 79.9%.
 
 💡 Insight:
-Palantir and Oracle together represented approximately 28.2% of the dataset’s value, up from 26.6%. Palantir’s lead over Oracle narrowed to approximately $27.8 billion from $30.3 billion, based on the prior report’s rounded figures.
+Palantir and Oracle together represented approximately 28.2% of the dataset’s value, compared with 27.9% in the previous report. Palantir’s lead over Oracle widened to approximately $27.8 billion from $18.1 billion, based on the prior report’s rounded figures.
 
 ⚠️ Not financial advice. For informational purposes only.

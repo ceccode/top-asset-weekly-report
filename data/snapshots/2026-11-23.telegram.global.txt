@@ -14,9 +14,9 @@ Source: Yahoo Finance (market cap)
 10) Berkshire Hathaway Inc. (BRK-B) — $1.22T
 
 📝 Summary:
-As of November 23, 2026, the 46 tracked assets had a combined reported market capitalization of $39.11 trillion, up approximately $2.14 trillion, or 5.8%, from November 22. The asset count was unchanged, with no recorded entries or exits.
+As of November 23, 2026, the 46 tracked assets had a combined reported market capitalization of $39.11 trillion, approximately $1.07 trillion, or 2.7%, below the November 16 total. The asset count was unchanged, with no recorded entries or exits.
 
-Apple remained first at $5.08 trillion. NVIDIA rose two places to second at $3.99 trillion, followed by Microsoft, Alphabet and Amazon. Bitcoin remained ninth at $1.24 trillion.
+Apple remained first at $5.08 trillion. NVIDIA rose to second at $3.99 trillion, while Microsoft fell to third at $3.69 trillion. Alphabet and Amazon completed the top five. Bitcoin remained ninth at $1.24 trillion.
 
 💡 Insight:
 Technology-sector equities occupied three of the top five positions: Apple, NVIDIA and Microsoft. NVIDIA, Broadcom and AMD represented semiconductors in the top 20, while Alphabet and Meta were classified as Communication Services.
